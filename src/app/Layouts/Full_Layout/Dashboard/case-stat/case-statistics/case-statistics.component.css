@@ -1,0 +1,72 @@
+.labels{
+    float: left;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-family: Arial;
+}
+
+.toggleButtons{
+    float: right;
+    position: relative;
+    margin-right: 10px;
+}
+
+.strokedButton{
+    background-color: white;
+    margin-top: 05px;
+    font-family: Arial;
+    border: 1px solid currentColor;
+}
+.boxShadow{
+    box-shadow: 4px 4px 4px rgb(179, 178, 178);
+}
+kendo-card-header {
+    border-bottom: solid;
+    border-bottom-color: #F23428;
+    border-bottom-width: 10px;    
+    font-size: 16px;
+    color: #686363;
+    margin-top: -22px
+  }
+  .spanwidth{
+    margin-left: 20px;
+  }
+  button[kendoGridExcelCommand] {
+    border-color: #F23428;
+    border-width: 3px;
+    position: relative;
+    left: 78%;
+    color: #189514;
+  }
+
+  .Excel-Button{
+    color: green;
+    margin:3px;
+     width: 112px;
+     border: solid;       
+     border-color: #F23428;
+     height: 40px;
+     font-weight: bold;
+     border-radius: 15px;
+     text-transform: none;
+  }
+  .PDF-Button{
+    color: #F23428;  
+    margin:3px;
+    width: 112px;
+    border: solid;       
+    border-color: #F23428;
+    height: 40px;
+    font-weight: bold;
+    border-radius: 15px;
+    text-transform: none;
+  }
+  .k-icon-md {
+    font-size: 26px;
+  }
+
+  
+ .k-grid td{
+  padding: 3px 0px 3px 0px;
+  }

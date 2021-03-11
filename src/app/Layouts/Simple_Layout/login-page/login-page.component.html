@@ -1,0 +1,64 @@
+<div class="bgImage">
+
+  <div class="container">
+
+    <div class="login__container">
+      <kendo-card [width]="'400px'">
+        <div style="padding: 20px;">
+
+          <form class="k-form" [formGroup]="form" >
+            <fieldset class="k-form-fieldset">
+              <div class="row">
+                <div class="logo-row">
+                  <a><img src="/assets/Images/BM_logo.png" alt="logo" class="logo"></a>
+                </div>
+              </div>
+              <div class="label">
+                Robotic Process Automation
+              </div>
+
+              <div class="label2">
+                ATM-CDM Dispute Handling & Reconciliation Process
+              </div>
+
+              <kendo-formfield>
+                <kendo-label [for]="username" text="Username">&nbsp;&nbsp;&nbsp;
+                  <kendo-textbox formControlName="username" [clearButton]="true" #username required autocomplete="off"></kendo-textbox>
+                </kendo-label>
+
+                <kendo-formerror>Username is required</kendo-formerror>
+              </kendo-formfield>
+
+              <kendo-formfield>
+                <kendo-label [for]="password" text="Password"> &nbsp;&nbsp;&nbsp;
+                  <kendo-textbox formControlName="password" #password required [clearButton]="true" autocomplete="off">
+                    <ng-template kendoTextBoxSuffixTemplate>
+                      <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
+                    </ng-template>
+                  </kendo-textbox>
+                </kendo-label>
+                <kendo-formerror>Password is required</kendo-formerror>
+              </kendo-formfield>
+
+
+              <div class="k-form-buttons ">
+                <button kendoButton (click)="login()" icon="login" style="color: #fff; background: #F23428; "  [disabled]="!form.valid">Login</button>
+                <button kendoButton (click)="clearForm()" icon="refresh" style="color: #fff; background: #808080;">Reset</button>
+
+                <!-- <button kendoButton  icon="login" class="login-button-login"  (click)="login()" [disabled]="!form.valid" look="flat" >Login</button>
+                <button class=" login-button-login" (click)="login()" [disabled]="!form.valid">Login</button> -->
+                
+              </div>
+
+
+            </fieldset>
+
+          </form>
+        </div>
+      </kendo-card>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+<app-header (toggleDrawer)="toggleDrawer($event, drawer)"></app-header>
+<kendo-drawer-container>
+
+	<kendo-drawer #drawer class="example-sidenav" [mode]="'overlay'" [(expanded)]="expanded" [mode]="'push'"
+		[width]="260">
+		<ng-template kendoDrawerTemplate *ngIf="expanded">
+			<div class="panelbar-wrapper">
+				<kendo-panelbar style="background-color: #F2F2F2;">
+					<kendo-panelbar-item style="font-weight: bold; padding: 2px;" [title]="'Dashboard'">
+					</kendo-panelbar-item>
+					<kendo-panelbar-item [title]="'Overview'" icon="group-section"
+						(click)="NavigateUrl('/v_130',drawer)"></kendo-panelbar-item>
+					<kendo-panelbar-item [title]="'CR Trends'" icon="detail-section"
+						(click)="NavigateUrl('/v_summary',drawer)"></kendo-panelbar-item>
+
+					<kendo-panelbar-item style="font-weight: bold; padding: 2px;" [title]="'Reports'">
+					</kendo-panelbar-item>
+					<kendo-panelbar-item [title]="'CR Details'" icon="group-section"
+						(click)="NavigateUrl('/v_130',drawer)"></kendo-panelbar-item>
+					<kendo-panelbar-item [title]="'Expired Details'" icon="detail-section"
+						(click)="NavigateUrl('/v_summary',drawer)"></kendo-panelbar-item>
+					<kendo-panelbar-item [title]="'Exceptions'" icon="detail-section"
+						(click)="NavigateUrl('/v_summary',drawer)"></kendo-panelbar-item>
+
+
+
+				</kendo-panelbar>
+			</div>
+		</ng-template>
+	</kendo-drawer>
+
+
+
+
+
+	<kendo-drawer-content>
+
+
+		<router-outlet>
+		</router-outlet>
+	</kendo-drawer-content>
+</kendo-drawer-container>

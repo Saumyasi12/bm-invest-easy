@@ -1,0 +1,104 @@
+
+
+<kendo-card-body width="100%">
+    <div class="card-Header-bm">
+        <div class="row-bm">
+          <div class="cols-bm">
+            <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
+        </div>
+          <div class="cols-bm">
+            Export  &nbsp;&nbsp;<button kendoButton icon="excel"[name]="'file-excel'" style="background: darkgreen; color: #fff; "></button>
+                         <button kendoButton icon="pdf" style="background: #F23428; color: #fff; margin-left: 5px;"></button> 
+          </div>
+        </div>
+      </div>
+
+      <!--Search Controls-->
+      <div class="flex-container-bm">     
+        <div class="flex-item-bm">
+          <div class="row-bm">
+           <div class="cols-bm">
+            <kendo-datepicker class='kendo-input controls-bm' placeholder="From" [format]="'MM-dd-yyyy'">
+            </kendo-datepicker>
+           </div>
+           <div class="cols-bm">
+            <kendo-datepicker class='kendo-input controls-bm' placeholder="To" [format]="'MM-dd-yyyy'">
+            </kendo-datepicker>
+           </div>
+           <div class="cols-bm">
+            <kendo-combobox [data]="['Open','Close']" class='kendo-input controls-bm'> </kendo-combobox>
+           </div>
+           <div class="cols-bm margin-extra">
+            <kendo-buttongroup >
+                <button kendoButton icon="zoom" style="color: #fff; background: #F23428;"  type="submit"  title="Find"  tabindex="3"></button>
+                <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; "  type="reset"  title="Reset"  tabindex="4"></button>
+            </kendo-buttongroup>
+           </div>
+            <div class="cols-bm" >
+              <button kendoButton [look]="'default'"  icon="arrow-left"   style="background: #F23428; color: white;"
+          (click)="goBack()">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!--Search Controls-->
+      <!--Chart-->
+      <div class="bm-dashboard-container">
+        <div class="bm-dashboard-item rouded-corner">
+            <div class="card-body">
+                <div class="content status">
+                    <div class="status-items k-text-success" >
+                   <div style="color:#0D274D ;"> MasterCard</div>  
+                        <div class="status-big-text" style="color:#0D274D ;">{{actualdata[0]}}</div>
+                    </div>
+                    <div class="status-items  k-text-base" >
+                      <div style="color:#C00000">Visa</div> 
+                        <div class="status-big-text" style="color:#C00000" >{{actualdata[1]}}</div>
+                    </div>
+                    <div class="status-items  k-text-tertiary" >
+                     <div style="color:#9C9C9C">OmanNet</div> 
+                        <div class="status-big-text"  style="color:#9C9C9C">{{actualdata[2]}}</div>
+                    </div>
+                    <div class="status-items  k-text-error" >
+                     <div style="color:#527BCB">POSECOM</div>  
+                        <div class="status-big-text" style="color:#527BCB">{{actualdata[3]}}</div>
+                    </div>
+                    <div class="status-items  k-text-error"  >
+                      <div style="color:#92D050">Onus</div>  
+                         <div class="status-big-text"  style="color:#92D050">{{actualdata[4]}}</div>
+                     </div>
+                     </div>
+              </div>
+          </div>
+        
+        <div class="bm-dashboard-item rouded-corner">
+            <div class="card-body">
+                <div class="content">
+                  <fusioncharts
+                  [chartConfig]=routingPortalChartConfig
+                  [dataSource]=datasourceRoutingPortal >
+              </fusioncharts>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--Chart-->
+      <!--Kendo Grid-->
+      <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="windowHeight" (pageChange)="pageChange($event)">
+        <kendo-grid-column [headerStyle]="headerstyle" field="FeedbackId" title="Feedback Id" width=120>
+        </kendo-grid-column>
+        <kendo-grid-column [headerStyle]="headerstyle" field="AuthCode" title="Auth Code">
+        </kendo-grid-column>
+        <kendo-grid-column [headerStyle]="headerstyle" field="Amount" title="Amount">
+        </kendo-grid-column>
+        <kendo-grid-column [headerStyle]="headerstyle" field="RoutingPortal" title="Routing Portal">
+        </kendo-grid-column>
+        <kendo-grid-column [headerStyle]="headerstyle" field="CardNo" title="Card No.">
+        </kendo-grid-column>
+        <kendo-grid-column [headerStyle]="headerstyle" field="Status" title="Status">
+        </kendo-grid-column>
+    </kendo-grid>
+      <!--Kendo Grid-->
+
+</kendo-card-body>

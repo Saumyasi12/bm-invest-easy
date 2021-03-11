@@ -1,0 +1,128 @@
+
+/* .bgImage {
+    background-image: url('/assets/Images/Bg-image.jpg'); 
+     background-color: #049FD9; 
+    background-size: cover;
+    min-height: 100vh;
+  } */
+
+  .bgImage {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to right bottom,rgba(239,50,38,.8),rgba(239,102,56,.8)),url(/assets/Images/BM_BackImg.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+
+}
+  .container{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .login__container{
+    position: absolute;
+    width: 400px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .logo-row {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 20px;
+  }
+  
+  .logo {
+    width: 70%;
+  }
+
+  .label{
+      text-align: center;
+      margin: 12px auto;
+      font-size: 16px;
+      font-weight: lighter;
+      width: 80%;
+  }
+  
+  .label2{
+    text-align: center;
+    margin: 12px auto;
+    width: 80%;
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 30px;
+}
+
+  .login-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    width: 30%;
+ 
+   
+  }
+  .k-form-buttons{
+    text-align: center;
+    padding-left: 210px;
+  }
+  .login-button-login {
+    color: white;
+    background-color: #F23428;
+    width: 100%;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 3px;
+    margin-right: 10px;
+  }
+  
+.login-button-reset {
+  color: white;
+  background-color: #808080;
+  width: 25%;
+  text-align: center;
+  border-radius: 3px;
+  margin-top: 3px;
+  
+}
+
+.login-button-field {
+  text-align: right;
+}
+
+.card-margin{
+  margin-top: 5%;
+}
+.login-button{
+  margin-right:50px;
+}
+
+.login-button-left{
+  margin-left:190px;
+}
+
+.admin-button{
+  margin-right:50px;
+}
+
+.k-card{
+    border-radius: 3px;
+   /*  background-color: rgb(217, 217, 217); */
+    background-image: linear-gradient(to left bottom,rgb(217, 217, 217),rgb(255, 255, 255));
+    
+}
+
+
+
+    .test{
+      background-color: #F23428 !important;
+    }

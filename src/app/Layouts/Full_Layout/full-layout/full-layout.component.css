@@ -1,0 +1,23 @@
+.actions .k-button {
+  padding: 0;
+}
+
+.clock_txt {
+  
+  color: #171a19;
+  font-weight: lighter;
+  font-size: 16px;
+  float: right;
+  margin-right: 30px;
+  line-height: 50px;
+}
+
+.k-icon{
+  color: #F23428;
+ 
+}
+
+.k-panelbar > .k-item > .k-link {
+  color: #333;
+  background-color: #ffffff;
+}
