@@ -38,6 +38,18 @@ const routes: Routes = [{
       path: 'casestat',
       loadChildren: () => import('../Dashboard/case-stat/case-stat.module').then(m => m.CaseStatModule)
     } ,
+    {
+        path: 'crnumber',
+        loadChildren: () => import('../Dashboard/cr-number/cr-number.module').then(m => m.CrNumberModule)
+      },
+      {
+        path: 'expnumber',
+        loadChildren: () => import('../Dashboard/expired-crdata/expired-crdata.module').then(m => m.ExpiredCrdataModule)
+      },
+      {
+        path: 'exception',
+        loadChildren: () => import('../Dashboard/exception-data/exception-data.module').then(m => m.ExceptionDataModule)
+      },
     /*{
       path: 'v_summary',
       loadChildren: () => import('../Dashboard/visa-summary-sheet/visa-summary-sheet.module').then(m => m.VisaSummarySheetModule)

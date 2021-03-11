@@ -2,8 +2,8 @@
     <kendo-card-body> 
         <div class="card-Header-bm">    
             <div class="row-bm">
-                <div class="cols-bm">
-                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pagename}}</p>
+                 <div class="cols-bm">
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;"></p>
                 </div>
                 <div class="cols-bm" *ngIf="!showLoading && !errorMessage">
                     Export  &nbsp;&nbsp;<button kendoButton icon="excel"[name]="'file-excel'" (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
@@ -11,7 +11,7 @@
             </div> 
         </div>  
         
-        <form [formGroup]="reactiveform" (ngSubmit)="formSearch()">
+        <form [formGroup]="expform" (ngSubmit)="formSearch()">
         <div class="flex-container-bm">            
                 <div class="flex-item-bm">
                     <div class="row-bm">
@@ -26,19 +26,31 @@
                                 formControlName="toDate" (valueChange)="toDateChange($event)">
                                 </kendo-datepicker>
                         </div>
-                        <div class="cols-bm">
-                                <kendo-textbox formControlName="feedbackId" class="controls-bm" placeholder="Feedback Id" (valueChange)="feedbabackIdChange($event)"></kendo-textbox>
-                        </div>
+                        <!-- <div class="cols-bm">
+                                <kendo-textbox formControlName="feedbackId" class="controls-bm" placeholder="CR Number" (valueChange)="crNumberChange($event)"></kendo-textbox>
+                        </div> -->
                         <div class="cols-bm">                                
-                            <kendo-combobox [data]="['Open','Close']" class="controls-bm" formControlName="caseStatus" placeholder="Case Status" (valueChange)="caseStatusChange($event)"> </kendo-combobox> 
+                            <kendo-combobox [data]="['426583','426583']" class="controls-bm" formControlName="crNumber" placeholder="CR Number" (valueChange)="crNumberChange($event)"> </kendo-combobox> 
                     </div>
+                    <div class="cols-bm">                                
+                        <kendo-textbox  class="controls-bm" formControlName="exception" placeholder="Exception"> </kendo-textbox> 
+                </div>
                         <div class="cols-bm">
                             <kendo-buttongroup >
                                 <button kendoButton icon="zoom" style="color: #fff; background: #F23428;" type="submit" [disabled]="!allowSearch"></button>
                                 <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; "  type="reset" (click)="resetForm()" ></button>
                             </kendo-buttongroup>
                         </div>
-                        
+                        <div class="cols-bm">
+                            <button kendoButton [look]="'default'"
+                                style="background:  #92D050; color: white;width: 69px;     height: 28px;    border-radius: 5px;text-transform:none " title="Details">Find
+                            </button>
+                        </div>
+                        <div class="cols-bm">
+                            <button kendoButton [look]="'default'"
+                                style="background:  #7F7F7F; color: white;width: 69px;     height: 28px;    border-radius: 5px;text-transform:none " title="Details">Reset
+                            </button>
+                        </div>
                     </div>
                 </div>                
         </div>
@@ -50,41 +62,20 @@
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
         (pageChange)="pageChange($event)" [height]="windowHeight"  >    
-        <kendo-grid-column  field="FeedbackId" title="Feedback Id" width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="TransactionID" title="Transaction ID" width= "6%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="DeviceId" title="Device Id"  width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="CRNumber" title="CR Number"  width= "6%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="BotStatus" title="Bot Status" width="12%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="CIF" title="CIF" width="12%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="BotRemark" title="Bot Remark" width="10%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="Application" title="Application" width="10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="Recommendation" title="Recommendation" width="15%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="ExceptionType" title="Exception Type" width="15%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="CheckerStatus" title="Checker Status" width="7%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="ExceptionMessage" title="Exception Message" width="7%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="CheckerUserId" title="Checker User Id" width="7%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="MakerStatus" title="Maker Status"  width="7%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="MakerUserId" title="Maker User Id"  width="7%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="CaseStatus" title="Case Status"  width="7%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column title="Action"   width=5% [headerStyle]="headerStyle">
-            <ng-template kendoGridCellTemplate>
-                <div kendoTooltip>
-                <kendo-buttongroup>
-                    <button kendoButton [look]="'default'"
-                    style="background:  #F23428; color: white " title="Details">
-                    <kendo-icon class="k-i-detail-section" [themeColor]="'#292b2d'" ></kendo-icon></button>
-                    <button kendoButton [look]="'default'"
-                    style="background: #92D050; color: white " title="View"> 
-                    <kendo-icon class="k-icon k-i-preview" [themeColor]="'#292b2d'"></kendo-icon></button>
-                </kendo-buttongroup>
-                </div>
-                </ng-template>
-            
-        </kendo-grid-column>
+        
+        
     </kendo-grid>
     <kendo-excelexport [data]="gridView" fileName="ReactiveCase.xlsx" #excelexport>
         <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'" [width]="100">
