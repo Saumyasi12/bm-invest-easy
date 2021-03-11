@@ -12,20 +12,6 @@ import { Tbl_User_Detail } from '../../../Models/ReportsModel'
 })
 export class FullLayoutComponent implements OnInit {
 
-
-  /* public navItems: Array<any> = [];
-  testItems: Array<DrawerItem> = [
-    { text: 'Visa 130 Files', icon: 'k-i-group-section', selected: true  },
-    { text: 'Visa Summary Sheet', icon: 'k-i-detail-section' },
-    { text: 'Case History', icon: 'k-i-aggregate-fields' },
-    { text: 'Accepted Case Closure Report', icon: 'k-i-track-changes-accept' },
-    { text: 'Matched Financial Transaction', icon: 'k-i-track-changes-accept-all' },
-    { text: 'Unmatched Financial Transaction', icon: 'k-i-track-changes-reject-all' },
-    { text: 'Reconciliation', icon: 'k-i-borders-show-hide' },
-    {text: 'User Management', icon: 'k-i-accessibility'}
-];
- */
-
   public expanded = false;
   public dateval = new Date();
   public items: Array<any> = [];

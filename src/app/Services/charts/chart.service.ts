@@ -52,18 +52,7 @@ export class ChartService {
                         }
                     ]
                 },
-                {
-                    seriesname: "Unprocessed",
-                    color: "#7F7F7F",
-                    patternangle: "60",
-                    patternbgcolor: "#FFFFFF",
-                    showValues: "1",
-                    "data": [
-                        {
-                            "value": ev[3]
-                        }
-                    ]
-                },
+               
                 
             ]
         return ([data, ev]);
@@ -81,28 +70,18 @@ export class ChartService {
                 {    
                   
                     color: "#0D274D",
-                    "label": "Unactioned",
+                    "label": "CR Received",
                     "value": ev[0]
                 },
                 {
                   color: "#C00000",
-                    "label": "Reject",
+                    "label": "CR Scrapped",
                     "value": ev[1]
                 },
                 {
-                  color: "#9C9C9C",
-                    "label": "Hold",
-                    "value":  ev[2]
-                },
-                {
-                  color: "#92D050",
-                    "label": "Approve",
-                    "value": ev[3]
-                },
-                {
                   color: "#527BCB",
-                    "label": "Reroute",
-                    "value":  ev[4]
+                    "label": "CR Updated",
+                    "value":  ev[2]
                 }
             ]
      return ([data,ev]);
@@ -116,11 +95,11 @@ fetchReadyForClosure():  Observable<any>{
 
 }
 fetchReadyToAction():  Observable<any>{
-   return this.http.get<caseReadyForAction[]>('https://bm-atm-cdm-default-rtdb.firebaseio.com/casesReady-Maker.json',{})
+   return this.http.get<caseReadyForAction[]>('https://bm-atm-cdm-default-rtdb.firebaseio.com/invest-expiredCr.json',{})
 
 }
 fetchCaseStatisticsData(): Observable<any>{
-    return this.http.get<CaseStatistics[]>('https://bm-atm-cdm-default-rtdb.firebaseio.com/caseStatTable-data.json',{})
+    return this.http.get<CaseStatistics[]>('https://bm-atm-cdm-default-rtdb.firebaseio.com/invest-crStatus.json',{})
 }
 
 fetchRoutingPortalGridData(): Observable<any>{

@@ -94,18 +94,6 @@
             value: "01"
           }
         ]
-      },
-      {
-        seriesname: "Unprocessed",
-        color: "#7F7F7F",
-        patternangle: "60",
-        patternbgcolor: "#FFFFFF",
-        showValues: "1",
-        data: [
-          {
-            value: "01"
-          }
-        ]
       }
 
     ]

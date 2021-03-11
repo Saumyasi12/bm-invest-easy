@@ -34,6 +34,10 @@ const routes: Routes = [{
       path: 'reactivecase',
       loadChildren: () => import('../Dashboard/reactive-cases/reactive-cases.module').then(m => m.ReactiveCasesModule)
     },
+    {
+      path: 'casestat',
+      loadChildren: () => import('../Dashboard/case-stat/case-stat.module').then(m => m.CaseStatModule)
+    } ,
     /*{
       path: 'v_summary',
       loadChildren: () => import('../Dashboard/visa-summary-sheet/visa-summary-sheet.module').then(m => m.VisaSummarySheetModule)
@@ -58,10 +62,7 @@ const routes: Routes = [{
       path: 'reconciliation',
       loadChildren: () => import('../Dashboard/reconciliation/reconciliation.module').then(m => m.ReconciliationModule)
     } ,
-    {
-      path: 'casestat',
-      loadChildren: () => import('../Dashboard/case-stat/case-stat.module').then(m => m.CaseStatModule)
-    } ,
+   
      */
   
    /* {

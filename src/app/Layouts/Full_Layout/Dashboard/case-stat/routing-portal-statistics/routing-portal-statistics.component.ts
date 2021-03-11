@@ -13,7 +13,7 @@ import { chartConfigUI } from '../ChartData/chartsConfig';
 export class RoutingPortalStatisticsComponent implements OnInit {
   @Output() onClose = new EventEmitter<boolean>()
 
-  pageTitle = 'Routing Portal Statistics';
+  pageTitle = 'CR Statistics';
   public actualdata: any;
   public gridView!: GridDataResult;
   public pageSize = 5;

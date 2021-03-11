@@ -2,7 +2,7 @@
   <div class="card-Header-bm">
     <div class="row-bm">
       <div class="cols-bm">
-        <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">Case Status</p>
+        <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">CR Status</p>
       </div>
       <div class="cols-bm">
         Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
@@ -61,10 +61,6 @@
             Application Exception
             <div class="status-big-text">{{actualdata[2]}}</div>
           </div>
-          <div class="status-items  k-text-error">
-            Unprocessed
-            <div class="status-big-text">{{actualdata[3]}}</div>
-          </div>
         </div>
       </div>
     </div>
@@ -85,20 +81,16 @@
   <!--Kendo Grid-->
   <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="windowHeight"
     (pageChange)="pageChange($event)">
-    <kendo-grid-column title="S.No" width="5%" [headerStyle]="headerstyle">
-      <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-        {{rowIndex+1}}
-      </ng-template>
+  
+    <kendo-grid-column [headerStyle]="headerstyle" field="crNumber" title="CR Number" width="15%">
     </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="FeedbackId" title="Feedback Id" width="15%">
+    <kendo-grid-column [headerStyle]="headerstyle" field="cif" title="CIF" width="25%">
     </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="IssueType" title="Issue Type" width="25%">
+    <kendo-grid-column [headerStyle]="headerstyle" field="investEasyExpiryDate" title="Invest Easy Expiry Date" width="15%">
     </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="Status" title="Status" width="15%">
+    <kendo-grid-column [headerStyle]="headerstyle" field="Status" title="Status" width="25%">
     </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="Reason" title="Reason" width="25%">
-    </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="MessageType" title="Bot Entry Time" width="15%">
+    <kendo-grid-column [headerStyle]="headerstyle" field="Reason" title="Reason" width="15%">
     </kendo-grid-column>
   </kendo-grid>
   <!--Kendo Grid-->

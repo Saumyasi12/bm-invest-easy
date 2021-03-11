@@ -69,10 +69,7 @@ export class CaseStatComponent implements OnInit {
       this.totalCount = this.mystar.map(value => value.count).reduce((a, b) => a + b);
     })
 
-    this.chartService.fetchReadyForClosure().subscribe(ev => {
-      this.mystarData = ev;
-      this.totalCountClosure = this.mystarData.map(value => value.count).reduce((a, b) => a + b);
-    })
+  
 
     this.caseStatsChartConfig = {
       width: '100%',

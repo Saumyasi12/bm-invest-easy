@@ -1,30 +1,30 @@
 export const CaseStatVar = [{
-    'FeedbackId': '466583',
-    'IssueType': 'UnknownUnauthorized/Fraud Transaction',
+    'crNumber': '466583',
+    'cif': '346532',
     'Status': 'Business RuleException',
     'Reason': 'Auth Code not in standardformat',
-    'MessageType': '20-Nov-2020'      
+    'investEasyExpiryDate': '20-Nov-2020'      
 },
 {
-    'FeedbackId': '346532',
-    'IssueType': 'Cash Not Received',
+    'crNumber': '346532',
+    'cif': '466583',
     'Status': 'Processed',
     'Reason': 'Success',
-    'MessageType': '20-Nov-2020'      
+    'investEasyExpiryDate': '20-Nov-2020'      
 },
 {
-    'FeedbackId': '897345',
-    'IssueType': 'Transactionfailed but amount debited',
+    'crNumber': '897345',
+    'cif': '466583',
     'Status': 'Application RuleException',
     'Reason': 'Login Failure in VISA',
-    'MessageType': '20-Nov-2020'      
+    'investEasyExpiryDate': '20-Nov-2020'      
 },
 {
-    'FeedbackId': '466583',
-    'IssueType': 'UnknownUnauthorized/Fraud Transaction',
+    'crNumber': '466583',
+    'cif': '897345',
     'Status': 'Business RuleException',
     'Reason': 'Auth Code not in standardformat',
-    'MessageType': '20-Nov-2020'      
+    'investEasyExpiryDate': '20-Nov-2020'      
 }
 
 ]

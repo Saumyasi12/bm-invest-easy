@@ -43,9 +43,9 @@
       </div>
       
       <!--Search Controls-->
-      <!--Chart-->
+    
       <div class="bm-dashboard-container">
-        <div class="bm-dashboard-item rouded-corner">
+        <!--div class="bm-dashboard-item rouded-corner">
             <div class="card-body">
                 <div class="content status">
                     <div class="status-items k-text-success" >
@@ -70,7 +70,7 @@
                      </div>
                      </div>
               </div>
-          </div>
+          </div----->
         
         <div class="bm-dashboard-item rouded-corner">
             <div class="card-body">
@@ -86,18 +86,23 @@
       <!--Chart-->
       <!--Kendo Grid-->
       <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="windowHeight" (pageChange)="pageChange($event)">
-        <kendo-grid-column [headerStyle]="headerstyle" field="FeedbackId" title="Feedback Id" width=120>
+        <kendo-grid-column [headerStyle]="headerstyle" field="FeedbackId" title="CR Number">
         </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="AuthCode" title="Auth Code">
+        <kendo-grid-column [headerStyle]="headerstyle" field="AuthCode" title="CIF">
         </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="Amount" title="Amount">
+        <kendo-grid-column [headerStyle]="headerstyle" field="Amount" title="Invest Easy Expiry Date">
         </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="RoutingPortal" title="Routing Portal">
+        <kendo-grid-column [headerStyle]="headerstyle" field="RoutingPortal" title="CR Scraped">
         </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="CardNo" title="Card No.">
+        <kendo-grid-column [headerStyle]="headerstyle" field="CardNo" title="CR Scraped Remark">
         </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="Status" title="Status">
+        <kendo-grid-column [headerStyle]="headerstyle" field="Status" title="CR Updated">
         </kendo-grid-column>
+        <kendo-grid-column [headerStyle]="headerstyle" field="RoutingPortal" title="CR Updated Remark">
+        </kendo-grid-column>
+        <kendo-grid-column [headerStyle]="headerstyle" field="CardNo" title="Manual Check Required">
+        </kendo-grid-column>
+     
     </kendo-grid>
       <!--Kendo Grid-->
 
