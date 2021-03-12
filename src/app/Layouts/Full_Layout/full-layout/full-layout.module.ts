@@ -27,13 +27,10 @@ const routes: Routes = [{
   children: [
     {
       path: '',
-      redirectTo: '/reactivecase',
+      redirectTo: '/casestat',
       pathMatch: 'full'
     } ,
-    {
-      path: 'reactivecase',
-      loadChildren: () => import('../Dashboard/reactive-cases/reactive-cases.module').then(m => m.ReactiveCasesModule)
-    },
+   
     {
       path: 'casestat',
       loadChildren: () => import('../Dashboard/case-stat/case-stat.module').then(m => m.CaseStatModule)
@@ -50,11 +47,11 @@ const routes: Routes = [{
         path: 'exception',
         loadChildren: () => import('../Dashboard/exception-data/exception-data.module').then(m => m.ExceptionDataModule)
       },
-    /*{
-      path: 'v_summary',
-      loadChildren: () => import('../Dashboard/visa-summary-sheet/visa-summary-sheet.module').then(m => m.VisaSummarySheetModule)
+   {
+      path: 'crtrendsreport',
+      loadChildren: () => import('../Dashboard/cr-trend-reports/cr-trend-reports.module').then(m => m.CrTrendsReportModule)
     } ,
-    {
+    /* {
       path: 'casehistory',
       loadChildren: () => import('../Dashboard/case-histtory/case-histtory.module').then(m => m.CaseHisttoryModule)
     } ,

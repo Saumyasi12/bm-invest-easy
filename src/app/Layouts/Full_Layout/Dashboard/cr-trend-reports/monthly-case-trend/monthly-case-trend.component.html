@@ -1,0 +1,57 @@
+<kendo-card style="width: 100%;">
+    <kendo-card-body>
+        <div class="card-Header-bm">
+            <div class="row-bm">
+                <div class="cols-bm">
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
+                </div>
+                <div class="cols-bm">
+                    Export  &nbsp;&nbsp;<button kendoButton icon="excel"[name]="'file-excel'"  style="background: darkgreen; color: #fff; margin-right: 5px; "></button>
+                    <button kendoButton icon="pdf" style="background: #F23428; color: #fff;"></button>
+                </div>
+            </div>
+        </div>
+        <form>
+            <div class="flex-container-bm">            
+                    <div class="flex-item-bm">
+                        <div class="row-bm">
+                           
+                            <div class="cols-bm">
+                                    <kendo-datepicker class='kendo-input controls-bm'  [format]="'MM-dd-yyyy'" formControlName="fromDate"  placeholder="From"   tabindex="1">
+                                    </kendo-datepicker>
+                            </div>
+                            <div class="cols-bm">
+                                <kendo-datepicker class='kendo-input controls-bm'  [format]="'MM-dd-yyyy'" formControlName="toDate"  placeholder="To"   tabindex="2">
+                                </kendo-datepicker>
+                        </div>
+                        <div class="cols-bm">
+                            <kendo-combobox [data]="['A','B','C']" placeholder="Status" class='kendo-input controls-bm'  > </kendo-combobox>
+                    </div>
+                            <div class="cols-bm">
+                                <kendo-buttongroup >
+                                    <button kendoButton icon="zoom" style="color: #fff; background: #F23428;"  type="submit" [disabled]="true" title="Find"  tabindex="3"></button>
+                                    <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; "  type="reset"  title="Reset"  tabindex="4"></button>
+                                </kendo-buttongroup>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+        </form>
+         <!--Chart-->
+     <div class="bm-dashboard-container">
+        <div class="bm-dashboard-item rouded-corner">
+            <div class="card-body">
+                <div class="content">
+                    
+                    <fusioncharts
+                    [chartConfig]=monthlyCrChartConfig
+                    [dataSource]=monthlyDataSource >
+                </fusioncharts>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--Chart-->
+    </kendo-card-body>
+</kendo-card>

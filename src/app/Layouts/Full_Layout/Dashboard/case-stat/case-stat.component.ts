@@ -1,4 +1,5 @@
 import { Component, DebugNode, OnInit, } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 //import { dataSource } from './ChartData/casestatusdata'
 //import { portaldatasource } from './ChartData/Routingportaldata'
 import { UserManagementService } from '../../../../Services/UserManagement/user-management.service';
@@ -73,7 +74,7 @@ export class CaseStatComponent implements OnInit {
 
     this.caseStatsChartConfig = {
       width: '100%',
-      height: '210',
+      height: '155',
       type: 'stackedbar2d',
       dataFormat: 'json'
     };

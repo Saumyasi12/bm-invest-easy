@@ -87,7 +87,7 @@ caseStats:
         //xAxisNameBorderDashed:"1",
         theme: "fusion"
     },
-    wecareDailyChart:{
+    crWeeklyChart:{
         paletteColors:"#EF3226,#0D274D",
         showLabels:"1",
         showPlotBorder:"1",
