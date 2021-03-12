@@ -1,4 +1,6 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CrTrendsService } from 'src/app/Services/CrTrends/cr-trends.service';
 import { chartConfigUI } from '../../case-stat/ChartData/chartsConfig';
 
@@ -9,14 +11,24 @@ import { chartConfigUI } from '../../case-stat/ChartData/chartsConfig';
 })
 
 export class YearlyCaseTrendComponent  implements OnInit{
-  pageTitle = "Yearly Case Trend"
+  pageTitle = "Yearly Cr Trend"
   yearlyDataSource:any;
+  Yearlycaseform:FormGroup;
   yearlyCrChartConfig:any;
+  fobj = { FromDate: "", ToDate: "", Status: "", Issue: "" }
 
-  constructor( private crService: CrTrendsService ) { }
+  constructor( private CrService: CrTrendsService, private fb:FormBuilder) { }
 
   ngOnInit(){
-    this.crService.fetchCrTrendsYearlyGraphData().subscribe(ev=>{
+    this.fobj={FromDate:formatDate((new Date().getTime()-(365*3 * 24 * 60 * 60 * 1000)),'yyyy-MM-dd','en-US'),ToDate:formatDate(new Date(),'yyyy-MM-dd','en-US'),Status:"",Issue:""} 
+   this.RenderChart(this.fobj)
+   this.Yearlycaseform = this.fb.group({
+    FromDate: new FormControl(),
+    ToDate: new FormControl()    
+  });
+  }
+  RenderChart(formObj:any){
+    this.CrService.fetchCrTrendsYearlyGraphData(formObj).subscribe(ev=>{
       console.log(ev);
      this.yearlyDataSource ={
        "chart": chartConfigUI.crWeeklyChart,
@@ -33,5 +45,8 @@ export class YearlyCaseTrendComponent  implements OnInit{
     };
 
   }
-
+  formSearch(){
+    this.fobj = { FromDate:formatDate(this.Yearlycaseform.controls['FromDate'].value,'yyyy-MM-dd','en-US') ,ToDate:formatDate(this.Yearlycaseform.controls['ToDate'].value,'yyyy-MM-dd','en-US') , Status: "", Issue:'' }
+    this.RenderChart(this.fobj)
+  }
 }

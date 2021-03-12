@@ -8,6 +8,7 @@ import { chartConfigUI } from '../../case-stat/ChartData/chartsConfig';
 import { dailydatasource } from '../../case-stat/ChartData/daily'
 import { monthlydatasource } from '../../case-stat/ChartData/monthly'
 import { yearlydatasource } from '../../case-stat/ChartData/yearly'
+import { formatDate } from '@angular/common';
 //import {UserManagementService} from '../../../../Services/UserManagement/user-management.service'
 @Component({
   selector: 'app-cr-trends',
@@ -18,14 +19,12 @@ export class CrTrendsComponent implements OnInit {
 
   pageTitle="CR Trend";
 
-
-
+  fobj = { FromDate: "", ToDate: "", Status: "", Issue: "" }
   public windowOpened = false;
   weeklyDataSource:any;
   monthlyDataSource:any;
   yearlyDataSource:any;
   public viewflag: number = 0;
-  
   weeklyCrChartConfig:any;
   monthlyCrChartConfig:any;
   yearlyCrChartConfig:any;
@@ -38,7 +37,8 @@ export class CrTrendsComponent implements OnInit {
 
   ngOnInit(): void {
    // this.userservice.CheckUserpages('casetrend')
-   this.crService.fetchCrTrendsWeeklyGraphData().subscribe(ev=>{
+   this.fobj={FromDate:formatDate((new Date().getTime()-(90 * 24 * 60 * 60 * 1000)),'yyyy-MM-dd','en-US'),ToDate:formatDate(new Date(),'yyyy-MM-dd','en-US'),Status:"",Issue:""}
+   this.crService.fetchCrTrendsWeeklyGraphData(this.fobj).subscribe(ev=>{
      console.log(ev);
  
     this.weeklyDataSource ={
@@ -47,7 +47,8 @@ export class CrTrendsComponent implements OnInit {
       "dataset": ev.dataset,
     } 
   });
-  this.crService.fetchCrTrendsMonthlyGraphData().subscribe(ev=>{
+  this.fobj={FromDate:formatDate((new Date().getTime()-(365 * 24 * 60 * 60 * 1000)),'yyyy-MM-dd','en-US'),ToDate:formatDate(new Date(),'yyyy-MM-dd','en-US'),Status:"",Issue:""}
+  this.crService.fetchCrTrendsMonthlyGraphData(this.fobj).subscribe(ev=>{
     console.log(ev);
  
    this.monthlyDataSource ={
@@ -56,8 +57,8 @@ export class CrTrendsComponent implements OnInit {
      "dataset": ev.dataset,
    } 
  });
-
- this.crService.fetchCrTrendsYearlyGraphData().subscribe(ev=>{
+ this.fobj={FromDate:formatDate((new Date().getTime()-(365 * 24 * 60 * 60 * 1000)),'yyyy-MM-dd','en-US'),ToDate:formatDate(new Date(),'yyyy-MM-dd','en-US'),Status:"",Issue:""}
+ this.crService.fetchCrTrendsYearlyGraphData(this.fobj).subscribe(ev=>{
   console.log(ev);
  this.yearlyDataSource ={
    "chart": chartConfigUI.crWeeklyChart,
@@ -93,6 +94,4 @@ this.yearlyCrChartConfig={
     this[component + 'Opened'] = true;
     this.viewflag=flag;
   }
-
-
 }
