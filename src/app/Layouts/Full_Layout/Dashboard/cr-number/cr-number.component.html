@@ -38,23 +38,14 @@
                                 <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; "  type="reset" (click)="resetForm()" ></button>
                             </kendo-buttongroup>
                         </div>
-                        <div class="cols-bm">
-                            <button kendoButton [look]="'default'"
-                                style="background:  #92D050; color: white;width: 69px;     height: 28px;    border-radius: 5px;text-transform:none " title="Details">Find
-                            </button>
-                        </div>
-                        <div class="cols-bm">
-                            <button kendoButton [look]="'default'"
-                                style="background:  #7F7F7F; color: white;width: 69px;     height: 28px;    border-radius: 5px;text-transform:none " title="Details">Reset
-                            </button>
-                        </div>
+                       
                     </div>
                 </div>                
         </div>
     </form>
    
       
-    <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+    <!----app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader----->
         
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"

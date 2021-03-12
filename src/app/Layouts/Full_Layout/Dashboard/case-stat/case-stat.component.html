@@ -6,9 +6,8 @@
                     <!--div class="cols-bm">
                         <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
                     </div---->
-                    <div class="cols-bm">
-                        <button kendoButton icon="refresh" [primary]="true" (click)="ngOnInit()">Realtime Data</button>
-                    </div>
+               
+
                 </div>
             </div>
             <div class="bm-dashboard-container">
@@ -60,8 +59,8 @@
                        </div>
                     <div class="card-body">
                         <div class="content">
-                            <div><button kendoButton [look]="'flat'" class="big-int" (click)="open('window',3)">
-                                    {{ totalCount }}
+                            <div><button kendoButton [look]="'flat'" class="big-int" >
+                                    {{ mystar[0].count }}
                                 </button></div>
                         </div>
                     </div>

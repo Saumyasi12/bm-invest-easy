@@ -1,0 +1,107 @@
+
+<div *ngIf="!windowOpened">
+    <kendo-card [width]="'100%'" >
+        <kendo-card-body>
+            <div class="card-Header-bm">
+                <div class="row-bm">
+                    <div class="cols-bm">
+                        <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="bm-dashboard-container">
+                <div class="bm-dashboard-item rouded-corner">
+                    <div class="header">
+                        <div class="heading">
+                            Weekly CR Trend
+                        </div>
+                        <div class="controls-heading">
+                            <kendo-buttongroup>
+                                <button kendoButton  icon="clock"  [disabled]="true">Last 3 Weeks</button>
+                                <button kendoButton  icon="calendar"  (click)="open('window',1)">View
+                                    From</button>
+                            </kendo-buttongroup>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="content">
+                            <fusioncharts
+                  [chartConfig]=weeklyCrChartConfig
+                  [dataSource]= weeklyDataSource >
+              </fusioncharts>
+                        </div>
+                    </div>
+                </div>
+                <div class="bm-dashboard-item rouded-corner">
+                    <div class="header">
+                        <div class="heading">
+                            Monthly CR Trend
+                        </div>
+                        <div class="controls-heading">
+                            <kendo-buttongroup>
+                                <button kendoButton  icon="clock"  [disabled]="true"> Last 12 Months</button>
+                                <button kendoButton  icon="calendar"  (click)="open('window',2)">View
+                                    From</button>
+                            </kendo-buttongroup>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="content">
+                           <fusioncharts
+                            [chartConfig]=monthlyCrChartConfig
+                            [dataSource]=monthlyDataSource >
+                        </fusioncharts>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bm-dashboard-container">
+                <div class="bm-dashboard-item rouded-corner">
+                    <div class="header">
+                        <div class="heading">
+                            Yearly CR Trend
+                        </div>
+                        <div class="controls-heading">
+                            <kendo-buttongroup>
+                                <button kendoButton  icon="clock" [disabled]="true">Last 4 Years</button>
+                                <button kendoButton  icon="calendar"  (click)="open('window',3)">View
+                                    From</button>
+                                    </kendo-buttongroup>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="content">
+                           <fusioncharts
+                            [chartConfig]=yearlyCrChartConfig
+                            [dataSource]=yearlyDataSource >
+                        </fusioncharts> 
+                        </div>
+                    </div>
+                   
+    </div>
+    <div class="bm-dashboard-item">
+        <div class="header">
+            
+        </div>
+        <div class="card-body">
+            <div class="content">
+              
+            </div>
+        </div>
+       
+</div>
+    </div>
+    </kendo-card-body>
+    </kendo-card>
+</div>
+
+ <kendo-dialog *ngIf="windowOpened" [title]="pageTitle" (close)="close('window')"
+            [width]="800" >
+
+            <app-daily-case-trend *ngIf="viewflag===1"></app-daily-case-trend>
+            <app-monthly-case-trend *ngIf="viewflag===2"></app-monthly-case-trend>
+            <app-yearly-case-trend *ngIf="viewflag===3"></app-yearly-case-trend>
+        </kendo-dialog>
+
+

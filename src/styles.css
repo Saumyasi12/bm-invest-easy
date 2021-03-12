@@ -4,20 +4,22 @@
 body{
     margin: 0;
     font-family: 'Roboto', sans-serif;
-
 }
-
-.k-grid th, .k-grid td {
-    padding: 5px;
-    font-size:12px
-}
-
-.k-grid th{
-   padding: 8px 12px;
-   white-space: nowrap;
-   text-align: center;
+    .k-grid th, .k-grid td {
+      padding: 2px;
+      font-size:12px;
+      text-align : center;
+  }
   
-}
+  .k-grid th{
+    border-right-style: solid;
+    border-right-width: 0.5px;
+    border-color: white;
+     padding: 8px 12px;
+     white-space: nowrap;
+     text-align: center;
+    
+  }
 
 .k-grid th:hover{
     opacity: 0.9;

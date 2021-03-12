@@ -62,7 +62,65 @@ export class ChartService {
     )
 
    }
-  
+   fetchCaseDataOnFilter(fobj:any):Observable<any>{
+    return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/casestat-data.json',{}).pipe(
+        map((ev)=>{
+             const data=  [
+             {
+                 seriesname: "Processed",
+                 color: "#92D050",
+                 patternangle: "60",
+                 patternbgcolor: "#FFFFFF",
+               
+                 "data": [
+                     {
+                         "value": ev[0]
+                     }
+                 ]
+             },
+             {
+                 seriesname: "Business Rule Exception",
+                 color: "#0D274D",
+                 patternangle: "60",
+                 patternbgcolor: "#FFFFFF",
+             
+                 "data": [
+                     {
+                         "value": ev[1]
+                     }
+                 ]
+             },
+             {
+                 seriesname: "Application Exception",
+                 color: "#C00000",
+                 patternangle: "60",
+                 patternbgcolor: "#FFFFFF",
+               
+                 "data": [
+                     {
+                         "value": ev[2]
+                     }
+                 ]
+             },
+             {
+                 seriesname: "Unprocessed",
+                 color: "#7F7F7F",
+                 patternangle: "60",
+                 patternbgcolor: "#FFFFFF",
+                
+                 "data": [
+                     {
+                         "value": ev[3]
+                     }
+                 ]
+             },
+             
+         ]
+     return ([data, ev]);
+    
+      })
+ )
+}
    fetchRoutingPortalData():  Observable<any>{
     return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/casestat-data.json',{}).pipe(
         map((ev)=>{

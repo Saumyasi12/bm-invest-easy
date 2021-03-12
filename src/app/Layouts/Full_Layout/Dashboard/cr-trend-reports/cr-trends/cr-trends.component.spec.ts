@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReactiveCasesComponent } from './reactive-cases.component';
+import { CrTrendsComponent } from './cr-trends.component';
 
-describe('ReactiveCasesComponent', () => {
-  let component: ReactiveCasesComponent;
-  let fixture: ComponentFixture<ReactiveCasesComponent>;
+describe('CrTrendsComponent', () => {
+  let component: CrTrendsComponent;
+  let fixture: ComponentFixture<CrTrendsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReactiveCasesComponent ]
+      declarations: [ CrTrendsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReactiveCasesComponent);
+    fixture = TestBed.createComponent(CrTrendsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

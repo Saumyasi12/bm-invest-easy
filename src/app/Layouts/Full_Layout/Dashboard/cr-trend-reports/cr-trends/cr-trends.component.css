@@ -1,0 +1,95 @@
+kendo-card-header {  
+    font-size: 16px;
+    font-family: roboto,sans-serif,arial;
+    padding: 5px;
+    color: #171a19;
+    }
+.toggleButtons {
+    float: right;
+    position: relative;
+    margin-right: 10px;
+    margin-top: 7px;
+}
+.labels {
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    color: #48514e;
+    margin-top: -4px;
+    position: relative;
+    top: 9px;
+    left: 21px;
+}
+
+button[kendoGridExcelCommand] {
+    border-color: #F23428;
+    border-width: 3px;
+    position: relative;
+    left: 80%;
+    color: #189514;
+}
+
+.spanwidth {
+    margin-left: 45px;
+}
+
+.boxShadow {
+    box-shadow: 4px 4px 4px rgb(179, 178, 178);
+}
+
+
+.tktProcessed {
+    width: 493px;
+    height: 280px;
+    background-color: #F2F2F2;
+}
+
+.vbutton {
+    font-weight: bold;
+    font-size: 12px;
+    width: 89px;
+    text-transform: none;
+}
+
+.tbutton {
+    background-color: #d5dbd2;
+    font-weight: bold;
+    font-size: 12px;
+    width: 89px;
+    text-transform: none;
+}
+.tbutton {
+    background-color: #d5dbd2;
+    font-weight: bold;
+    font-size: 12px;
+    width: 89px;
+    text-transform: none;
+}
+
+.casesReady {
+    background-color: #F2F2F2;
+    font-family: Arial;
+    text-align: center;
+    margin-top: 1%;
+    font-size: 40px;
+    font-weight: normal;
+    margin-top: 24px;
+}
+
+.footer {
+    font-family: Arial;
+    font-size: 16px;
+    background-color: #F2F2F2;
+    margin-top: 5px;
+    color: #51625c;
+    margin-left: -35px;
+}
+
+.casesReady button {
+    height: 180px;
+    width: 100%;
+    background-color: #dad2e300;
+    font-size: larger;
+    color: #625d57;
+    box-shadow: none;
+}
