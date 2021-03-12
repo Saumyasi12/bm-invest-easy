@@ -52,17 +52,17 @@
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
         (pageChange)="pageChange($event)" [height]="windowHeight"  >    
-        <kendo-grid-column  field="TransactionID" title="Transaction ID" width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="TransactionID" title="Transaction ID" width= "10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="CRNumber" title="CR Number"  width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="CRNumber" title="CR Number"  width= "10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="CIF" title="CIF" width="12%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="CIF" title="CIF" width="10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
         <kendo-grid-column  field="Application" title="Application" width="10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="ExceptionType" title="Exception Type" width="15%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="ExceptionType" title="Exception Type" width="10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="ExceptionMessage" title="Exception Message" width="7%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="ExceptionMessage" title="Exception Message" width="15%" [headerStyle]="headerStyle">
         </kendo-grid-column>
         
         

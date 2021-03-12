@@ -55,12 +55,12 @@
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
         (pageChange)="pageChange($event)" [height]="windowHeight"  >    
-        <kendo-grid-column  field="LegalType" title="LegalType" width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="LegalType" title="LegalType" width= "4%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="Status" title="Status"  width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="Status" title="Status"  width= "4%" [headerStyle]="headerStyle">
         </kendo-grid-column>
         
-        <kendo-grid-column  title="Action" width="10%" [headerStyle]="headerStyle">
+        <kendo-grid-column  title="Action" width="2%" [headerStyle]="headerStyle">
             <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                 <div kendoTooltip>
                     <button kendoButton *ngIf="!opened" [look]="'default'"

@@ -122,9 +122,9 @@
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
         (pageChange)="pageChange($event)" [height]="windowHeight"  >    
-        <kendo-grid-column  field="CountryCode" title="Country Code" width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="CountryCode" title="Country Code" width= "10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="CountryName" title="Country Name"  width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="CountryName" title="Country Name"  width= "10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
         <kendo-grid-column  field="CountryShortName" title="CountryShort Name" width="12%" [headerStyle]="headerStyle">
         </kendo-grid-column>
@@ -136,7 +136,7 @@
         </kendo-grid-column>
         <kendo-grid-column  field="CRUpdatedRemarks" title="CR Updated Remarks" width="7%" [headerStyle]="headerStyle">
         </kendo-grid-column> -->
-        <kendo-grid-column  title="Action" width="10%" [headerStyle]="headerStyle">
+        <kendo-grid-column  title="Action" width="4%" [headerStyle]="headerStyle">
             <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                 <div kendoTooltip>
                     <button kendoButton [look]="'default'"

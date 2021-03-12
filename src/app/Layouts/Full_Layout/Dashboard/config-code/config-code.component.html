@@ -3,6 +3,7 @@
         <div class="card-Header-bm">    
              <div class="row-bm">
                  
+
             </div> 
         </div>  
         
@@ -47,14 +48,14 @@
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
         (pageChange)="pageChange($event)" [height]="windowHeight"  >    
-        <kendo-grid-column  field="Name" title="Name" width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="Name" title="Name" width= "10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <kendo-grid-column  field="Value" title="Value"  width= "6%" [headerStyle]="headerStyle">
+        <kendo-grid-column  field="Value" title="Value"  width= "10%" [headerStyle]="headerStyle">
         </kendo-grid-column>
         <kendo-grid-column  field="Description" title="Description" width="12%" [headerStyle]="headerStyle">
         </kendo-grid-column>
         
-        <kendo-grid-column  title="Action" width="10%" [headerStyle]="headerStyle">
+        <kendo-grid-column  title="Action" width="4%" [headerStyle]="headerStyle">
             <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                 <div kendoTooltip>
                     <button kendoButton *ngIf="!opened" [look]="'default'"
