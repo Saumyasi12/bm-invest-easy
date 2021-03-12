@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UploadModule } from '@progress/kendo-angular-upload';
-<<<<<<< HEAD
 import { CrNumberComponent } from './Layouts/Full_Layout/Dashboard/cr-number/cr-number.component';
 import { ExpiredCrdataComponent } from './Layouts/Full_Layout/Dashboard/expired-crdata/expired-crdata.component';
 import { ExceptionDataComponent } from './Layouts/Full_Layout/Dashboard/exception-data/exception-data.component';
@@ -22,8 +21,6 @@ import { ConfigCodeComponent } from './Layouts/Full_Layout/Dashboard/config-code
 
 
 
-=======
->>>>>>> d1f3fc687521153df1521795ea9c566df974599f
 
 
 const routes: Routes = [
