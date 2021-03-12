@@ -29,6 +29,10 @@ import { UploadModule } from '@progress/kendo-angular-upload';
 import { CrNumberComponent } from './Layouts/Full_Layout/Dashboard/cr-number/cr-number.component';
 import { ExpiredCrdataComponent } from './Layouts/Full_Layout/Dashboard/expired-crdata/expired-crdata.component';
 import { ExceptionDataComponent } from './Layouts/Full_Layout/Dashboard/exception-data/exception-data.component';
+import { CountryCodeComponent } from './Layouts/Full_Layout/Dashboard/country-code/country-code.component';
+
+import { LegalTypeComponent } from './Layouts/Full_Layout/Dashboard/legal-type/legal-type.component';
+import { ConfigCodeComponent } from './Layouts/Full_Layout/Dashboard/config-code/config-code.component';
 
 
 
@@ -52,10 +56,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
-    
-
-   
+    AppComponent,
   ],
   imports: [
     BrowserModule,

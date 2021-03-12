@@ -50,6 +50,18 @@ const routes: Routes = [{
         path: 'exception',
         loadChildren: () => import('../Dashboard/exception-data/exception-data.module').then(m => m.ExceptionDataModule)
       },
+      {
+        path: 'countrycode',
+        loadChildren: () => import('../Dashboard/country-code/country-code.module').then(m => m.CountryCodeModule)
+      },
+      {
+        path: 'configcode',
+        loadChildren: () => import('../Dashboard/config-code/config-code.module').then(m => m.ConfigCodeModule)
+      },
+      {
+        path: 'legaltype',
+        loadChildren: () => import('../Dashboard/legal-type/legal-type.module').then(m => m.LegalTypeModule)
+      },
     /*{
       path: 'v_summary',
       loadChildren: () => import('../Dashboard/visa-summary-sheet/visa-summary-sheet.module').then(m => m.VisaSummarySheetModule)

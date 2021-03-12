@@ -1,0 +1,167 @@
+<kendo-card [style]="'width:100%'">
+    <kendo-card-body> 
+        <div class="card-Header-bm">    
+             <div class="row-bm">
+                 <!-- <div class="cols-bm">
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;"></p>
+                </div> -->
+                <!-- <div class="cols-bm" *ngIf="!showLoading && !errorMessage">
+                    Export  &nbsp;&nbsp;<button kendoButton icon="excel"[name]="'file-excel'" (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
+                </div> -->
+                <div class="cols-bm">
+                    <button kendoButton *ngIf="!opened" icon="table-row-insert-below" style="color: #189514;"
+                        (click)="opendialog()">Add Row</button>
+                </div>
+            </div> 
+        </div>  
+        
+        <!-- <form [formGroup]="crform" (ngSubmit)="formSearch()">
+        <div class="flex-container-bm">             
+                 <div class="flex-item-bm">
+                    <div class="row-bm">
+                        <div class="cols-bm">
+                                <kendo-datepicker class='kendo-input controls-bm' placeholder="From" [format]="'MM-dd-yyyy'" tabindex="1" 
+                                formControlName="fromDate" (valueChange)="fromDateChange($event)">
+                                </kendo-datepicker>
+                            
+                        </div>
+                        <div class="cols-bm">
+                                <kendo-datepicker class='kendo-input controls-bm' placeholder="To" [format]="'MM-dd-yyyy'" tabindex="2"
+                                formControlName="toDate" (valueChange)="toDateChange($event)">
+                                </kendo-datepicker>
+                        </div>
+                          <div class="cols-bm">
+                                <kendo-textbox formControlName="feedbackId" class="controls-bm" placeholder="CR Number" (valueChange)="crNumberChange($event)"></kendo-textbox>
+                        </div> -->
+                         <!-- <div class="cols-bm">                                
+                            <kendo-combobox [data]="['426583','426583']" class="controls-bm" formControlName="crNumber" placeholder="CR Number" (valueChange)="crNumberChange($event)"> </kendo-combobox> 
+                    </div>
+                        <div class="cols-bm">
+                            <kendo-buttongroup >
+                                <button kendoButton icon="zoom" style="color: #fff; background: #F23428;" type="submit" [disabled]="!allowSearch"></button>
+                                <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; "  type="reset" (click)="resetForm()" ></button>
+                            </kendo-buttongroup>
+                        </div>
+                        <div class="cols-bm">
+                            <button kendoButton [look]="'default'"
+                                style="background:  #92D050; color: white;width: 69px;     height: 28px;    border-radius: 5px;text-transform:none " title="Details">Find
+                            </button>
+                        </div>
+                        <div class="cols-bm">
+                            <button kendoButton [look]="'default'"
+                                style="background:  #7F7F7F; color: white;width: 69px;     height: 28px;    border-radius: 5px;text-transform:none " title="Details">Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>                
+        </div>
+    </form>  -->
+    <kendo-dialog title="Add New Row" *ngIf="opened" (close)="closedialog('cancel')" [minWidth]="250" [width]="600"
+     [height]="350">
+     <form [formGroup]="editAddForm" (ngSubmit)="formSearch()">
+
+         <div class="rowData">
+             <!-- <span class="colData"> -->
+                 <label>Country Code:</label>
+                 <kendo-textbox class="textBox" formControlName="countryCode"></kendo-textbox>
+                </div><br><br>
+             <!-- </span>
+             <span class="colData"> -->
+                <div class="rowData">
+                 <label>Country Name :</label>
+                 <kendo-textbox class="textBox" formControlName="countryName"></kendo-textbox>
+                </div><br><br>
+             <!-- </span>
+                
+             <span class="colData"> -->
+                <div class="rowData">
+                 <label>Country Short Name :</label>
+                 <kendo-textbox class="textBox" formControlName="countryShortName"></kendo-textbox>
+             <!-- </span> -->
+         </div>
+        
+         <!-- <br><br>
+         <div class="rowData">
+             <span class="colData">
+                 <label>To Account No :</label>
+                 <kendo-textbox class="textBox" formControlName="ToAccountNo"></kendo-textbox>
+             </span>
+             <span class="colData">
+                 <label>From Account No :</label>
+                 <kendo-textbox class="textBox" formControlName="FromAccountNo"></kendo-textbox>
+             </span>
+             <span class="colData">
+                 <label>Date Of Payment :</label>
+                 <kendo-textbox class="textBox" formControlName="DateOfPayment"></kendo-textbox>
+             </span>
+         </div> -->
+         <br><br><br>
+         <div class="rowData">
+            
+                 <button kendoButton [look]="'default'"
+                     style="background: #92D050;color: white;width: 69px;   height: 28px;    border-radius: 5px; width: 80px;"
+                     type="submit">Save</button>
+             <!-- </span>&nbsp;&nbsp;&nbsp;
+             <span>
+                 <button kendoButton [look]="'default'"
+                     style="background: #7F7F7F;color: white;width: 69px;     height: 28px;    border-radius: 5px;"
+                     type="reset">Reset</button>
+             </span> -->
+             <!-- <br><br><br><br>
+             <p style="width: 50%;text-align: center;margin-left: 280px;">Validations: Remaining amount should
+                 not exceed the inputted amount
+                 Maker/Checker concept in approving payment in Balance Proof
+                 Also check for duplicity in payment
+             </p> -->
+         </div>
+     </form>
+ </kendo-dialog>
+      
+    <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+        
+       <div *ngIf="!showLoading && !errorMessage">
+        <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
+        (pageChange)="pageChange($event)" [height]="windowHeight"  >    
+        <kendo-grid-column  field="CountryCode" title="Country Code" width= "6%" [headerStyle]="headerStyle">
+        </kendo-grid-column>
+        <kendo-grid-column  field="CountryName" title="Country Name"  width= "6%" [headerStyle]="headerStyle">
+        </kendo-grid-column>
+        <kendo-grid-column  field="CountryShortName" title="CountryShort Name" width="12%" [headerStyle]="headerStyle">
+        </kendo-grid-column>
+        <!-- <kendo-grid-column  field="CRScraped" title="CR Scraped" width="10%" [headerStyle]="headerStyle">
+        </kendo-grid-column>
+        <kendo-grid-column  field="CRScrapedRemarks" title="CR Scraped Remarks" width="15%" [headerStyle]="headerStyle">
+        </kendo-grid-column>
+        <kendo-grid-column  field="CRUpdated" title="CR Updated" width="7%" [headerStyle]="headerStyle">
+        </kendo-grid-column>
+        <kendo-grid-column  field="CRUpdatedRemarks" title="CR Updated Remarks" width="7%" [headerStyle]="headerStyle">
+        </kendo-grid-column> -->
+        <kendo-grid-column  title="Action" width="10%" [headerStyle]="headerStyle">
+            <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                <div kendoTooltip>
+                    <button kendoButton [look]="'default'"
+                    style="background: #92D050; color: white " title="Edit"> 
+                    <kendo-icon class="k-i-track-changes k-icon-48" [themeColor]="'#292b2d'" ></kendo-icon></button>
+            
+                </div>
+                 <!-- <div>
+                    <kendo-grid-column  field="Updated By" title="Updated By" >
+                    </kendo-grid-column>
+                      </div>  -->
+             </ng-template>
+        </kendo-grid-column>
+    </kendo-grid>
+     <!-- <kendo-excelexport [data]="gridView" fileName="ReactiveCase.xlsx" #excelexport>
+        <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'" [width]="100">
+        </kendo-excelexport-column>
+  </kendo-excelexport> -->
+       </div>
+        <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
+           <h6>Error Code: {{errorCode}}</h6>
+           <p>{{errorMessage}}</p>
+           
+        
+     </div> 
+    </kendo-card-body>
+</kendo-card>
+

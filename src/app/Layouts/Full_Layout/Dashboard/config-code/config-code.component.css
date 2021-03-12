@@ -1,0 +1,124 @@
+ul {
+    font-size: 14px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    }
+    li {
+    margin: 0px 9px;
+    }.flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 30px;
+      text-align: center;
+      box-sizing: border-box;
+      justify-content: center;
+    }
+    
+    .flex-item-left {
+      
+      box-sizing: border-box;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .card-Header{
+    margin-top: -10px;
+    border-bottom: 1px solid #eee7de;
+    padding-bottom: 5px;
+    }  
+    .row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    }
+    .col-2{
+    box-sizing: border-box;
+    margin-right: 5px;
+    }
+    /* Responsive layout - makes a one column-layout instead of a two-column layout */
+    @media (max-width: 800px) {
+    .flex-item-right, .flex-item-left {
+      flex: 100%;
+    }
+    .col-2{
+      flex:100%;
+    }
+    }
+    .spanwidth{
+      margin-left: 40px;
+    }
+    kendo-card-header {
+      border-bottom:groove;
+      border-top-width: 3px;
+      text-align: center;
+      font-size: 16px;
+      color: #F23428;
+    }
+    .k-form kendo-label:not(:last-of-type) {
+      flex-direction: column;
+      margin-bottom: 10px;
+  }
+  .dialog-save {
+    color: white;
+    background-color:  #049FD9;
+    width: 15%;
+    text-align: center;
+  
+    margin-left: 350px;
+  margin-top: 50px;
+  }
+  
+  .labelcls{
+    font-size: 15px;
+    color: #6f6457;
+  }
+  
+  
+  .view {
+  background-color: #92D050;
+  margin: 3px;
+  color: white;
+  width: 30%;
+  }
+  .Excel-Button{
+  color: green;
+  margin:3px;
+   width: 112px;
+   border: solid;       
+   border-color: #F23428;
+   height: 40px;
+   font-weight: bold;
+   border-radius: 15px;
+   text-transform: none;
+  }
+  .k-icon-md {
+  font-size: 26px;
+  }
+  
+  ul {
+  font-size: 14px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  }
+  li {
+  margin: 0px 9px;
+  }
+
+  .rowData{
+    margin-left: 20px;
+    align-items: center;
+    text-align: center;
+  }
+  .colData{
+    margin-left: 20px;
+  }
+  .textBox{
+    margin-left: 10px;
+  }
+  
