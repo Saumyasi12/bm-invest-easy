@@ -15,7 +15,7 @@
   <!--Search Controls-->
   <div class="flex-container-bm">
     <div class="flex-item-bm">
-      <form formGroup = "casetatform" (ngSubmit)="formSearch()">
+      <form [formGroup] = "casetatform" (ngSubmit)="formSearch()">
         <div class="row-bm">
           <div class="cols-bm">
             <kendo-datepicker class='kendo-input controls-bm' formControlName="Fromdate" (valueChange)="FromDate($event)" placeholder="From"

@@ -15,7 +15,7 @@
         <form>
             <div class="flex-container-bm">
                 <div class="flex-item-bm">
-                    <form formGroup="Yearlycaseform" (ngSubmit)="formSearch()">
+                    <form [formGroup] = "Yearlycaseform" (ngSubmit)="formSearch()">
                         <div class="row-bm">
 
                             <div class="cols-bm">
