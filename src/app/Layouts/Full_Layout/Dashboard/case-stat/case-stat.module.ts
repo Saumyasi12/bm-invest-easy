@@ -28,6 +28,7 @@ import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import { FusionChartsModule } from 'angular-fusioncharts';
 
 import {ChartService} from '../../../../Services/charts/chart.service';
+import { ReactiveFormsModule } from '@angular/forms';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 
 
@@ -62,7 +63,8 @@ const route: Routes = [{
     TooltipModule,
     DialogsModule,
     DropDownsModule,
-    FusionChartsModule
+    FusionChartsModule,
+    ReactiveFormsModule
    
   ],
   providers:[

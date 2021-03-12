@@ -19,6 +19,7 @@ import { TooltipModule } from '@progress/kendo-angular-tooltip';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { CrTrendReportsComponent } from './cr-trend-reports.component';
+import { ReactiveFormsModule } from '@angular/forms';
 //import {WecareTrendComponent} from './wecare-casetrend/wecare-casetrend.component' 
 
 const newRoute: Routes=[
@@ -60,6 +61,7 @@ const newRoute: Routes=[
     TooltipModule,
     DialogsModule,
     DropDownsModule,
+    ReactiveFormsModule
   ]
 })
 

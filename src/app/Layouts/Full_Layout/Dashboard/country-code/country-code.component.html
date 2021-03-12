@@ -117,7 +117,7 @@
      </form>
  </kendo-dialog>
       
-    <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+    <!---app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader------>
         
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
@@ -128,14 +128,7 @@
         </kendo-grid-column>
         <kendo-grid-column  field="CountryShortName" title="CountryShort Name" width="12%" [headerStyle]="headerStyle">
         </kendo-grid-column>
-        <!-- <kendo-grid-column  field="CRScraped" title="CR Scraped" width="10%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="CRScrapedRemarks" title="CR Scraped Remarks" width="15%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="CRUpdated" title="CR Updated" width="7%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="CRUpdatedRemarks" title="CR Updated Remarks" width="7%" [headerStyle]="headerStyle">
-        </kendo-grid-column> -->
+      
         <kendo-grid-column  title="Action" width="4%" [headerStyle]="headerStyle">
             <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
                 <div kendoTooltip>
@@ -144,17 +137,11 @@
                     <kendo-icon class="k-i-track-changes k-icon-48" [themeColor]="'#292b2d'" ></kendo-icon></button>
             
                 </div>
-                 <!-- <div>
-                    <kendo-grid-column  field="Updated By" title="Updated By" >
-                    </kendo-grid-column>
-                      </div>  -->
+                
              </ng-template>
         </kendo-grid-column>
     </kendo-grid>
-     <!-- <kendo-excelexport [data]="gridView" fileName="ReactiveCase.xlsx" #excelexport>
-        <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'" [width]="100">
-        </kendo-excelexport-column>
-  </kendo-excelexport> -->
+   
        </div>
         <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
            <h6>Error Code: {{errorCode}}</h6>
