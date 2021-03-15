@@ -18,7 +18,7 @@ export class LegalTypeComponent implements OnInit {
   windowHeight: number;
   @HostListener('window:resize', ['$event']) onResize(event) { 
     
-    this.windowHeight = window.innerHeight-155;
+    this.windowHeight = window.innerHeight-105;
     this.pageSize  = Math.ceil( this.windowHeight /35);
   }
   //----Page Loader--//
@@ -45,7 +45,7 @@ export class LegalTypeComponent implements OnInit {
   constructor(private fb: FormBuilder, private dialogService: DialogService, private legalTypeService: LegalTypeService) { }
 
   ngOnInit(): void {
-    this.windowHeight = window.innerHeight-155;
+    this.windowHeight = window.innerHeight-105;
   this.pageSize  = Math.ceil( this.windowHeight /35);
   this.showLoading= true;
   // this.generateForm();

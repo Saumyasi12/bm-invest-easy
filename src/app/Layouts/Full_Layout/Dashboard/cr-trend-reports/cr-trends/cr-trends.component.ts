@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ CrTrendsService} from '../../../../../Services/CrTrends/cr-trends.service';
 
-import { chartConfigUI } from '../../case-stat/ChartData/chartsConfig';
+import { chartConfigUI } from '../../../../../common/chartsConfig';
 //import {DailyCaseTrendComponent} from './daily-case-trend/daily-case-trend.component';
 //import {MonthlyCaseTrendComponent} from './monthly-case-trend/monthly-case-trend.component';
 //import {YearlyCaseTrendComponent} from './yearly-case-trend/yearly-case-trend.component'

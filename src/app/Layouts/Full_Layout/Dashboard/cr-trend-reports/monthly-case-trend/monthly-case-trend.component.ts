@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CrTrendsService } from 'src/app/Services/CrTrends/cr-trends.service';
-import { chartConfigUI } from '../../case-stat/ChartData/chartsConfig';
+import { chartConfigUI } from '../../../../../common/chartsConfig';
 
 @Component({
   selector: 'app-monthly-case-trend',

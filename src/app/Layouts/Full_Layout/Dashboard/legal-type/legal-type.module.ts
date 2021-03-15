@@ -20,6 +20,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http';
 import { LegalTypeComponent } from './legal-type.component';
 import { LegalTypeService } from 'src/app/Services/legal-type.service';
+import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
 const route: Routes = [{
   path: '', component:LegalTypeComponent 
   /* , children: [
@@ -51,7 +52,8 @@ const route: Routes = [{
     DialogsModule,
     DropDownsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SpinLoaderModule
   ],
   providers:[
     LegalTypeService

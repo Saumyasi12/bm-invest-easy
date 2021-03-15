@@ -18,7 +18,7 @@ export class ConfigCodeComponent implements OnInit {
   windowHeight: number;
   @HostListener('window:resize', ['$event']) onResize(event) { 
     
-    this.windowHeight = window.innerHeight-155;
+    this.windowHeight = window.innerHeight-85;
     this.pageSize  = Math.ceil( this.windowHeight /35);
   }
   //----Page Loader--//
@@ -42,15 +42,17 @@ export class ConfigCodeComponent implements OnInit {
   // AddcountryForm: FormGroup;
   configData:configDataModel[]= [];
   public fields: string[] = [];
+  configId: string;
   constructor(private fb: FormBuilder, private dialogService: DialogService, private configCodeService: ConfigCodeService) { }
 
   ngOnInit(): void {
-    this.windowHeight = window.innerHeight-155;
+    this.windowHeight = window.innerHeight-85;
   this.pageSize  = Math.ceil( this.windowHeight /35);
   this.showLoading= true;
   // this.generateForm();
   this.configCodeService.fetchConfigData().subscribe(data=>{
     this.configData= data;
+    console.log(data);
     this.loadItems();
     this.showLoading= false;
   }, err=>{
@@ -176,8 +178,10 @@ export class ConfigCodeComponent implements OnInit {
      this.opened = false;
    }
 
-   public opendialog() {
+   public opendialog(id) {
      this.opened = true;
+    this.configId = id;
+    console.log(this.configId)
    }
 
 }

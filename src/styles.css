@@ -299,6 +299,7 @@ body{
   text-align: center;
   width: 50%;
   margin: 20px auto;
+  background: rgba(242, 53, 40, 0.705);
 }
 
 .alert-error h6{

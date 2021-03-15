@@ -7,44 +7,11 @@
             </div> 
         </div>  
         
-    <kendo-dialog title="Edit Config" *ngIf="opened" (close)="closedialog('cancel')" [minWidth]="250" [width]="600"
-     [height]="350">
-     <form [formGroup]="editAddForm" (ngSubmit)="formSearch()">
-
-         <div class="rowData">
-             <!-- <span class="colData"> -->
-                 <label>Name:</label>
-                 <kendo-textbox class="textBox" formControlName="name"></kendo-textbox>
-                </div><br><br>
-             <!-- </span>
-             <span class="colData"> -->
-                <div class="rowData">
-                 <label>Value:</label>
-                 <kendo-textbox class="textBox" formControlName="value"></kendo-textbox>
-                </div><br><br>
-             <!-- </span>
-                
-             <span class="colData"> -->
-                <div class="rowData">
-                 <label>Description:</label>
-                 <kendo-textarea class="textBox" formControlName="description"></kendo-textarea>
-             <!-- </span> -->
-         </div>
-        
-         
-         <br><br><br>
-         <div class="rowData">
-            
-                 <button kendoButton [look]="'default'"
-                     style="background: #17A2B8; color: white;width: 69px;   height: 28px;    border-radius: 5px; width: 80px;"
-                     type="submit">Save</button>
-             
-         </div>
-     </form>
- </kendo-dialog>
+    <kendo-dialog title="Edit Config" *ngIf="opened" (close)="closedialog('cancel')" [minWidth]="250" [width]="600">
+    <app-config-add-edit [configId]="configId" ></app-config-add-edit>
+    </kendo-dialog>
       
-    <!---app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader---->
-        
+    <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>  
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
         (pageChange)="pageChange($event)" [height]="windowHeight"  >    
@@ -56,10 +23,10 @@
         </kendo-grid-column>
         
         <kendo-grid-column  title="Action" width="4%" [headerStyle]="headerStyle">
-            <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <div kendoTooltip>
                     <button kendoButton *ngIf="!opened" [look]="'default'"
-                    style="background: #92D050; color: white " (click)="opendialog()" title="Edit"> 
+                    style="background: #92D050; color: white " (click)="opendialog(dataItem.id)" title="Edit"> 
                     <kendo-icon class="k-i-track-changes k-icon-48" [themeColor]="'#292b2d'" ></kendo-icon></button>
             
                 </div>
