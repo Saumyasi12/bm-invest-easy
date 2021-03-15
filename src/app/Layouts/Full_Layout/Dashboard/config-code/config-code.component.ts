@@ -97,59 +97,7 @@ export class ConfigCodeComponent implements OnInit {
     this.loadSortedItems();
 
   }
-  //   generateForm(){
-  //     this.AddcountryForm = this.fb.group({
-  //       countryCode: new FormControl(),
-  //       countryName: new FormControl(),
-  //       countryShortName: new FormControl(),
-      
-  //     });
-  //  }
-  /// form-validation //
-  // fromDateChange(value: Date) : void{
-  // if(value){
-  //   this.fromDate = value;
-  //   this.checkFormValidation();
-  //   }
-  // }
-  // toDateChange(value: Date) : void{
-  // if(value){
-  //   this.toDate = value;
-  //   this.checkFormValidation();
-  //   }
-  // }
-  // crNumberChange(value: string) : void{
-  // if(value){
-  //   this.crNumber = value;
-  //   this.checkFormValidation();
-  //   }
-  // }
   
-  // checkFormValidation() :void{
-  // if ((this.crNumber || this.caseStatus) && (!this.fromDate && !this.toDate)){
-  //   this.allowSearch = true;
-  // }
-  // else if(!this.crNumber && (!this.fromDate && !this.toDate) ){
-  //   this.allowSearch =false;
-  // }
-  // else if(this.fromDate && !this.toDate){
-  //   this.allowSearch= false
-  // } else if(!this.fromDate && this.toDate){
-  //   this.allowSearch = false;
-  // } else if(this.fromDate > this.toDate){
-  //   this.allowSearch= false;
-  // }else{
-  //   this.allowSearch=true;
-  // }
-  
-  
-  // }
-  /// Form Reset
-  // resetForm() : void {
-  // this.crform.reset();
-  // this.allowSearch=false;
-  // }
-  /// Form Reset
   
   // form-validation ///
   formSearch() {  

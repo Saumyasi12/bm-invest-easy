@@ -45,9 +45,7 @@
                 </div>                
         </div>
     </form>
-   
-      
-    <!---app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader----->
+   <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
         
        <div *ngIf="!showLoading && !errorMessage">
         <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"

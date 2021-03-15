@@ -15,8 +15,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router'
-
-
+import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ExceptionDataComponent } from './exception-data.component';
 import { ExceptionDataService } from 'src/app/Services/exception-data.service';
@@ -35,7 +34,8 @@ const route: Routes = [{
     CommonModule,
     RouterModule.forChild(route),
     HttpClientModule,
-    GridModule,    
+    GridModule, 
+    SpinLoaderModule,   
     InputsModule,
     IconsModule,
     LabelModule,

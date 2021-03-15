@@ -19,7 +19,7 @@ export class CountryCodeComponent implements OnInit {
   windowHeight: number;
   @HostListener('window:resize', ['$event']) onResize(event) { 
     
-    this.windowHeight = window.innerHeight-155;
+    this.windowHeight = window.innerHeight-140;
     this.pageSize  = Math.ceil( this.windowHeight /35);
   }
   //----Page Loader--//

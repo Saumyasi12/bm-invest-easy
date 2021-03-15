@@ -15,11 +15,11 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router'
-
-
+import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CountryCodeComponent } from './country-code.component';
 import { CountryCodeService } from 'src/app/Services/country-code.service';
+import { CountryCodeAddEditComponent } from './country-code-add-edit/country-code-add-edit.component';
 
 const route: Routes = [{
   path: '', component:CountryCodeComponent 
@@ -31,12 +31,13 @@ const route: Routes = [{
 }]
 
 @NgModule({
-  declarations: [CountryCodeComponent],
+  declarations: [CountryCodeComponent, CountryCodeAddEditComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(route),
     HttpClientModule,
-    GridModule,    
+    GridModule,
+    SpinLoaderModule,    
     InputsModule,
     IconsModule,
     LabelModule,

@@ -12,7 +12,6 @@ export class ConfigAddEditComponent implements OnInit {
   @Input() configId=null;
 
   configForm: FormGroup;
-
   selectedconfig: configDataModel = { Id: "0", Name: "", Value: "", Description: "" };
 
   constructor(private fb: FormBuilder, private configService : ConfigCodeService) { }
@@ -39,6 +38,12 @@ export class ConfigAddEditComponent implements OnInit {
     });
   }
 
-  
+  resetForm() : void {
+    this.configForm.reset();
 
+    }
+    SubmitForm(){
+      console.log("Form Value")
+      this.configForm.reset();
+    }
 }
