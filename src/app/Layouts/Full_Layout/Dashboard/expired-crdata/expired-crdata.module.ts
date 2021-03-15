@@ -15,7 +15,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router'
-
+import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
 import { ReactiveCasesService } from 'src/app/Services/reactive-cases.services';
 import { HttpClientModule } from '@angular/common/http';
 import { ExpiredCrdataComponent } from './expired-crdata.component';
@@ -40,6 +40,7 @@ const route: Routes = [{
     InputsModule,
     IconsModule,
     LabelModule,
+    
     DateInputsModule,
     IntlModule,
     ButtonsModule,
@@ -52,7 +53,8 @@ const route: Routes = [{
     DialogsModule,
     DropDownsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SpinLoaderModule
   ],
   providers:[
     ExpiredCrdataService

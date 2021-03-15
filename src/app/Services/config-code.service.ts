@@ -16,4 +16,8 @@ fetchConfigDataByFilter(searchObj): Observable<any>{
   console.log(searchObj);
   return this.http.get<configDataModel[]>('https://atm-cdm-dashboard-default-rtdb.firebaseio.com/config-data.json')
 }
+
+fetchConfigDataByID(id):Observable<any>{
+  return this.http.get<configDataModel[]>('https://atm-cdm-dashboard-default-rtdb.firebaseio.com/config-data.json')
+}
 }

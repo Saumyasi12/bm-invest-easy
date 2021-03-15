@@ -29,6 +29,7 @@ import { FusionChartsModule } from 'angular-fusioncharts';
 
 import {ChartService} from '../../../../Services/charts/chart.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 
 
@@ -64,7 +65,8 @@ const route: Routes = [{
     DialogsModule,
     DropDownsModule,
     FusionChartsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SpinLoaderModule
    
   ],
   providers:[

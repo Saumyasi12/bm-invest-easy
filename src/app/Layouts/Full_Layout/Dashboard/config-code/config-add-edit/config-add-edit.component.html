@@ -1,0 +1,52 @@
+
+<form [formGroup]="configForm" (ngSubmit)="SubmitForm()">
+
+<kendo-card [width]="'100%'">
+    <kendo-card-body>
+        
+        
+            <div class="flex-container-bm">
+                <div class="flex-item-bm">
+                    <div class="row-bm">
+                        <div class="cols-bm">
+                            <label for="name">Name:</label>
+                        </div>
+                        <div class="cols-bm">
+                            <kendo-textbox class="controls-bm width50" formControlName="configName"></kendo-textbox>
+                        </div>
+                    </div>
+                    <div class="row-bm">
+                        <div class="cols-bm">
+                            <label for="value">Value:</label>
+                        </div>
+                        <div class="cols-bm">
+                            <kendo-textbox class="controls-bm width50" formControlName="configValue"></kendo-textbox>
+                        </div>
+                    </div>
+                    <div class="row-bm">
+                        <div class="cols-bm">
+                            <label for="description">Description:</label>
+                        </div>
+                        <div class="cols-bm">
+                            <kendo-textarea class="controls-bm width50" formControlName="configDescription" [rows]="'5'"></kendo-textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+      
+    </kendo-card-body>
+    <kendo-card-footer>
+        <div class="flex-container-bm">
+            <div class="flex-item-bm">
+                <div class="row-bm">
+                    <div class="cols-bm">
+                        <button kendoButton [look]="'default'" style="background: #F23428;color: white;margin: 3px" type="submit" [disabled]="!configForm.valid">Submit</button>
+                        <button kendoButton [look]="'default'"  style="background: #7F7F7F;color: white;margin: 3px" type="reset" (click)="resetForm()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </kendo-card-footer>
+</kendo-card>
+</form>

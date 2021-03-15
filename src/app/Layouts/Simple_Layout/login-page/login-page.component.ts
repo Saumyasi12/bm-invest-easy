@@ -21,6 +21,7 @@ export class LoginPageComponent {
     public userdata: loginparams = { username: "", password: "" }
     public userobj: Tbl_User_Detail;
     @ViewChild('password')
+    public TokenData={TokenValue:"",CreatedTS:new Date()}
     public textbox!: TextBoxComponent;
     public dataitem: any;
     public ngAfterViewInit(): void {
@@ -50,7 +51,7 @@ export class LoginPageComponent {
             password: this.encservice.encryptData(this.form.controls['password'].value)
         }
         this.loginobj.invokelogin(this.userdata).subscribe(result => {
-            if (result != null) {
+            if (result !== null) {
                 this.showSuccess("Login Successful.")
                 this.userobj = {
                     ID: result.ID,
@@ -61,9 +62,10 @@ export class LoginPageComponent {
                     Name: result.Name,
                     Visa130ColHeaders:result.Visa130ColHeaders
                 }
-                localStorage.setItem("token", result.Password)
+                this.TokenData={TokenValue:result.Password,CreatedTS:new Date()}
+                localStorage.setItem("token",JSON.stringify(this.TokenData))              
                 sessionStorage.setItem("UserInfo", JSON.stringify(this.userobj))
-                this.router.navigate(["/" + this.CheckPages(result.GroupPages, result.Usergroup)])
+                this.router.navigate(["/casestat" ])
             } else {
                 this.showError("Invalild Credential.")
             }

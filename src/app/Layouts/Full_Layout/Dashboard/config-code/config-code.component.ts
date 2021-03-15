@@ -18,7 +18,7 @@ export class ConfigCodeComponent implements OnInit {
   windowHeight: number;
   @HostListener('window:resize', ['$event']) onResize(event) { 
     
-    this.windowHeight = window.innerHeight-155;
+    this.windowHeight = window.innerHeight-85;
     this.pageSize  = Math.ceil( this.windowHeight /35);
   }
   //----Page Loader--//
@@ -42,15 +42,17 @@ export class ConfigCodeComponent implements OnInit {
   // AddcountryForm: FormGroup;
   configData:configDataModel[]= [];
   public fields: string[] = [];
+  configId: string;
   constructor(private fb: FormBuilder, private dialogService: DialogService, private configCodeService: ConfigCodeService) { }
 
   ngOnInit(): void {
-    this.windowHeight = window.innerHeight-155;
+    this.windowHeight = window.innerHeight-85;
   this.pageSize  = Math.ceil( this.windowHeight /35);
   this.showLoading= true;
   // this.generateForm();
   this.configCodeService.fetchConfigData().subscribe(data=>{
     this.configData= data;
+    console.log(data);
     this.loadItems();
     this.showLoading= false;
   }, err=>{
@@ -95,59 +97,7 @@ export class ConfigCodeComponent implements OnInit {
     this.loadSortedItems();
 
   }
-  //   generateForm(){
-  //     this.AddcountryForm = this.fb.group({
-  //       countryCode: new FormControl(),
-  //       countryName: new FormControl(),
-  //       countryShortName: new FormControl(),
-      
-  //     });
-  //  }
-  /// form-validation //
-  // fromDateChange(value: Date) : void{
-  // if(value){
-  //   this.fromDate = value;
-  //   this.checkFormValidation();
-  //   }
-  // }
-  // toDateChange(value: Date) : void{
-  // if(value){
-  //   this.toDate = value;
-  //   this.checkFormValidation();
-  //   }
-  // }
-  // crNumberChange(value: string) : void{
-  // if(value){
-  //   this.crNumber = value;
-  //   this.checkFormValidation();
-  //   }
-  // }
   
-  // checkFormValidation() :void{
-  // if ((this.crNumber || this.caseStatus) && (!this.fromDate && !this.toDate)){
-  //   this.allowSearch = true;
-  // }
-  // else if(!this.crNumber && (!this.fromDate && !this.toDate) ){
-  //   this.allowSearch =false;
-  // }
-  // else if(this.fromDate && !this.toDate){
-  //   this.allowSearch= false
-  // } else if(!this.fromDate && this.toDate){
-  //   this.allowSearch = false;
-  // } else if(this.fromDate > this.toDate){
-  //   this.allowSearch= false;
-  // }else{
-  //   this.allowSearch=true;
-  // }
-  
-  
-  // }
-  /// Form Reset
-  // resetForm() : void {
-  // this.crform.reset();
-  // this.allowSearch=false;
-  // }
-  /// Form Reset
   
   // form-validation ///
   formSearch() {  
@@ -176,8 +126,10 @@ export class ConfigCodeComponent implements OnInit {
      this.opened = false;
    }
 
-   public opendialog() {
+   public opendialog(id) {
      this.opened = true;
+    this.configId = id;
+    console.log(this.configId)
    }
 
 }

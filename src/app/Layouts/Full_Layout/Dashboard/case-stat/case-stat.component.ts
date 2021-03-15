@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UserManagementService } from '../../../../Services/UserManagement/user-management.service';
 
 import { ChartService } from 'src/app/Services/charts/chart.service';
-import { chartConfigUI } from '../case-stat/ChartData/chartsConfig';
+import { chartConfigUI } from '../../../../common/chartsConfig';
 import { caseReadyForAction ,caseReadyForClosure } from '../../../../Models/caseStats.Model'
 
 @Component({

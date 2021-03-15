@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostListener, OnInit, Output, ViewEncapsulatio
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { RoutingPortalGridData } from 'src/app/Models/caseStats.Model';
 import { ChartService } from 'src/app/Services/charts/chart.service';
-import { chartConfigUI } from '../ChartData/chartsConfig';
+import { chartConfigUI } from '../../../../../common/chartsConfig';
 //import {routingp} from './routingportal'
 
 @Component({

@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostListener, OnInit, Output, ViewEncapsulatio
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { CaseStatistics } from 'src/app/Models/caseStats.Model';
 import { ChartService } from 'src/app/Services/charts/chart.service';
-import { chartConfigUI } from '../ChartData/chartsConfig';
+import { chartConfigUI } from '../../../../../common/chartsConfig';
 import { CaseStatVar } from './casestatistics';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { formatDate } from '@angular/common';

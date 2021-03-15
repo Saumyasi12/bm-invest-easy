@@ -20,6 +20,8 @@ import { RouterModule, Routes } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigCodeComponent } from './config-code.component';
 import { ConfigCodeService } from 'src/app/Services/config-code.service';
+import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
+import { ConfigAddEditComponent } from './config-add-edit/config-add-edit.component';
 const route: Routes = [{
   path: '', component:ConfigCodeComponent 
   /* , children: [
@@ -30,7 +32,7 @@ const route: Routes = [{
 }]
 
 @NgModule({
-  declarations: [ConfigCodeComponent],
+  declarations: [ConfigCodeComponent, ConfigAddEditComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(route),
@@ -51,7 +53,8 @@ const route: Routes = [{
     DialogsModule,
     DropDownsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SpinLoaderModule
   ],
   providers:[
     ConfigCodeService
