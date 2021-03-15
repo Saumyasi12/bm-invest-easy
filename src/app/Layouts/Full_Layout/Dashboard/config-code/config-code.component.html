@@ -1,10 +1,11 @@
 <kendo-card [style]="'width:100%'">
     <kendo-card-body> 
-        <div class="card-Header-bm">    
-             <div class="row-bm">
-                 
-
-            </div> 
+        <div class="card-Header-bm">
+            <div class="row-bm">
+                <div class="cols-bm">
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">Config</p>
+                </div>                
+            </div>
         </div>  
         
     <kendo-dialog title="Edit Config" *ngIf="opened" (close)="closedialog('cancel')" [minWidth]="250" [width]="600">
