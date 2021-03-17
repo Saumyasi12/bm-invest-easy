@@ -47,18 +47,18 @@ export class CrNumberComponent implements OnInit {
   private data!: Object[]; 
   crform: FormGroup;
   public gtservice;
-
+  FilterOBJ={FromDate:'',ToDate:'',Filter:''}
   crData:crDataModel[]= [];
   public fields: string[] = [];
   constructor(private fb: FormBuilder, private dialogService: DialogService, private crNumberService: CrNumberService) { }
 
   ngOnInit(): void {
-
+  
     this.windowHeight = window.innerHeight-155;
   this.pageSize  = Math.ceil( this.windowHeight /35);
   this.showLoading= true;
   this.generateForm();
-  this.crNumberService.fetchCrNumberData().subscribe(data=>{
+  this.crNumberService.fetchCrNumberDataByFilter(this.FilterOBJ).subscribe(data=>{
     this.crData= data;
     this.loadItems();
     this.showLoading= false;
@@ -154,11 +154,13 @@ this.allowSearch=false;
 
 // form-validation ///
 formSearch() {  
-  const searchObj= {...this.crform.value, 
-    fromDate: formatDate(this.crform.value.fromDate, 'yyyy-mm-dd', 'en-US'),
-    toDate: formatDate(this.crform.value.toDate, 'yyyy-mm-dd', 'en-US')}
+  this.FilterOBJ= {
+    FromDate: this.crform.value.fromDate,
+    ToDate: this.crform.value.toDate,
+    Filter:this.crform.value.crNumber
+  }
     this.showLoading = true;
-    this.crNumberService.fetchCrNumberDataByFilter(searchObj).subscribe(data=>{
+    this.crNumberService.fetchCrNumberDataByFilter(this.FilterOBJ).subscribe(data=>{
       this.crData= data;
       this.loadItems();
       this.showLoading= false;

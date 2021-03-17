@@ -30,7 +30,7 @@ export class ExceptionDataComponent implements OnInit {
   crNumber = null;
   exception = null;
   /// Form Reset
-
+  FilterOBJ={FromDate:'',ToDate:'',Filter:'',Exception:''}
   //error-handling
   errorMessage = null;
   errorCode = null;
@@ -56,7 +56,7 @@ export class ExceptionDataComponent implements OnInit {
   this.pageSize  = Math.ceil( this.windowHeight /35);
   this.showLoading= true;
   this.generateForm();
-  this.exceptionDataService.fetchExceptionData().subscribe(data=>{
+  this.exceptionDataService.fetchExceptionDataByFilter(this.FilterOBJ).subscribe(data=>{
     this.exceptionData= data;
     this.loadItems();
     this.showLoading= false;
@@ -153,11 +153,15 @@ this.allowSearch=false;
 
 // form-validation ///
 formSearch() {  
-  const searchObj= {...this.expform.value, 
-    fromDate: formatDate(this.expform.value.fromDate, 'yyyy-mm-dd', 'en-US'),
-    toDate: formatDate(this.expform.value.toDate, 'yyyy-mm-dd', 'en-US')}
+  this.FilterOBJ=
+   {
+    FromDate: this.expform.value.fromDate, 
+    ToDate: this.expform.value.toDate, 
+    Filter:this.expform.value.crNumber,
+    Exception:this.expform.value.exception
+  }
     this.showLoading = true;
-    this.exceptionDataService.fetchExceptionDataByFilter(searchObj).subscribe(data=>{
+    this.exceptionDataService.fetchExceptionDataByFilter(this.FilterOBJ).subscribe(data=>{
       this.exceptionData= data;
       this.loadItems();
       this.showLoading= false;
