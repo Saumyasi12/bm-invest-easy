@@ -9,6 +9,7 @@ import { dailydatasource } from '../../case-stat/ChartData/daily'
 import { monthlydatasource } from '../../case-stat/ChartData/monthly'
 import { yearlydatasource } from '../../case-stat/ChartData/yearly'
 import { formatDate } from '@angular/common';
+import { forkJoin } from 'rxjs';
 //import {UserManagementService} from '../../../../Services/UserManagement/user-management.service'
 @Component({
   selector: 'app-cr-trends',
@@ -19,11 +20,20 @@ export class CrTrendsComponent implements OnInit {
 
   pageTitle="CR Trend";
 
-  fobj = { FromDate: "", ToDate: "", Status: "", Issue: "" }
+   //----Page Loader--//
+   showLoading =true;
+
+  //error-handling
+  errorMessage = null;
+  errorCode = null;
+  //error-handling
+  // public string FromDate { get; set; }
+ 
+  dataObject= {FromDate: "", ToDate: "", Filter: ""}
   public windowOpened = false;
-  weeklyDataSource:any;
-  monthlyDataSource:any;
-  yearlyDataSource:any;
+  weeklyDataSource: object = {};
+  monthlyDataSource :object = {};
+  yearlyDataSource :object = {};
   public viewflag: number = 0;
   weeklyCrChartConfig:any;
   monthlyCrChartConfig:any;
@@ -36,36 +46,39 @@ export class CrTrendsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   // this.userservice.CheckUserpages('casetrend')
-   this.fobj={FromDate:formatDate((new Date().getTime()-(90 * 24 * 60 * 60 * 1000)),'yyyy-MM-dd','en-US'),ToDate:formatDate(new Date(),'yyyy-MM-dd','en-US'),Status:"",Issue:""}
-   this.crService.fetchCrTrendsWeeklyGraphData(this.fobj).subscribe(ev=>{
-     console.log(ev);
- 
-    this.weeklyDataSource ={
-      "chart": chartConfigUI.crWeeklyChart,
-      "categories":ev.categories,
-      "dataset": ev.dataset,
-    } 
-  });
-  this.fobj={FromDate:formatDate((new Date().getTime()-(365 * 24 * 60 * 60 * 1000)),'yyyy-MM-dd','en-US'),ToDate:formatDate(new Date(),'yyyy-MM-dd','en-US'),Status:"",Issue:""}
-  this.crService.fetchCrTrendsMonthlyGraphData(this.fobj).subscribe(ev=>{
-    console.log(ev);
- 
-   this.monthlyDataSource ={
-     "chart": chartConfigUI.crWeeklyChart,
-     "categories":ev.categories,
-     "dataset": ev.dataset,
-   } 
- });
- this.fobj={FromDate:formatDate((new Date().getTime()-(365 * 24 * 60 * 60 * 1000)),'yyyy-MM-dd','en-US'),ToDate:formatDate(new Date(),'yyyy-MM-dd','en-US'),Status:"",Issue:""}
- this.crService.fetchCrTrendsYearlyGraphData(this.fobj).subscribe(ev=>{
-  console.log(ev);
- this.yearlyDataSource ={
-   "chart": chartConfigUI.crWeeklyChart,
-   "categories":ev.categories,
-   "dataset": ev.dataset,
- } 
-});
+
+    this.showLoading=true;
+    let weekly= this.crService.fetchCrTrendsWeeklyGraphData(this.dataObject);
+    let monthly= this.crService.fetchCrTrendsMonthlyGraphData(this.dataObject);
+    let yearly= this.crService.fetchCrTrendsYearlyGraphData(this.dataObject);
+    const joinedSubs = forkJoin([weekly, monthly, yearly]).subscribe(data=>{
+      this.weeklyDataSource ={
+        "chart": chartConfigUI.crWeeklyChart,
+        "categories":data[0].categories,
+        "dataset": data[0].dataset,
+      } 
+      this.monthlyDataSource ={
+        "chart": chartConfigUI.crWeeklyChart,
+        "categories":data[1].categories,
+        "dataset": data[1].dataset,
+      } 
+      this.yearlyDataSource ={
+        "chart": chartConfigUI.crWeeklyChart,
+        "categories":data[2].categories,
+        "dataset": data[2].dataset,
+      } 
+
+      this.showLoading = false;
+      this.errorMessage = null;
+      this.errorCode = null;
+    }, err=>{
+      console.log(err);
+      this.showLoading = false;
+      this.errorMessage = err.message;
+      this.errorCode = err.status;
+    });
+
+  
   this.weeklyCrChartConfig={
     width: '100%',
     height: '160',
@@ -94,4 +107,5 @@ this.yearlyCrChartConfig={
     this[component + 'Opened'] = true;
     this.viewflag=flag;
   }
+
 }

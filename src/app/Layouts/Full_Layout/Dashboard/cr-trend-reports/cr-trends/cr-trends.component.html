@@ -2,6 +2,8 @@
 <div *ngIf="!windowOpened">
     <kendo-card [width]="'100%'" >
         <kendo-card-body>
+            <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+            <div *ngIf="!showLoading && !errorMessage">
             <div class="card-Header-bm">
                 <div class="row-bm">
                     <div class="cols-bm">
@@ -18,7 +20,7 @@
                         </div>
                         <div class="controls-heading">
                             <kendo-buttongroup>
-                                <button kendoButton  icon="clock"  [disabled]="true">Last 3 Weeks</button>
+                                <button kendoButton  icon="clock"  [disabled]="'true'">Last 3 Weeks</button>
                                 <button kendoButton  icon="calendar"  (click)="open('window',1)">View
                                     From</button>
                             </kendo-buttongroup>
@@ -40,7 +42,7 @@
                         </div>
                         <div class="controls-heading">
                             <kendo-buttongroup>
-                                <button kendoButton  icon="clock"  [disabled]="true"> Last 12 Months</button>
+                                <button kendoButton  icon="clock"  [disabled]="'true'"> Last 12 Months</button>
                                 <button kendoButton  icon="calendar"  (click)="open('window',2)">View
                                     From</button>
                             </kendo-buttongroup>
@@ -64,7 +66,7 @@
                         </div>
                         <div class="controls-heading">
                             <kendo-buttongroup>
-                                <button kendoButton  icon="clock" [disabled]="true">Last 4 Years</button>
+                                <button kendoButton  icon="clock" [disabled]="'true'">Last 4 Years</button>
                                 <button kendoButton  icon="calendar"  (click)="open('window',3)">View
                                     From</button>
                                     </kendo-buttongroup>
@@ -91,7 +93,12 @@
         </div>
        
 </div>
-    </div>
+            </div>
+        </div>
+        <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
+            <h6>Error Code: {{errorCode}}</h6>
+            <p>{{errorMessage}}</p>
+      </div> 
     </kendo-card-body>
     </kendo-card>
 </div>

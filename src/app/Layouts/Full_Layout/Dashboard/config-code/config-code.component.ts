@@ -51,8 +51,7 @@ export class ConfigCodeComponent implements OnInit {
   this.showLoading= true;
   // this.generateForm();
   this.configCodeService.fetchConfigData().subscribe(data=>{
-    this.configData= data;
-    console.log(data);
+    this.configData= data; 
     this.loadItems();
     this.showLoading= false;
   }, err=>{
@@ -73,13 +72,12 @@ export class ConfigCodeComponent implements OnInit {
   }
   private loadItems(): void {
     
-    if(this.configData){
+  
       this.gridView = {
         data: this.configData.slice(this.skip, this.skip + this.pageSize),     
         total: this.configData.length
       };
-    
-    }
+ 
   }
   private loadSortedItems(): void {
     this.gridView = {
@@ -95,23 +93,24 @@ export class ConfigCodeComponent implements OnInit {
   public sortChange(sort: SortDescriptor[]): void {
     this.sort = sort;
     this.loadSortedItems();
-
   }
+ 
   
-  
-  // form-validation ///
-  formSearch() {  
-    console.log("Form Submit Value");
-    
-     editAddForm: FormGroup;
-     console.log(this.editAddForm.value);
-     this.editAddForm.reset();
-    
-    }
    //Dialog Work
    public windowOpened = false;
 
   public close(component) {
+    this.configCodeService.fetchConfigData().subscribe(data=>{
+      this.configData= data; 
+      this.loadItems();
+      this.showLoading= false;
+    }, err=>{
+      this.errorMessage=err.error.error;
+      this.errorCode = err.status;
+      this.showLoading= false;
+    })
+
+
      this[component + 'Opened'] = false;
    }
 

@@ -1,4 +1,6 @@
 <kendo-card-body>
+  <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+  <div *ngIf="!showLoading && !errorMessage">
   <div class="card-Header-bm">
     <div class="row-bm">
       <div class="cols-bm">
@@ -7,7 +9,7 @@
       <div class="cols-bm">
         Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
           style="background: darkgreen; color: #fff; "></button>
-        <button kendoButton icon="pdf" style="background: #F23428; color: #fff; margin-left: 5px;"></button>
+      
       </div>
     </div>
   </div>
@@ -89,18 +91,26 @@
   <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="windowHeight"
     (pageChange)="pageChange($event)">
 
-    <kendo-grid-column [headerStyle]="headerstyle" field="crNumber" title="CR Number" width="15%">
+    <kendo-grid-column [headerStyle]="headerstyle" field="CRNumber" title="CR Number" width="15%">
     </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="cif" title="CIF" width="25%">
+    <kendo-grid-column [headerStyle]="headerstyle" field="CIFNumber" title="CIF" width="25%">
     </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="investEasyExpiryDate" title="Invest Easy Expiry Date"
+    <kendo-grid-column [headerStyle]="headerstyle" field="ExpiryDate" title="Expiry Date"
       width="15%">
     </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="Status" title="Status" width="25%">
+    <kendo-grid-column [headerStyle]="headerstyle" field="InvestEasyStatus" title="InvestEasy Status" width="25%">
     </kendo-grid-column>
-    <kendo-grid-column [headerStyle]="headerstyle" field="Reason" title="Reason" width="15%">
+    <kendo-grid-column [headerStyle]="headerstyle" field="InvestEasyRemarks" title="InvestEasy Remarks" width="15%">
+    </kendo-grid-column>
+    <kendo-grid-column [headerStyle]="headerstyle" field="T24Status" title="T24 Status" width="25%">
+    </kendo-grid-column>
+    <kendo-grid-column [headerStyle]="headerstyle" field="T24Remarks" title="T24 Remarks" width="15%">
     </kendo-grid-column>
   </kendo-grid>
   <!--Kendo Grid-->
-
+</div>
+<div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
+  <h6>Error Code: {{errorCode}}</h6>
+  <p>{{errorMessage}}</p> 
+ </div> 
 </kendo-card-body>

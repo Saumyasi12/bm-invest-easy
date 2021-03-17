@@ -7,6 +7,7 @@ import { UserManagementService } from '../../../../Services/UserManagement/user-
 import { ChartService } from 'src/app/Services/charts/chart.service';
 import { chartConfigUI } from '../../../../common/chartsConfig';
 import { caseReadyForAction ,caseReadyForClosure } from '../../../../Models/caseStats.Model'
+import { FilterClass } from 'src/app/Models/ViewModel';
 
 @Component({
   selector: 'app-case-stat',
@@ -15,7 +16,15 @@ import { caseReadyForAction ,caseReadyForClosure } from '../../../../Models/case
 })
 export class CaseStatComponent implements OnInit {
 
-  pageTitle = "Case Statistics";
+  pageTitle = "CR Overview";
+
+   //----Page Loader--//
+   showLoading =true;
+FilterObj={Fromdate:"",Todate:"",Filter:""}
+  //error-handling
+  errorMessage = null;
+  errorCode = null;
+  //error-handling
 
   caseStatsChartConfig: Object;
   routingPortalChartConfig: Object;
@@ -37,14 +46,11 @@ export class CaseStatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
+   this.showLoading = true
     // console.log(chartConfigUI);
-    this.chartService.fetchCaseStatusData().subscribe(ev => {
-      
+    this.chartService.fetchCaseStatusData(this.FilterObj).subscribe(ev => {
       this.casestatus = ev;
-
       this.datasourceCasestatisstics = {
-
         "chart": chartConfigUI.caseStats,
         "categories": [
           {
@@ -57,18 +63,32 @@ export class CaseStatComponent implements OnInit {
         ],
         "dataset": ev[0]
       }
-    });
-    this.chartService.fetchRoutingPortalData().subscribe(ev => {
+      this.showLoading = false;
+      this.errorMessage = null;
+      this.errorCode = null;
+    }, err=>{
+    this.errorMessage=err.error.error;
+    this.errorCode = err.status;
+    this.showLoading= false;
+  } );
+    this.chartService.fetchRoutingPortalData(this.FilterObj).subscribe(ev => {
       this.datasourceRoutingPortal = {
         chart: chartConfigUI.routerChart,
         data: ev[0]
       }
-    })
-
-    this.chartService.fetchReadyToAction().subscribe(ev => {
+    }, err=>{
+      this.errorMessage=err.error.error;
+      this.errorCode = err.status;
+      this.showLoading= false;
+    } );
+    this.chartService.fetchReadyToAction(this.FilterObj).subscribe(ev => {
       this.mystar = ev;
       this.totalCount = this.mystar.map(value => value.count).reduce((a, b) => a + b);
-    })
+    }, err=>{
+      this.errorMessage=err.error.error;
+      this.errorCode = err.status;
+      this.showLoading= false;
+    } );
 
   
 

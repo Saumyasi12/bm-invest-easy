@@ -13,7 +13,8 @@ import { LegalTypeService } from 'src/app/Services/legal-type.service';
   styleUrls: ['./legal-type.component.css']
 })
 export class LegalTypeComponent implements OnInit {
-
+  pageTitle = "Legal Type";
+  public viewflag: number = 0;
   editAddForm: any;
   windowHeight: number;
   @HostListener('window:resize', ['$event']) onResize(event) { 
@@ -23,7 +24,7 @@ export class LegalTypeComponent implements OnInit {
   }
   //----Page Loader--//
   showLoading =true;
-
+  legalId: string;
   allowSearch = false;
   legalType = null;
   status = null;
@@ -49,7 +50,7 @@ export class LegalTypeComponent implements OnInit {
   this.pageSize  = Math.ceil( this.windowHeight /35);
   this.showLoading= true;
   // this.generateForm();
-  this.legalTypeService.fetchConfigData().subscribe(data=>{
+  this.legalTypeService.fetchLegalData().subscribe(data=>{
     this.legalData= data;
     this.loadItems();
     this.showLoading= false;
@@ -102,27 +103,19 @@ export class LegalTypeComponent implements OnInit {
      editAddForm: FormGroup;
      console.log(this.editAddForm.value);
      this.editAddForm.reset();
-    
-    }
-   //Dialog Work
-   public windowOpened = false;
+  }
+     public windowOpened = false;
 
-  public close(component) {
-     this[component + 'Opened'] = false;
-   }
 
-   public open(component) {
-     this[component + 'Opened'] = true;
-   }
+   public close(component) {
+    this[component + 'Opened'] = false;
+    this.viewflag = 0;
+  }
 
-   public opened = false;
+  public open(component, flag: number,ID:number) {
+    this[component + 'Opened'] = true;
+    this.viewflag = flag;
+    this.legalId=ID.toString();
+  }
 
-  public closedialog(status) {
-     console.log(`Dialog result: ${status}`);
-     this.opened = false;
-   }
-
-   public opendialog() {
-     this.opened = true;
-   }
 }

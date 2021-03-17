@@ -2,21 +2,16 @@
     <kendo-card-body> 
         <div class="card-Header-bm">    
              <div class="row-bm">
-               
                 <div class="cols-bm">
-                    <button kendoButton *ngIf="!opened" icon="table-row-insert-below" style="color: #189514;"
-                        (click)="opendialog()">Add Row</button>
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
+                </div>
+                <div class="cols-bm">
+                    <button kendoButton  icon="table-row-insert-below" style="color: #189514;"
+                    (click)="open('window',1,0)">Add Row</button>
                 </div>
             </div> 
         </div>  
         
-       
-    <kendo-dialog title="Add New Row" *ngIf="opened" (close)="closedialog('cancel')" [minWidth]="250" [width]="600"
-     [height]="400">
-     <app-country-code-add-edit></app-country-code-add-edit>
-        
- </kendo-dialog>
-      
     <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
         
        <div *ngIf="!showLoading && !errorMessage">
@@ -30,11 +25,12 @@
         </kendo-grid-column>
       
         <kendo-grid-column  title="Action" width="4%" [headerStyle]="headerStyle">
-            <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+            <ng-template kendoGridCellTemplate let-dataItem  let-rowIndex="rowIndex">
                 <div kendoTooltip>
-                    <button kendoButton [look]="'default'"
+                    <button kendoButton [look]="'default'" (click)="open('window',1,dataItem.ID)"
                     style="background: #92D050; color: white " title="Edit"> 
-                    <kendo-icon class="k-i-track-changes k-icon-48" [themeColor]="'#292b2d'" ></kendo-icon></button>
+                    <kendo-icon class="k-i-track-changes k-icon-48" [themeColor]="'#292b2d'" ></kendo-icon>
+                </button>
             
                 </div>
                 
@@ -51,4 +47,12 @@
      </div> 
     </kendo-card-body>
 </kendo-card>
+
+<div >
+    <kendo-dialog  *ngIf="windowOpened" [title]="'Country Code'" (close)="close('window')"
+    [width]="500" >  
+    <app-country-code-add-edit [countryId]="countryId" *ngIf="viewflag===1"></app-country-code-add-edit>
+</kendo-dialog>
+</div>
+
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../src/environments/environment'
 import { Observable } from 'rxjs';
@@ -8,11 +8,12 @@ import { caseReadyForAction, CaseStatistics, caseReadyForClosure } from 'src/app
 
 @Injectable({ providedIn: 'root' })
 export class ChartService {
-  
+    getToken(): string {
+        return (JSON.parse(localStorage.getItem('token'))).TokenValue;
+      }
     constructor(private http: HttpClient){}
-    fetchCaseStatusData():  Observable<any>{
-
-       return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/casestat-data.json',{}).pipe(
+    fetchCaseStatusData(obj):  Observable<any>{
+       return this.http.post(`${environment.API_URL}Overview/GetCRCount`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(
            map((ev)=>{
             console.log(ev);
                 const data=  [
@@ -62,71 +63,12 @@ export class ChartService {
     )
 
    }
-   fetchCaseDataOnFilter(fobj:any):Observable<any>{
-    return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/casestat-data.json',{}).pipe(
-        map((ev)=>{
-             const data=  [
-             {
-                 seriesname: "Processed",
-                 color: "#92D050",
-                 patternangle: "60",
-                 patternbgcolor: "#FFFFFF",
-               
-                 "data": [
-                     {
-                         "value": ev[0]
-                     }
-                 ]
-             },
-             {
-                 seriesname: "Business Rule Exception",
-                 color: "#0D274D",
-                 patternangle: "60",
-                 patternbgcolor: "#FFFFFF",
-             
-                 "data": [
-                     {
-                         "value": ev[1]
-                     }
-                 ]
-             },
-             {
-                 seriesname: "Application Exception",
-                 color: "#C00000",
-                 patternangle: "60",
-                 patternbgcolor: "#FFFFFF",
-               
-                 "data": [
-                     {
-                         "value": ev[2]
-                     }
-                 ]
-             },
-             {
-                 seriesname: "Unprocessed",
-                 color: "#7F7F7F",
-                 patternangle: "60",
-                 patternbgcolor: "#FFFFFF",
-                
-                 "data": [
-                     {
-                         "value": ev[3]
-                     }
-                 ]
-             },
-             
-         ]
-     return ([data, ev]);
-    
-      })
- )
-}
-   fetchRoutingPortalData():  Observable<any>{
-    return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/casestat-data.json',{}).pipe(
+  
+   fetchRoutingPortalData(obj):  Observable<any>{
+    return this.http.post(`${environment.API_URL}Overview/GetCrStatisticsGraph`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(
         map((ev)=>{
              const data= [
-                {    
-                  
+                {                      
                     color: "#0D274D",
                     "label": "CR Received",
                     "value": ev[0]
@@ -148,25 +90,20 @@ export class ChartService {
  )
 }
 
-fetchReadyForClosure():  Observable<any>{
-   return this.http.get<caseReadyForClosure[]>('https://bm-atm-cdm-default-rtdb.firebaseio.com/casesReady-Closure.json',{})
+
+fetchReadyToAction(obj):  Observable<any>{
+   return this.http.post<any>(`${environment.API_URL}Overview/GetCRExpired`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
 
 }
-fetchReadyToAction():  Observable<any>{
-   return this.http.get<caseReadyForAction[]>('https://bm-atm-cdm-default-rtdb.firebaseio.com/invest-expiredCr.json',{})
-
-}
-fetchCaseStatisticsData(): Observable<any>{
-    return this.http.get<CaseStatistics[]>('https://bm-atm-cdm-default-rtdb.firebaseio.com/invest-crStatus.json',{})
+fetchCRStatusGridData(fobj): Observable<any>{
+    return this.http.post<any>(`${environment.API_URL}Overview/GetCRTable`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
 }
 
-fetchRoutingPortalGridData(): Observable<any>{
-    return this.http.post(`${environment.API_URL}CaseStatistics/GetRoutingPortalTableForToday`,{})
+fetchRoutingPortalGridData(fobj): Observable<any>{
+    return this.http.post<any>(`${environment.API_URL}Overview/GetCrStatisticsTable`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
 }
 
-fetchCaseReadyActionData():Observable<any>{
-    return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/casesReady-Maker.json',{})
-}
+
 
 
     

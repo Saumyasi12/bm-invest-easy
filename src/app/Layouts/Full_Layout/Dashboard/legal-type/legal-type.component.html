@@ -2,54 +2,16 @@
     <kendo-card-body> 
         <div class="card-Header-bm">    
              <div class="row-bm">
-                 <!-- <div class="cols-bm">
-                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;"></p>
-                </div> -->
-                <!-- <div class="cols-bm" *ngIf="!showLoading && !errorMessage">
-                    Export  &nbsp;&nbsp;<button kendoButton icon="excel"[name]="'file-excel'" (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
-                </div> -->
                  <div class="cols-bm">
-                    <button kendoButton *ngIf="!opened" icon="table-row-insert-below" style="color: #189514;">Add New LegalType</button>
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
+                </div>
+        
+                <div class="cols-bm">
+                    <button kendoButton  icon="table-row-insert-below" style="color: #189514;"
+                    (click)="open('window',1,0)">Add New Legal Type</button>
                 </div>
             </div> 
         </div>  
-        
-    <kendo-dialog title="Edit Legal Type" *ngIf="opened" (close)="closedialog('cancel')" [minWidth]="250" [width]="600"
-     [height]="350">
-     <form [formGroup]="editAddForm" (ngSubmit)="formSearch()">
-
-         <div class="rowData">
-             <!-- <span class="colData"> -->
-                 <label>legal Type:</label>
-                 <kendo-textbox class="textBox" formControlName="legalType"></kendo-textbox>
-                </div><br><br>
-             <!-- </span>
-             <span class="colData"> -->
-                <div class="rowData">
-                 <label>status:</label>
-                 <kendo-textbox class="textBox" formControlName="status"></kendo-textbox>
-                </div><br><br>
-             <!-- </span>
-                
-             <span class="colData"> -->
-                <div class="rowData">
-                 <label>Description:</label>
-                 <kendo-textarea class="textBox" formControlName="description"></kendo-textarea>
-             <!-- </span> -->
-         </div>
-        
-         
-         <br><br><br>
-         <div class="rowData">
-            
-                 <button kendoButton [look]="'default'"
-                     style="background: #17A2B8;color: white;width: 69px;   height: 28px;    border-radius: 5px; width: 80px;"
-                     type="submit">Save</button>
-             
-         </div>
-     </form>
- </kendo-dialog>
-      
     <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
         
        <div *ngIf="!showLoading && !errorMessage">
@@ -61,24 +23,18 @@
         </kendo-grid-column>
         
         <kendo-grid-column  title="Action" width="2%" [headerStyle]="headerStyle">
-            <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                 <div kendoTooltip>
-                    <button kendoButton *ngIf="!opened" [look]="'default'"
-                    style="background: #92D050; color: white " (click)="opendialog()" title="Edit"> 
+                    <button kendoButton  [look]="'default'" (click)="open('window',1,dataItem.Id)"
+                    style="background: #92D050; color: white " > 
                     <kendo-icon class="k-i-track-changes k-icon-48" [themeColor]="'#292b2d'" ></kendo-icon></button>
             
                 </div>
-                 <!-- <div>
-                    <kendo-grid-column  field="Updated By" title="Updated By" >
-                    </kendo-grid-column>
-                      </div>  -->
+               
              </ng-template>
         </kendo-grid-column>
     </kendo-grid>
-     <!-- <kendo-excelexport [data]="gridView" fileName="ReactiveCase.xlsx" #excelexport>
-        <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'" [width]="100">
-        </kendo-excelexport-column>
-  </kendo-excelexport> -->
+    
        </div>
         <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
            <h6>Error Code: {{errorCode}}</h6>
@@ -88,4 +44,9 @@
      </div> 
     </kendo-card-body>
 </kendo-card>
-
+<div >
+    <kendo-dialog  *ngIf="windowOpened" [title]="'Legal Type'" (close)="close('window')"
+    [width]="500" >  
+    <app-legal-type-add-edit [legalId]="legalId" *ngIf="viewflag===1"></app-legal-type-add-edit>
+</kendo-dialog>
+</div>

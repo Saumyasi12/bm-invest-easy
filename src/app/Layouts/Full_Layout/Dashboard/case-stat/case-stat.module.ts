@@ -4,7 +4,7 @@ import {CaseStatComponent} from './case-stat.component'
 import { RouterModule, Routes } from '@angular/router';
 
 import {RoutingPortalStatisticsComponent} from '../case-stat/routing-portal-statistics/routing-portal-statistics.component'
-import {CaseReadyForActionComponent} from '../case-stat/case-ready-for-action/case-ready-for-action.component'
+
 import {CaseStatisticsComponent} from '../case-stat/case-statistics/case-statistics.component'
 
 import { GridModule, PDFModule, ExcelModule } from '@progress/kendo-angular-grid';
@@ -42,8 +42,7 @@ const route: Routes = [{
 }]
 @NgModule({
   declarations: [CaseStatComponent,CaseStatisticsComponent,
-    RoutingPortalStatisticsComponent,
-   CaseReadyForActionComponent],
+    RoutingPortalStatisticsComponent],
 
    
   imports: [

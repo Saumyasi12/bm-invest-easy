@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LegalTypeComponent } from './legal-type.component';
 import { LegalTypeService } from 'src/app/Services/legal-type.service';
 import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
+import { LegalTypeAddEditComponent } from './legal-type-add-edit/legal-type-add-edit.component';
 const route: Routes = [{
   path: '', component:LegalTypeComponent 
   /* , children: [
@@ -31,7 +32,7 @@ const route: Routes = [{
 }]
 
 @NgModule({
-  declarations: [LegalTypeComponent],
+  declarations: [LegalTypeComponent, LegalTypeAddEditComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(route),

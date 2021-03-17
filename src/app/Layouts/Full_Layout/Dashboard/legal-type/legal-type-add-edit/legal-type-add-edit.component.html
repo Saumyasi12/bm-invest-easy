@@ -2,36 +2,37 @@
     <h3 class="k-text-success k-text-center" *ngIf="Message.length">{{Message}}</h3>
     <h3 class="k-text-error k-text-center" *ngIf="ErrorMessage.length">{{ErrorMessage}}</h3>
 </div>
-<form [formGroup]="countryForm" (ngSubmit)="SubmitForm()">   
-   
+<form [formGroup]="legalForm" (ngSubmit)="SubmitForm()">
     <kendo-card [width]="'100%'">
     <kendo-card-body>
-  
+    
             <div class="flex-container-bm">
-                <input type="hidden" formControlName="countryId">
                 <div class="flex-item-bm">
                     <div class="row-bm">
+                        <input type="hidden" formControlName="legalId">
                         <div class="cols-bm">
-                            <label for="countryCode">Country Code:</label>
+                            <label for="legalType">Legal Type :</label>
                         </div>
                         <div class="cols-bm">
-                            <kendo-textbox class="controls-bm width50" formControlName="countryCode"></kendo-textbox>
-                        </div>
-                    </div>
-                    <div class="row-bm">
-                        <div class="cols-bm">
-                            <label for="countryName">Country Name:</label>
-                        </div>
-                        <div class="cols-bm">
-                            <kendo-textbox class="controls-bm width50" formControlName="countryName"></kendo-textbox>
+                            <kendo-textbox class="controls-bm width50" formControlName="legalType"></kendo-textbox>
                         </div>
                     </div>
                     <div class="row-bm">
                         <div class="cols-bm">
-                            <label for="countryShortName">Country Short Name:</label>
+                            <label for="status">Status :</label>
                         </div>
                         <div class="cols-bm">
-                            <kendo-textarea class="controls-bm width50" formControlName="countryShortName" [rows]="'5'"></kendo-textarea>
+                         <kendo-combobox class="controls-bm width50" [data]="['false','true']" formControlName="status" >
+            </kendo-combobox>
+                           
+                        </div>
+                    </div>
+                    <div class="row-bm">
+                        <div class="cols-bm">
+                            <label for="description">Description :</label>
+                        </div>
+                        <div class="cols-bm">
+                            <kendo-textarea class="controls-bm width50" formControlName="description" [rows]="'5'"></kendo-textarea>
                         </div>
                     </div>
 
@@ -44,7 +45,7 @@
             <div class="flex-item-bm">
                 <div class="row-bm">
                     <div class="cols-bm">
-                        <button kendoButton [look]="'default'" style="background: #F23428;color: white;margin: 3px" type="submit" [disabled]="!countryForm.valid">Submit</button>
+                        <button kendoButton [look]="'default'" style="background: #F23428;color: white;margin: 3px" type="submit" [disabled]="!legalForm.valid">Submit</button>
                         <button kendoButton [look]="'default'"  style="background: #7F7F7F;color: white;margin: 3px" type="reset" (click)="resetForm()">Reset</button></div>
                 </div>
             </div>
