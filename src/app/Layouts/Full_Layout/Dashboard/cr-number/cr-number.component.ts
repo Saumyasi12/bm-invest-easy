@@ -49,7 +49,7 @@ export class CrNumberComponent implements OnInit {
   public gtservice;
   FilterOBJ={FromDate:'',ToDate:'',Filter:''}
   crData:crDataModel[]= [];
-  public fields: string[] = [];
+  public fields: string[] =['CRNumber','CIFNumber','InvestEasyStatus','InvestEasyRemarks','T24Status','T24Remarks','ExpiryDate'];
   constructor(private fb: FormBuilder, private dialogService: DialogService, private crNumberService: CrNumberService) { }
 
   ngOnInit(): void {
@@ -60,13 +60,16 @@ export class CrNumberComponent implements OnInit {
   this.generateForm();
   this.crNumberService.fetchCrNumberDataByFilter(this.FilterOBJ).subscribe(data=>{
     this.crData= data;
-    this.loadItems();
     this.showLoading= false;
+    this.loadItems();
+    
+   
   }, err=>{
     this.errorMessage=err.error.error;
     this.errorCode = err.status;
     this.showLoading= false;
   })
+ 
   }
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
@@ -163,6 +166,7 @@ formSearch() {
     this.crNumberService.fetchCrNumberDataByFilter(this.FilterOBJ).subscribe(data=>{
       this.crData= data;
       this.loadItems();
+      
       this.showLoading= false;
     },err=>{
       this.errorMessage=err.error.error;

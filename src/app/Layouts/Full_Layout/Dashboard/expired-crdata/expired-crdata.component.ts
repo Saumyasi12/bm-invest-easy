@@ -46,7 +46,7 @@ FilterOBJ={FromDate:'',ToDate:'',Filter:''}
   public gtservice;
 
   expiredData:expiredDataModel[]= [];
-  public fields: string[] = [];
+  public fields: string[] = ['CRNumber','CIFNumber','ExpiryDate'];
   constructor(private fb: FormBuilder, private dialogService: DialogService, private expiredCrdataService: ExpiredCrdataService) { }
 
   ngOnInit(): void {
@@ -57,8 +57,9 @@ FilterOBJ={FromDate:'',ToDate:'',Filter:''}
   this.generateForm();
   this.expiredCrdataService.fetchExpiredData(this.FilterOBJ).subscribe(data=>{
     this.expiredData= data;
-    this.loadItems();
     this.showLoading= false;
+    
+    this.loadItems();    
   }, err=>{
     this.errorMessage=err.error.error;
     this.errorCode = err.status;
@@ -159,8 +160,9 @@ formSearch() {
     this.showLoading = true;
     this.expiredCrdataService.fetchExpiredData(this.FilterOBJ).subscribe(data=>{
       this.expiredData= data;
-      this.loadItems();
       this.showLoading= false;
+      this.loadItems();
+    
     },err=>{
       this.errorMessage=err.error.error;
       this.errorCode = err.status;

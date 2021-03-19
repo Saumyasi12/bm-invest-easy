@@ -5,12 +5,20 @@
                  <div class="cols-bm">
                     <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;"></p>
                 </div>
-                <div class="cols-bm" *ngIf="!showLoading && !errorMessage">
-                    Export  &nbsp;&nbsp;<button kendoButton icon="excel"[name]="'file-excel'" (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
+                <div class="cols-bm" *ngIf="!showLoading && !errorMessage">                  
+               	 Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
+                        (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
                 </div>
             </div> 
         </div>  
-        
+        <!-- Excel Export -->
+        <kendo-excelexport [data]="expiredData" fileName="ExpireCR.xlsx" #excelexport>
+            <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
+                [width]="100">
+            </kendo-excelexport-column>
+        </kendo-excelexport>
+          <!-- Excel Export -->
+
         <form [formGroup]="crform" (ngSubmit)="formSearch()">
         <div class="flex-container-bm">            
                 <div class="flex-item-bm">

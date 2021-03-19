@@ -42,7 +42,7 @@ export class CaseStatisticsComponent {
 
   //----Page Loader--//
   showLoading =true;
-
+  fields:string[]=['CRNumber','CIFNumber','InvestEasyStatus','InvestEasyRemarks','T24Status','T24Remarks','ExpiryDate'];
   //error-handling
   errorMessage = null;
   errorCode = null;
@@ -97,6 +97,7 @@ export class CaseStatisticsComponent {
     };
     this.chartService.fetchCRStatusGridData(this.FilterObj).subscribe(ev => {
       this.caseStatistics = ev;
+      
       this.loadItems();
     })
 
@@ -167,6 +168,7 @@ FromDateChange(value: Date) : void{
         ],
         "dataset": ev[0]
       };
+      this.showLoading = false;
     }, err=>{
       this.showLoading = false;
       this.errorMessage = 'Something went wrong';
@@ -196,9 +198,7 @@ FromDateChange(value: Date) : void{
 
   }
 
-  //Excel button work
-  public excelData: any[] = CaseStatVar;
-  public fields: string[] = Object.keys(this.excelData[0]);
+
 }
 
 

@@ -7,8 +7,10 @@
         <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">CR Status</p>
       </div>
       <div class="cols-bm">
-        Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
-          style="background: darkgreen; color: #fff; "></button>
+        <!-- Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
+          style="background: darkgreen; color: #fff; "></button> -->
+          Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
+          (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
       
       </div>
     </div>
@@ -20,22 +22,22 @@
       <form [formGroup] = "casetatform" (ngSubmit)="formSearch()">
         <div class="row-bm">
           <div class="cols-bm">
-            <kendo-datepicker class='kendo-input controls-bm' formControlName="Fromdate" (valueChange)="FromDate($event)" placeholder="From"
+            <kendo-datepicker class='kendo-input controls-bm' formControlName="Fromdate"placeholder="From"
               [format]="'MM-dd-yyyy'">
             </kendo-datepicker>
           </div>
           <div class="cols-bm">
-            <kendo-datepicker class='kendo-input controls-bm' formControlName="Todate" (valueChange)="ToDate($event)" placeholder="To"
+            <kendo-datepicker class='kendo-input controls-bm' formControlName="Todate"  placeholder="To"
               [format]="'MM-dd-yyyy'">
             </kendo-datepicker>
           </div>
           <div class="cols-bm">
-            <kendo-combobox [data]="['Processed','Application Exception','Business Rule Exception']"  (valueChange)="Filter($event)" formControlName="Filter" class='kendo-input controls-bm'>
+            <kendo-combobox [data]="['Processed','Application Exception','Business Rule Exception']"  formControlName="Filter" class='kendo-input controls-bm'>
             </kendo-combobox>
           </div>
           <div class="cols-bm margin-extra">
             <kendo-buttongroup>
-              <button kendoButton icon="zoom" style="color: #fff; background: #F23428;" type="submit" [disabled]="!allowSearch" title="Find"
+              <button kendoButton icon="zoom" style="color: #fff; background: #F23428;" type="submit"  title="Find"
                 tabindex="3"></button>
               <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; " type="reset" title="Reset"
                 tabindex="4"></button>
@@ -84,6 +86,14 @@
     </div>
   </div>
 
+
+<!-- Excel Export -->
+<kendo-excelexport [data]="caseStatistics" fileName="CRStatus.xlsx" #excelexport>
+  <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
+      [width]="100">
+  </kendo-excelexport-column>
+</kendo-excelexport>
+<!-- Excel Export -->
 
 
   <!--Chart-->

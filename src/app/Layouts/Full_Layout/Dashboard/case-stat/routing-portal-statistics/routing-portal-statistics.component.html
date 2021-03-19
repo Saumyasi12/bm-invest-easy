@@ -8,8 +8,8 @@
           <div class="cols-bm">
             <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
         </div>
-          <div class="cols-bm">
-            Export  &nbsp;&nbsp;<button kendoButton icon="excel"[name]="'file-excel'" style="background: darkgreen; color: #fff; "></button>
+          <div class="cols-bm">          
+            Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'" (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>          
           </div>
         </div>
       </div>
@@ -20,17 +20,17 @@
           <form [formGroup] = "crStatForm" (ngSubmit)="formSearch()">
             <div class="row-bm">
               <div class="cols-bm">
-                <kendo-datepicker class='kendo-input controls-bm' formControlName="Fromdate" (valueChange)="FromDate($event)" placeholder="From"
+                <kendo-datepicker class='kendo-input controls-bm' formControlName="Fromdate"  placeholder="From"
                   [format]="'MM-dd-yyyy'">
                 </kendo-datepicker>
               </div>
               <div class="cols-bm">
-                <kendo-datepicker class='kendo-input controls-bm' formControlName="Todate" (valueChange)="ToDate($event)" placeholder="To"
+                <kendo-datepicker class='kendo-input controls-bm' formControlName="Todate" placeholder="To"
                   [format]="'MM-dd-yyyy'">
                 </kendo-datepicker>
               </div>
               <div class="cols-bm">
-                <kendo-combobox [data]="['Processed','Application Exception','Business Rule Exception']"  (valueChange)="Filter($event)" formControlName="Filter" class='kendo-input controls-bm'>
+                <kendo-combobox [data]="['Processed','Application Exception','Business Rule Exception']"   formControlName="Filter" class='kendo-input controls-bm'>
                 </kendo-combobox>
               </div>
               <div class="cols-bm margin-extra">
@@ -85,6 +85,14 @@
               </div>
           </div>
       </div>
+      <!-- Excel Export -->
+      <kendo-excelexport [data]="routingPortalGridData" fileName="CRStatistics.xlsx" #excelexport>
+        <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
+            [width]="100">
+        </kendo-excelexport-column>
+    </kendo-excelexport>
+
+      <!-- Excel Export -->
       <!--Chart-->
       <!--Kendo Grid-->
       <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="windowHeight" (pageChange)="pageChange($event)">

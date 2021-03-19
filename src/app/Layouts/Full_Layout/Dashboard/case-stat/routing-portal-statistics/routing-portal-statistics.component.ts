@@ -45,7 +45,7 @@ export class RoutingPortalStatisticsComponent implements OnInit {
 
   pageSizeCount: number;
   windowHeight: number;
-
+  fields:string[]=['CRNumber','CIFNumber','InvestEasyStatus','InvestEasyRemarks','T24Status','T24Remarks','ExpiryDate'];
 
 
   @HostListener('window:resize', ['$event']) onResize(event) {
@@ -96,7 +96,7 @@ export class RoutingPortalStatisticsComponent implements OnInit {
     this.chartService.fetchRoutingPortalGridData(this.FilterObj).subscribe(ev => {
       this.routingPortalGridData = ev;
       this.loadItems();
-      // console.log(ev)
+        
     },  err=>{
       this.showLoading = false;
       this.errorMessage = 'Something went wrong';

@@ -11,7 +11,13 @@
                 </div>
             </div>
         </div>
-
+        <!-- Excel Export -->
+        <kendo-excelexport [data]="crData" fileName="CRDetails.xlsx" #excelexport>
+            <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
+                [width]="100">
+            </kendo-excelexport-column>
+        </kendo-excelexport>
+        <!-- Excel Export -->
         <form [formGroup]="crform" (ngSubmit)="formSearch()">
             <div class="flex-container-bm">
                 <div class="flex-item-bm">
@@ -34,7 +40,8 @@
                             <!-- <kendo-combobox [data]="['426583','426583']" class="controls-bm" formControlName="crNumber"
                                 placeholder="CR Number" (valueChange)="crNumberChange($event)"> </kendo-combobox> -->
 
-                                <kendo-textbox placeholder="CR Number" class="controls-bm"  (valueChange)="crNumberChange($event)" formControlName="crNumber"></kendo-textbox>
+                            <kendo-textbox placeholder="CR Number" class="controls-bm"
+                                (valueChange)="crNumberChange($event)" formControlName="crNumber"></kendo-textbox>
                         </div>
                         <div class="cols-bm">
                             <kendo-buttongroup>
@@ -62,15 +69,15 @@
                 <kendo-grid-column field="ExpiryDate" title="Invest Easy Expiry Date" width="12%"
                     [headerStyle]="headerStyle">
                 </kendo-grid-column>
-                <kendo-grid-column field="InvestEasyStatus" title="InvestEasy Status" width="7%" [headerStyle]="headerStyle">
+                <kendo-grid-column field="InvestEasyStatus" title="InvestEasy Status" width="7%"
+                    [headerStyle]="headerStyle">
                 </kendo-grid-column>
                 <kendo-grid-column field="InvestEasyRemarks" title="InvestEasy Remarks" width="15%"
                     [headerStyle]="headerStyle">
                 </kendo-grid-column>
                 <kendo-grid-column field="T24Status" title="T24 Status" width="7%" [headerStyle]="headerStyle">
                 </kendo-grid-column>
-                <kendo-grid-column field="T24Remarks" title="T24 Remarks" width="10%"
-                    [headerStyle]="headerStyle">
+                <kendo-grid-column field="T24Remarks" title="T24 Remarks" width="10%" [headerStyle]="headerStyle">
                 </kendo-grid-column>
 
             </kendo-grid>
