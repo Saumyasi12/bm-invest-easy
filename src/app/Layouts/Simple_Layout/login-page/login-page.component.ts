@@ -20,10 +20,10 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 export class LoginPageComponent {
     public userdata: loginparams = { username: "", password: "" }
     public userobj: Tbl_User_Detail;
-    @ViewChild('password')
-    public TokenData={TokenValue:"",CreatedTS:new Date()}
+    @ViewChild('password',{static:true})   
     public textbox!: TextBoxComponent;
     public dataitem: any;
+    public TokenData={TokenValue:"",CreatedTS:new Date()}
     public ngAfterViewInit(): void {
         this.textbox.input.nativeElement.type = 'password';
     }
