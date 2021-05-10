@@ -20,7 +20,7 @@ export class LegalTypeAddEditComponent implements OnInit {
   constructor(private fb: FormBuilder, private legalService : LegalTypeService) { }
 
   ngOnInit(): void {
-    
+  
     if (this.legalId === '0') {
       this.generateForm();
     }
@@ -33,9 +33,10 @@ export class LegalTypeAddEditComponent implements OnInit {
     }
   }
 
-  generateForm() {    
+  generateForm() {  
+    debugger  
     this.legalForm = this.fb.group({
-      legalId: new FormControl(this.selectedlegal.ID),
+      legalId: new FormControl(this.legalId),
       legalType: new FormControl(this.selectedlegal.LegalType, [Validators.required]),
       status: new FormControl(this.selectedlegal.Status.toString(),[Validators.required]),
       description: new FormControl(this.selectedlegal.Description, [Validators.required])
@@ -48,6 +49,7 @@ export class LegalTypeAddEditComponent implements OnInit {
 
     }
     SubmitForm(){
+     
       this.selectedlegal = {
         ID: this.legalForm.controls['legalId'].value, LegalType: this.legalForm.controls['legalType'].value,
         Status: this.legalForm.controls['status'].value, Description: this.legalForm.controls['description'].value

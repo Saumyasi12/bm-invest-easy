@@ -3,21 +3,22 @@
         <div class="card-Header-bm">
             <div class="row-bm">
                 <div class="cols-bm">
-                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;"></p>
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">Exceptions</p>
                 </div>
                 <div class="cols-bm" *ngIf="!showLoading && !errorMessage">
                     Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
-                    (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
-              
-                    </div>
+                        (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
+
+                </div>
             </div>
         </div>
         <!-- Excel Export -->
         <kendo-excelexport [data]="exceptionData" fileName="Exception.xlsx" #excelexport>
-            <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'TransId'"      [width]="100">
+            <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'TransId'"
+                [width]="100">
             </kendo-excelexport-column>
         </kendo-excelexport>
-          <!-- Excel Export -->
+        <!-- Excel Export -->
         <form [formGroup]="expform" (ngSubmit)="formSearch()">
             <div class="flex-container-bm">
                 <div class="flex-item-bm">
@@ -41,8 +42,9 @@
                             </kendo-textbox>
                         </div>
                         <div class="cols-bm">
-                            <kendo-textbox class="controls-bm" formControlName="exception" placeholder="Exception">
-                            </kendo-textbox>
+
+                            <kendo-combobox [data]="['Application Exception','Business Exception']" class="controls-bm"
+                                formControlName="exception" placeholder="Exception"> </kendo-combobox>
                         </div>
                         <div class="cols-bm">
                             <kendo-buttongroup>
@@ -61,7 +63,10 @@
         <div *ngIf="!showLoading && !errorMessage">
             <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
                 (pageChange)="pageChange($event)" [height]="windowHeight">
-                <kendo-grid-column field="TransId" title="Transaction ID" width="10%" [headerStyle]="headerStyle">
+                <kendo-grid-column title="Id" width="6%" [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                        {{rowIndex+1}}
+                    </ng-template>
                 </kendo-grid-column>
                 <kendo-grid-column field="CRNumber" title="CR Number" width="10%" [headerStyle]="headerStyle">
                 </kendo-grid-column>

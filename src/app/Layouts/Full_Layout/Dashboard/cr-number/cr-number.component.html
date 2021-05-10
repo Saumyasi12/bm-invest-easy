@@ -3,7 +3,7 @@
         <div class="card-Header-bm">
             <div class="row-bm">
                 <div class="cols-bm">
-                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;"></p>
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">CR Details</p>
                 </div>
                 <div class="cols-bm" *ngIf="!showLoading && !errorMessage">
                     Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
@@ -60,14 +60,28 @@
         <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
 
         <div *ngIf="!showLoading && !errorMessage">
-            <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
-                (pageChange)="pageChange($event)" [height]="windowHeight">
+            <!-- <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
+                (pageChange)="pageChange($event)" [height]="windowHeight"> -->
+
+            <kendo-grid [data]="gridView" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort"
+                [filter]="state.filter" [sortable]="true" [pageable]="true" filterable="menu"
+                (dataStateChange)="dataStateChange($event)" [rowClass]="rowCallback">
+
+                <kendo-grid-column title="Id" width="6%" [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                        {{rowIndex+1}}
+                    </ng-template>
+                </kendo-grid-column>
+
                 <kendo-grid-column field="CRNumber" title="CR Number" width="6%" [headerStyle]="headerStyle">
                 </kendo-grid-column>
                 <kendo-grid-column field="CIFNumber" title="CIF" width="6%" [headerStyle]="headerStyle">
                 </kendo-grid-column>
-                <kendo-grid-column field="ExpiryDate" title="Invest Easy Expiry Date" width="12%"
+                <kendo-grid-column field="ExpiryDate"  title="Invest Easy Expiry Date" width="12%"
                     [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{ChangeDateFormat(dataItem.ExpiryDate)}}
+                    </ng-template>
                 </kendo-grid-column>
                 <kendo-grid-column field="InvestEasyStatus" title="InvestEasy Status" width="7%"
                     [headerStyle]="headerStyle">

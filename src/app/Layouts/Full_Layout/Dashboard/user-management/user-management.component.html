@@ -1,0 +1,82 @@
+<kendo-card [width]="'20%'">
+    <kendo-grid [data]="userlist" [scrollable]="false" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
+        [height]="853" (pageChange)="pageChange($event)">
+
+        <kendo-grid-column [headerStyle]="headerstyle" field="UserName" title="Users" grid-alt-text>
+        </kendo-grid-column>
+        <kendo-grid-column
+            [headerStyle]="{'background-color': '#E23328','color': '#fff','line-height': '1em','font-size': '14px', 'font-family': 'arial','overflow': 'visible','white-space': 'normal','padding': '8px 3px'}"
+            title="">
+            <ng-template kendoGridHeaderTemplate let-dataItem>
+                <kendo-textbox class="Searchbox" placeholder="Search" (valueChange)="handleFilterChange($event)"
+                    style="width: 100%;">
+                </kendo-textbox>
+            </ng-template>
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <button kendoButton [look]="'default'" style="width: 30px" (click)="getUser(dataItem)">
+                    <span class="k-icon k-i-track-changes-enable" style="cursor: pointer;"></span>
+                </button>
+            </ng-template>
+        </kendo-grid-column>
+
+    </kendo-grid>
+</kendo-card>
+<kendo-card [width]="'79%'">
+    <kendo-card-header>User Details</kendo-card-header>
+
+    <form class="k-form" [formGroup]="form" >
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                    <kendo-floatinglabel text="User Name">
+                        <input kendoTextBox [formControlName]="'UserName'" [(ngModel)]="Formuser.UserName" readonly />
+                    </kendo-floatinglabel>
+                </td>
+                <td style="width:13%" ></td>
+                <td>
+                    <kendo-floatinglabel text="AD Group Name">
+                        <input [formControlName]="'ADGroupName'" kendoTextBox #ADGroupName [(ngModel)]="Formuser.Usergroup" readonly />
+                    </kendo-floatinglabel>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+            <tr>
+                <td></td>
+                <td>
+                    <table style="float: right; margin-right: 9%;">
+                        <tr>
+                            Permissions
+                        </tr>
+
+                        <tr *ngFor="let item of pagelist">
+                            <td>
+                                <div class="wrap">
+                                    <input type="checkbox" id="terms" (change)="changepagelist($event,item.Link)" [checked]="item.Checked" kendoCheckBox />
+                                    <label class="k-checkbox-label" for="terms">{{item.Text}}</label>
+
+                                </div>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div style="width: 26%;float: right;">
+            <button kendoButton [look]="'default'"style="background: #F23428;color: white;margin: 3px;width: 80px;" (click)="submitForm()" >Save</button>
+            <button kendoButton [look]="'default'" style="background:  #7F7F7F;color: white;width: 80px" (click)="clearForm()" >Reset</button>
+        </div>
+        <!-- <div class="actionbutton">
+            <button class="k-button k-primary" [disabled]="!form.valid" (click)="submitForm()"
+                style="background-color: #EE2F23; border-radius: 7px; color: white; width: 100px; margin-left: 50px;">Save</button>&nbsp;
+            <button class="k-button" (click)="clearForm()"
+                style="width: 100px; background-color:  #7F7F7F; color: white; border-radius: 7px;">Cancel</button>
+
+        </div> -->
+    </form>
+
+
+</kendo-card>

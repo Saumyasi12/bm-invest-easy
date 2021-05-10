@@ -14,21 +14,20 @@ import { ConfigCodeService } from 'src/app/Services/config-code.service';
 })
 export class ConfigCodeComponent implements OnInit {
 
-  editAddForm: any;
   windowHeight: number;
-  @HostListener('window:resize', ['$event']) onResize(event) { 
-    
-    this.windowHeight = window.innerHeight-85;
-    this.pageSize  = Math.ceil( this.windowHeight /35);
+  @HostListener('window:resize', ['$event']) onResize(event) {
+
+    this.windowHeight = window.innerHeight - 85;
+    this.pageSize = Math.ceil(this.windowHeight / 35);
   }
   //----Page Loader--//
-  showLoading =true;
+  showLoading = true;
 
   allowSearch = false;
   name = null;
   value = null;
   description = null;
-  
+
   //error-handling
   errorMessage = null;
   errorCode = null;
@@ -37,98 +36,96 @@ export class ConfigCodeComponent implements OnInit {
   public gridView!: GridDataResult;
   public pageSize = 12;
   public skip = 0;
-  headerStyle=  headerStyle;
-  private data!: Object[]; 
+  headerStyle = headerStyle;
+  private data!: Object[];
   // AddcountryForm: FormGroup;
-  configData:configDataModel[]= [];
+  configData: configDataModel[] = [];
   public fields: string[] = [];
-  configId: string;
+  configId: number;
   constructor(private fb: FormBuilder, private dialogService: DialogService, private configCodeService: ConfigCodeService) { }
 
   ngOnInit(): void {
-    this.windowHeight = window.innerHeight-85;
-  this.pageSize  = Math.ceil( this.windowHeight /35);
-  this.showLoading= true;
-  // this.generateForm();
-  this.configCodeService.fetchConfigData().subscribe(data=>{
-    this.configData= data; 
-    this.loadItems();
-    this.showLoading= false;
-  }, err=>{
-    this.errorMessage=err.error.error;
-    this.errorCode = err.status;
-    this.showLoading= false;
-  })
-
-  this.editAddForm = this.fb.group({
-    name: new FormControl(),
-    value: new FormControl(),
-    description: new FormControl(),  
-   });
+    this.windowHeight = window.innerHeight - 85;
+    this.pageSize = Math.ceil(this.windowHeight / 35);
+    this.showLoading = true;
+    this.GetConfigList()
+  }
+  GetConfigList() {
+    this.configCodeService.fetchConfigData().subscribe(data => {
+      this.configData = data;
+      this.loadItems();
+      this.showLoading = false;
+    }, err => {
+      this.errorMessage = err.error.error;
+      this.errorCode = err.status;
+      this.showLoading = false;
+    })
   }
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.loadItems();
   }
   private loadItems(): void {
-    
-  
-      this.gridView = {
-        data: this.configData.slice(this.skip, this.skip + this.pageSize),     
-        total: this.configData.length
-      };
- 
+
+
+    this.gridView = {
+      data: this.configData.slice(this.skip, this.skip + this.pageSize),
+      total: this.configData.length
+    };
+
   }
   private loadSortedItems(): void {
     this.gridView = {
       data: orderBy(this.configData, this.sort),
       total: this.configData.length
-    };  }
+    };
+  }
   public sort: SortDescriptor[] = [
     {
-        field: 'ROLCaseNo',
-        dir: 'asc'
+      field: 'ROLCaseNo',
+      dir: 'asc'
     }
-];
+  ];
   public sortChange(sort: SortDescriptor[]): void {
     this.sort = sort;
     this.loadSortedItems();
   }
- 
-  
-   //Dialog Work
-   public windowOpened = false;
+
+
+  //Dialog Work
+  public windowOpened = false;
 
   public close(component) {
-    this.configCodeService.fetchConfigData().subscribe(data=>{
-      this.configData= data; 
+    this.configCodeService.fetchConfigData().subscribe(data => {
+      this.configData = data;
       this.loadItems();
-      this.showLoading= false;
-    }, err=>{
-      this.errorMessage=err.error.error;
+      this.showLoading = false;
+    }, err => {
+      this.errorMessage = err.error.error;
       this.errorCode = err.status;
-      this.showLoading= false;
+      this.showLoading = false;
     })
 
 
-     this[component + 'Opened'] = false;
-   }
+    this[component + 'Opened'] = false;
+  }
 
-   public open(component) {
-     this[component + 'Opened'] = true;
-   }
+  public open(component) {
+    this[component + 'Opened'] = true;
+  }
 
-   public opened = false;
+  public opened = false;
 
   public closedialog(status) {
-     console.log(`Dialog result: ${status}`);
-     this.opened = false;
-   }
+    console.log(`Dialog result: ${status}`);
+    this.opened = false;
+    this.GetConfigList()
+  }
 
-   public opendialog(id) {
-     this.opened = true;
+  public opendialog(id) {
+    this.opened = true;
     this.configId = id;
-    console.log(this.configId)
-   }
+
+  }
 
 }

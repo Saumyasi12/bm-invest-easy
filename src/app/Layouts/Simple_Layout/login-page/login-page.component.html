@@ -23,8 +23,8 @@
 
               <kendo-formfield>
                 <kendo-label [for]="username" text="Username">&nbsp;&nbsp;&nbsp;
-                  <kendo-textbox formControlName="username" [clearButton]="true" #username required autocomplete="off">
-                  </kendo-textbox>
+                  <kendo-textbox formControlName="username" [clearButton]="true" tabindex="1" #username required
+                    autocomplete="off"></kendo-textbox>
                 </kendo-label>
 
                 <kendo-formerror>Username is required</kendo-formerror>
@@ -32,15 +32,21 @@
 
               <kendo-formfield>
                 <kendo-label [for]="password" text="Password"> &nbsp;&nbsp;&nbsp;
-                  <kendo-textbox formControlName="password" #password required [clearButton]="true" autocomplete="off">
-                    <ng-template kendoTextBoxSuffixTemplate>
-                      <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
-                    </ng-template>
+                  <kendo-textbox formControlName="password" tabindex="2" #password required [clearButton]="true"
+                    autocomplete="off">
                   </kendo-textbox>
 
                 </kendo-label>
                 <kendo-formerror>Password is required</kendo-formerror>
               </kendo-formfield>
+              <div>
+                <div class="show-pwd">
+                  <input type="checkbox" id="terms" kendoCheckBox (click)="toggleVisibility()" />
+                  <label class="k-checkbox-label" for="terms"> Show password.</label>
+                </div>
+
+
+              </div>
 
 
               <div class="k-form-buttons ">

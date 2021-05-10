@@ -95,7 +95,17 @@ FilterOBJ={FromDate:'',ToDate:'',Filter:''}
     this.sort = sort;
     this.loadSortedItems();
 }
-
+ChangeDateFormat(dt: string): string {
+  let res: string = '-'
+  try {
+    if (dt) {
+      res = formatDate(dt, 'MM-dd-yyyy', 'en_US')
+    }
+  } catch {
+    res = dt
+  }
+  return res;
+}
 generateForm(){
   this.crform = this.fb.group({
     fromDate: new FormControl(),

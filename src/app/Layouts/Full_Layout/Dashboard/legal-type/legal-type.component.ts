@@ -48,23 +48,21 @@ export class LegalTypeComponent implements OnInit {
   ngOnInit(): void {
     this.windowHeight = window.innerHeight-105;
   this.pageSize  = Math.ceil( this.windowHeight /35);
-  this.showLoading= true;
-  // this.generateForm();
-  this.legalTypeService.fetchLegalData().subscribe(data=>{
-    this.legalData= data;
-    this.loadItems();
-    this.showLoading= false;
-  }, err=>{
-    this.errorMessage=err.error.error;
-    this.errorCode = err.status;
-    this.showLoading= false;
-  })
-
-  this.editAddForm = this.fb.group({
-    legalType: new FormControl(),
-    status: new FormControl(),
-    description: new FormControl(),  
-   });
+this.rederdata();  
+  }
+  rederdata(){
+    this.showLoading= true;
+    // this.generateForm();
+    this.legalTypeService.fetchLegalData().subscribe(data=>{
+      this.legalData= data;
+      this.loadItems();
+      this.showLoading= false;
+    }, err=>{
+      this.errorMessage=err.error.error;
+      this.errorCode = err.status;
+      this.showLoading= false;
+    })
+  
   }
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
@@ -108,6 +106,7 @@ export class LegalTypeComponent implements OnInit {
 
 
    public close(component) {
+    this.rederdata()
     this[component + 'Opened'] = false;
     this.viewflag = 0;
   }

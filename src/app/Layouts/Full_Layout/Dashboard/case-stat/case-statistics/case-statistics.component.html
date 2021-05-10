@@ -100,13 +100,21 @@
   <!--Kendo Grid-->
   <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="windowHeight"
     (pageChange)="pageChange($event)">
-
+    <kendo-grid-column  
+    title="Id" width= "6%" [headerStyle]="headerstyle">
+       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+           {{rowIndex+1}}
+       </ng-template>
+   </kendo-grid-column>
     <kendo-grid-column [headerStyle]="headerstyle" field="CRNumber" title="CR Number" width="15%">
     </kendo-grid-column>
     <kendo-grid-column [headerStyle]="headerstyle" field="CIFNumber" title="CIF" width="25%">
     </kendo-grid-column>
     <kendo-grid-column [headerStyle]="headerstyle" field="ExpiryDate" title="Expiry Date"
       width="15%">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ChangeDateFormat(dataItem.ExpiryDate)}}
+    </ng-template>  
     </kendo-grid-column>
     <kendo-grid-column [headerStyle]="headerstyle" field="InvestEasyStatus" title="InvestEasy Status" width="25%">
     </kendo-grid-column>

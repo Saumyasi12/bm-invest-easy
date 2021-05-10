@@ -180,7 +180,17 @@ FromDateChange(value: Date) : void{
       this.loadItems();
     })
   }
-
+  ChangeDateFormat(dt: string): string {
+    let res: string = '-'
+    try {
+      if (dt) {
+        res = formatDate(dt, 'MM-dd-yyyy', 'en_US')
+      }
+    } catch {
+      res = dt
+    }
+    return res;
+  }
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.loadItems();

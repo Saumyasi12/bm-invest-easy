@@ -129,7 +129,17 @@ FromDateChange(value: Date) : void{
     this.checkFormValidation();
     }
   }
-  
+  ChangeDateFormat(dt: string): string {
+    let res: string = '-'
+    try {
+      if (dt) {
+        res = formatDate(dt, 'MM-dd-yyyy', 'en_US')
+      }
+    } catch {
+      res = dt
+    }
+    return res;
+  }
   checkFormValidation() :void{
   if ((this.Filter ) && (!this.FromDate && !this.ToDate)){
     this.allowSearch = true;

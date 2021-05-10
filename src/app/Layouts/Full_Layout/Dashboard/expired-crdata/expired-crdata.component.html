@@ -1,81 +1,93 @@
 <kendo-card [style]="'width:100%'">
-    <kendo-card-body> 
-        <div class="card-Header-bm">    
+    <kendo-card-body>
+        <div class="card-Header-bm">
             <div class="row-bm">
-                 <div class="cols-bm">
-                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;"></p>
+                <div class="cols-bm">
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">Expired Details</p>
                 </div>
-                <div class="cols-bm" *ngIf="!showLoading && !errorMessage">                  
-               	 Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
+                <div class="cols-bm" *ngIf="!showLoading && !errorMessage">
+                    Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
                         (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>
                 </div>
-            </div> 
-        </div>  
+            </div>
+        </div>
         <!-- Excel Export -->
         <kendo-excelexport [data]="expiredData" fileName="ExpireCR.xlsx" #excelexport>
             <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
                 [width]="100">
             </kendo-excelexport-column>
         </kendo-excelexport>
-          <!-- Excel Export -->
+        <!-- Excel Export -->
 
         <form [formGroup]="crform" (ngSubmit)="formSearch()">
-        <div class="flex-container-bm">            
+            <div class="flex-container-bm">
                 <div class="flex-item-bm">
                     <div class="row-bm">
                         <div class="cols-bm">
-                                <kendo-datepicker class='kendo-input controls-bm' placeholder="From" [format]="'MM-dd-yyyy'" tabindex="1" 
-                                formControlName="fromDate" (valueChange)="fromDateChange($event)">
-                                </kendo-datepicker>
-                            
+                            <kendo-datepicker class='kendo-input controls-bm' placeholder="From" [format]="'MM-dd-yyyy'"
+                                tabindex="1" formControlName="fromDate" (valueChange)="fromDateChange($event)">
+                            </kendo-datepicker>
+
                         </div>
                         <div class="cols-bm">
-                                <kendo-datepicker class='kendo-input controls-bm' placeholder="To" [format]="'MM-dd-yyyy'" tabindex="2"
-                                formControlName="toDate" (valueChange)="toDateChange($event)">
-                                </kendo-datepicker>
+                            <kendo-datepicker class='kendo-input controls-bm' placeholder="To" [format]="'MM-dd-yyyy'"
+                                tabindex="2" formControlName="toDate" (valueChange)="toDateChange($event)">
+                            </kendo-datepicker>
                         </div>
                         <!-- <div class="cols-bm">
                                 <kendo-textbox formControlName="feedbackId" class="controls-bm" placeholder="CR Number" (valueChange)="crNumberChange($event)"></kendo-textbox>
                         </div> -->
-                        <div class="cols-bm">                                
-                            <kendo-combobox [data]="['426583','426583']" class="controls-bm" formControlName="crNumber" placeholder="CR Number" (valueChange)="crNumberChange($event)"> </kendo-combobox> 
-                    </div>
                         <div class="cols-bm">
-                            <kendo-buttongroup >
-                                <button kendoButton icon="zoom" style="color: #fff; background: #F23428;" type="submit" [disabled]="!allowSearch"></button>
-                                <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; "  type="reset" (click)="resetForm()" ></button>
+                            <kendo-textbox class="controls-bm" formControlName="crNumber" placeholder="CR Number">
+                            </kendo-textbox>
+                        </div>
+                        <div class="cols-bm">
+                            <kendo-buttongroup>
+                                <button kendoButton icon="zoom" style="color: #fff; background: #F23428;" type="submit"
+                                    [disabled]="!allowSearch"></button>
+                                <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; "
+                                    type="reset" (click)="resetForm()"></button>
                             </kendo-buttongroup>
                         </div>
-                     </div>
-                </div>                
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+
+        <div *ngIf="!showLoading && !errorMessage">
+            <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
+                (pageChange)="pageChange($event)" [height]="windowHeight">
+                <kendo-grid-column title="Id" width="6%" [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                        {{rowIndex+1}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="CRNumber" title="CR Number" width="6%" [headerStyle]="headerStyle">
+                </kendo-grid-column>
+                <kendo-grid-column field="CIFNumber" title="CIF" width="6%" [headerStyle]="headerStyle">
+                </kendo-grid-column>
+                <kendo-grid-column field="ExpiryDate" title="Invest Easy Expiry Date" width="12%"
+                    [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{ChangeDateFormat(dataItem.ExpiryDate)}}
+                    </ng-template>
+                </kendo-grid-column>
+
+
+            </kendo-grid>
+            <kendo-excelexport [data]="gridView" fileName="ReactiveCase.xlsx" #excelexport>
+                <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
+                    [width]="100">
+                </kendo-excelexport-column>
+            </kendo-excelexport>
         </div>
-    </form>
-   
-      
-    <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
-        
-       <div *ngIf="!showLoading && !errorMessage">
-        <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
-        (pageChange)="pageChange($event)" [height]="windowHeight"  >    
-        <kendo-grid-column  field="CRNumber" title="CR Number" width= "6%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="CIFNumber" title="CIF"  width= "6%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="ExpiryDate" title="Invest Easy Expiry Date" width="12%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        
-        
-    </kendo-grid>
-    <kendo-excelexport [data]="gridView" fileName="ReactiveCase.xlsx" #excelexport>
-        <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'" [width]="100">
-        </kendo-excelexport-column>
-  </kendo-excelexport>
-       </div>
-       <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
-           <h6>Error Code: {{errorCode}}</h6>
-           <p>{{errorMessage}}</p>
-           
+        <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
+            <h6>Error Code: {{errorCode}}</h6>
+            <p>{{errorMessage}}</p>
+
         </div>
     </kendo-card-body>
 </kendo-card>
-

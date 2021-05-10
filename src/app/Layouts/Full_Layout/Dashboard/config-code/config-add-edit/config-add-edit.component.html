@@ -13,7 +13,7 @@
                             <label for="name">Name:</label>
                         </div>
                         <div class="cols-bm">
-                            <kendo-textbox class="controls-bm width50" formControlName="configName"></kendo-textbox>
+                            <kendo-textbox class="controls-bm width50" [readonly]="!editName" formControlName="configName"></kendo-textbox>
                         </div>
                     </div>
                     <div class="row-bm">

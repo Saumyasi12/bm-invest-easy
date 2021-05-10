@@ -329,7 +329,7 @@ export interface Tbl_User_Detail {
     Name: string;
     Usergroup: string;
     GroupPages: string;
-    Visa130ColHeaders:string;
+    
 }
 export interface tbl_VisaAcquiringIncoming {
     ID: number;

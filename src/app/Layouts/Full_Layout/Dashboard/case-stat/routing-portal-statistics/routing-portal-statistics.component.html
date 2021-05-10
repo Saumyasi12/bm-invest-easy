@@ -1,121 +1,128 @@
-
-
 <kendo-card-body width="100%">
   <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
   <div *ngIf="!showLoading && !errorMessage">
     <div class="card-Header-bm">
-        <div class="row-bm">
-          <div class="cols-bm">
-            <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
+      <div class="row-bm">
+        <div class="cols-bm">
+          <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
         </div>
-          <div class="cols-bm">          
-            Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'" (click)="excelexport.save()" style="background: darkgreen; color: #fff; "></button>          
+        <div class="cols-bm">
+          Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'" (click)="excelexport.save()"
+            style="background: darkgreen; color: #fff; "></button>
+        </div>
+      </div>
+    </div>
+
+    <!--Search Controls-->
+    <div class="flex-container-bm">
+      <div class="flex-item-bm">
+        <form [formGroup]="crStatForm" (ngSubmit)="formSearch()">
+          <div class="row-bm">
+            <div class="cols-bm">
+              <kendo-datepicker class='kendo-input controls-bm' formControlName="Fromdate" placeholder="From"
+                [format]="'MM-dd-yyyy'">
+              </kendo-datepicker>
+            </div>
+            <div class="cols-bm">
+              <kendo-datepicker class='kendo-input controls-bm' formControlName="Todate" placeholder="To"
+                [format]="'MM-dd-yyyy'">
+              </kendo-datepicker>
+            </div>
+            <div class="cols-bm">
+              <kendo-combobox [data]="['Processed','Application Exception','Business Rule Exception']"
+                formControlName="Filter" class='kendo-input controls-bm'>
+              </kendo-combobox>
+            </div>
+            <div class="cols-bm margin-extra">
+              <kendo-buttongroup>
+                <button kendoButton icon="zoom" style="color: #fff; background: #F23428;" type="submit" title="Find"
+                  tabindex="3"></button>
+                <!-- [disabled]="!allowSearch" -->
+                <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; " type="reset"
+                  title="Reset" tabindex="4"></button>
+              </kendo-buttongroup>
+            </div>
+            <div class="cols-bm">
+              <button kendoButton [look]="'default'" icon="arrow-left" style="background: #F23428; color: white;"
+                (click)="goBack()">Back</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--Search Controls-->
+
+    <div class="bm-dashboard-container">
+      <div class="bm-dashboard-item rouded-corner">
+
+        <div class="card-body">
+          <div class="content status">
+            <div class="status-items k-text-success">
+              <div style="color:#0D274D ;"> CR Received</div>
+              <div class="status-big-text" style="color:#0D274D ;">{{actualdata? actualdata[0] : 0}}</div>
+            </div>
+            <div class="status-items  k-text-base">
+              <div style="color:#C00000">CR Scrapped</div>
+              <div class="status-big-text" style="color:#C00000">{{actualdata? actualdata[1] : 0}}</div>
+            </div>
+            <div class="status-items  k-text-tertiary">
+              <div style="color:#527BCB">CR Updated</div>
+              <div class="status-big-text" style="color:#527BCB">{{actualdata? actualdata[2] : 0}}</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!--Search Controls-->
-      <div class="flex-container-bm">     
-        <div class="flex-item-bm">
-          <form [formGroup] = "crStatForm" (ngSubmit)="formSearch()">
-            <div class="row-bm">
-              <div class="cols-bm">
-                <kendo-datepicker class='kendo-input controls-bm' formControlName="Fromdate"  placeholder="From"
-                  [format]="'MM-dd-yyyy'">
-                </kendo-datepicker>
-              </div>
-              <div class="cols-bm">
-                <kendo-datepicker class='kendo-input controls-bm' formControlName="Todate" placeholder="To"
-                  [format]="'MM-dd-yyyy'">
-                </kendo-datepicker>
-              </div>
-              <div class="cols-bm">
-                <kendo-combobox [data]="['Processed','Application Exception','Business Rule Exception']"   formControlName="Filter" class='kendo-input controls-bm'>
-                </kendo-combobox>
-              </div>
-              <div class="cols-bm margin-extra">
-                <kendo-buttongroup>
-                  <button kendoButton icon="zoom" style="color: #fff; background: #F23428;" type="submit"  title="Find"
-                    tabindex="3"></button>
-                    <!-- [disabled]="!allowSearch" -->
-                  <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; " type="reset" title="Reset"
-                    tabindex="4"></button>
-                </kendo-buttongroup>
-              </div>
-              <div class="cols-bm">
-                <button kendoButton [look]="'default'" icon="arrow-left" style="background: #F23428; color: white;"
-                  (click)="goBack()">Back</button>
-              </div>
-            </div>
-          </form>
+      <div class="bm-dashboard-item rouded-corner">
+        <div class="card-body">
+          <div class="content">
+            <fusioncharts [chartConfig]=routingPortalChartConfig [dataSource]=datasourceRoutingPortal>
+            </fusioncharts>
+          </div>
         </div>
       </div>
-      
-      <!--Search Controls-->
-    
-      <div class="bm-dashboard-container">
-        <div class="bm-dashboard-item rouded-corner">
-       
-            <div class="card-body">
-                <div class="content status">
-                    <div class="status-items k-text-success" >
-                   <div style="color:#0D274D ;"> CR Received</div>  
-                        <div class="status-big-text" style="color:#0D274D ;">{{actualdata? actualdata[0] : 0}}</div>
-                    </div>
-                    <div class="status-items  k-text-base" >
-                      <div style="color:#C00000">CR Scrapped</div> 
-                        <div class="status-big-text" style="color:#C00000" >{{actualdata? actualdata[1] : 0}}</div>
-                    </div>
-                    <div class="status-items  k-text-tertiary" >
-                     <div style="color:#527BCB">CR Updated</div> 
-                        <div class="status-big-text"  style="color:#527BCB">{{actualdata? actualdata[2] : 0}}</div>
-                    </div>
-                </div>   
-              </div>
-          </div>
-        
-        <div class="bm-dashboard-item rouded-corner">
-            <div class="card-body">
-                <div class="content">
-                  <fusioncharts
-                  [chartConfig]=routingPortalChartConfig
-                  [dataSource]=datasourceRoutingPortal >
-              </fusioncharts>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- Excel Export -->
-      <kendo-excelexport [data]="routingPortalGridData" fileName="CRStatistics.xlsx" #excelexport>
-        <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
-            [width]="100">
-        </kendo-excelexport-column>
+    </div>
+    <!-- Excel Export -->
+    <kendo-excelexport [data]="routingPortalGridData" fileName="CRStatistics.xlsx" #excelexport>
+      <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
+        [width]="100">
+      </kendo-excelexport-column>
     </kendo-excelexport>
 
-      <!-- Excel Export -->
-      <!--Chart-->
-      <!--Kendo Grid-->
-      <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="windowHeight" (pageChange)="pageChange($event)">
-        <kendo-grid-column [headerStyle]="headerstyle" field="CRNumber" title="CR Number" width="15%">
-        </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="CIFNumber" title="CIF Number" width="25%">
-        </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="ExpiryDate" title="Expiry Date"
-          width="15%">
-        </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="InvestEasyStatus" title="InvestEasy Status" width="25%">
-        </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="InvestEasyRemarks" title="InvestEasy Remarks" width="15%">
-        </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="T24Status" title="T24 Status" width="25%">
-        </kendo-grid-column>
-        <kendo-grid-column [headerStyle]="headerstyle" field="T24Remarks" title="T24 Remarks" width="15%">
-        </kendo-grid-column>
+    <!-- Excel Export -->
+    <!--Chart-->
+    <!--Kendo Grid-->
+    <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" [height]="windowHeight"
+      (pageChange)="pageChange($event)">
+      <kendo-grid-column title="Id" width="6%" [headerStyle]="headerstyle">
+        <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+          {{rowIndex+1}}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column [headerStyle]="headerstyle" field="CRNumber" title="CR Number" width="15%">
+      </kendo-grid-column>
+      <kendo-grid-column [headerStyle]="headerstyle" field="CIFNumber" title="CIF Number" width="25%">
+      </kendo-grid-column>
+      <kendo-grid-column [headerStyle]="headerstyle" field="ExpiryDate" title="Expiry Date" width="15%">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          {{ChangeDateFormat(dataItem.ExpiryDate)}}
+      </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column [headerStyle]="headerstyle" field="InvestEasyStatus" title="InvestEasy Status" width="25%">
+      </kendo-grid-column>
+      <kendo-grid-column [headerStyle]="headerstyle" field="InvestEasyRemarks" title="InvestEasy Remarks" width="15%">
+      </kendo-grid-column>
+      <kendo-grid-column [headerStyle]="headerstyle" field="T24Status" title="T24 Status" width="25%">
+      </kendo-grid-column>
+      <kendo-grid-column [headerStyle]="headerstyle" field="T24Remarks" title="T24 Remarks" width="15%">
+      </kendo-grid-column>
     </kendo-grid>
-      <!--Kendo Grid--></div>
-      <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
-        <h6>Error Code: {{errorCode}}</h6>
-        <p>{{errorMessage}}</p> 
-       </div> 
+    <!--Kendo Grid-->
+  </div>
+  <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
+    <h6>Error Code: {{errorCode}}</h6>
+    <p>{{errorMessage}}</p>
+  </div>
 
 </kendo-card-body>

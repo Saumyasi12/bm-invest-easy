@@ -29,144 +29,61 @@ const routes: Routes = [{
       path: '',
       redirectTo: '/casestat',
       pathMatch: 'full'
-    } ,
-   
+    },
+
     {
       path: 'casestat',
       loadChildren: () => import('../Dashboard/case-stat/case-stat.module').then(m => m.CaseStatModule)
-    } ,
+    },
     {
-        path: 'crnumber',
-        loadChildren: () => import('../Dashboard/cr-number/cr-number.module').then(m => m.CrNumberModule)
-      },
-      {
-        path: 'expnumber',
-        loadChildren: () => import('../Dashboard/expired-crdata/expired-crdata.module').then(m => m.ExpiredCrdataModule)
-      },
-      {
-        path: 'exception',
-        loadChildren: () => import('../Dashboard/exception-data/exception-data.module').then(m => m.ExceptionDataModule)
-      },
-      {
-        path: 'countrycode',
-        loadChildren: () => import('../Dashboard/country-code/country-code.module').then(m => m.CountryCodeModule)
-      },
-      {
-        path: 'configcode',
-        loadChildren: () => import('../Dashboard/config-code/config-code.module').then(m => m.ConfigCodeModule)
-      },
-      {
-        path: 'legaltype',
-        loadChildren: () => import('../Dashboard/legal-type/legal-type.module').then(m => m.LegalTypeModule)
-      },
-      {
-        path: 'crtrendsreport',
-        loadChildren: () => import('../Dashboard/cr-trend-reports/cr-trend-reports.module').then(m => m.CrTrendsReportModule)
-      }
-    /*{
-      path: 'v_summary',
-      loadChildren: () => import('../Dashboard/visa-summary-sheet/visa-summary-sheet.module').then(m => m.VisaSummarySheetModule)
-    } ,
-    /* {
-      path: 'casehistory',
-      loadChildren: () => import('../Dashboard/case-histtory/case-histtory.module').then(m => m.CaseHisttoryModule)
-    } ,
+      path: 'crnumber',
+      loadChildren: () => import('../Dashboard/cr-number/cr-number.module').then(m => m.CrNumberModule)
+    },
     {
-      path: 'closurereport',
-      loadChildren: () => import('../Dashboard/closer-report/closer-report.module').then(m => m.CloserReportModule)
-    } ,
+      path: 'expnumber',
+      loadChildren: () => import('../Dashboard/expired-crdata/expired-crdata.module').then(m => m.ExpiredCrdataModule)
+    },
     {
-      path: 'macthedtran',
-      loadChildren: () => import('../Dashboard/matched-transaction/matched-transaction.module').then(m => m.MatchedTransactionModule)
-    } ,
+      path: 'exception',
+      loadChildren: () => import('../Dashboard/exception-data/exception-data.module').then(m => m.ExceptionDataModule)
+    },
     {
-      path: 'unmacthedtran',
-      loadChildren: () => import('../Dashboard/unmatched-transaction/unmatched-transaction.module').then(m => m.UnmatchedTransactionModule)
-    } ,
+      path: 'countrycode',
+      loadChildren: () => import('../Dashboard/country-code/country-code.module').then(m => m.CountryCodeModule)
+    },
     {
-      path: 'reconciliation',
-      loadChildren: () => import('../Dashboard/reconciliation/reconciliation.module').then(m => m.ReconciliationModule)
-    } ,
-   
-     */
-  
-   /* {
-      path: 'wcstat',
-      loadChildren: () => import('../Dashboard/wecare-statistics/wecare-statistics.module').then(m => m.WecareStatisticsModule)
-    } 
-    ,
+      path: 'configcode',
+      loadChildren: () => import('../Dashboard/config-code/config-code.module').then(m => m.ConfigCodeModule)
+    },
     {
-      path: 'wccasetrend',
-      loadChildren: () => import('../Dashboard/weCare-case-trends/we-care-case-trends.module').then(m => m.WeCareCaseTrendsModule)
-    } , */
-   /*  {
-      path: 'wccasereport',
-      loadChildren: () => import('../Dashboard/wecare-case-report/wecare-case-report.module').then(m => m.WecareCaseReportModule)
-    } , */
-   /*  {
-      path: 'monthlycaseregistered',
-      loadChildren: () => import('../Dashboard/monthly-case-registered/monthly-case-registered.module').then(m => m.MonthlyCaseRegisteredModule)
-    } , */
-    /* {
-      path: 'staffperformance',
-      loadChildren: () => import('../Dashboard/staff-performance/staff-performance.module').then(m => m.StaffPerformanceModule)
-    } , */
-    
-   /*  {
-      path: 'slastat',
-      loadChildren: () => import('../Dashboard/slastat/slastat.module').then(m => m.SlastatModule)
-    }, */
-    /* {
-      path: 'beyondsla',
-      loadChildren: () => import('../Dashboard/beyond-sla-cases/beyond-sla-cases.module').then(m => m.BeyondSlaCasesModule)
-    }     , */
-    /* {
-      path: 'misonsla',
-      loadChildren: () => import('../Dashboard/mis-on-sla-days/mis-on-sla-days.module').then(m => m.MisOnSlaDaysModule)
-    } , 
-   
-   
-   
+      path: 'legaltype',
+      loadChildren: () => import('../Dashboard/legal-type/legal-type.module').then(m => m.LegalTypeModule)
+    },
     {
+      path: 'crtrendsreport',
+      loadChildren: () => import('../Dashboard/cr-trend-reports/cr-trend-reports.module').then(m => m.CrTrendsReportModule)
+    }
+    , {
       path: 'usermanagement',
-      loadChildren: () => import('../Dashboard/user-management/user-management.module').then(m => m.UserManagementModule)
-    } 
-    ,
-    {
-      path: 'errorpage',
-      loadChildren: () => import('../Dashboard/error-page/error-page.module').then(m => m.ErrorPageModule)
-    } */ 
+      loadChildren: () => import('../Dashboard/user-management/user-management.module').then(m => m.UserManagementModule),
+    },
   ]
 }];
 
 
 
 @NgModule({
- 
+
   imports: [
     CommonModule,
     LayoutModule,
     NavigationModule,
     IconsModule,
     RouterModule.forChild(routes),
-    // GridModule,
-    
-    // InputsModule,
-   
-    // LabelModule,
-    // DateInputsModule,
     IntlModule,
-    ButtonsModule,
-    // ExcelExportModule,
-    // ExcelModule,
-    // PDFModule,
-
-    // TooltipModule,
-    // DialogsModule,
-    // DropDownsModule,
-    //CreditCardMaskModule
+    ButtonsModule
   ],
-  declarations: [FullLayoutComponent,HeaderComponent,    
+  declarations: [FullLayoutComponent, HeaderComponent,
   ],
 })
 export class FullLayoutModule { }

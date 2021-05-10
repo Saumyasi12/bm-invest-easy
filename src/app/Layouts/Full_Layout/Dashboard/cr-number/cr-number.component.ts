@@ -2,8 +2,8 @@ import { formatDate } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DialogService } from '@progress/kendo-angular-dialog';
-import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
-import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
+import { DataStateChangeEvent, GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { orderBy, SortDescriptor, State,process } from '@progress/kendo-data-query';
 import { headerStyle } from 'src/app/common/common.functions';
 import { crDataModel } from 'src/app/Models/crNumber-data.model';
 import { CrNumberService } from 'src/app/Services/cr-number.service';
@@ -32,7 +32,10 @@ export class CrNumberComponent implements OnInit {
   crNumber = null;
   caseStatus = null;
   /// Form Reset
-
+  public state: State = {
+    skip: 0,
+    take: 10 
+    };
   //error-handling
   errorMessage = null;
   errorCode = null;
@@ -71,9 +74,24 @@ export class CrNumberComponent implements OnInit {
   })
  
   }
+  public dataStateChange(state: DataStateChangeEvent): void {
+    this.state = state;
+    this.gridView = process(this.crData, this.state);
+    }
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.loadItems();
+  }
+  ChangeDateFormat(dt: string): string {
+    let res: string = '-'
+    try {
+      if (dt) {
+        res = formatDate(dt, 'MM-dd-yyyy', 'en_US')
+      }
+    } catch {
+      res = dt
+    }
+    return res;
   }
   private loadItems(): void {
     
