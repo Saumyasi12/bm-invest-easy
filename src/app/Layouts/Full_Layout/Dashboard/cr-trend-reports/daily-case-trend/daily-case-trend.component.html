@@ -1,5 +1,7 @@
 <kendo-card style="width: 100%;">
     <kendo-card-body>
+        <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+        <div *ngIf="!showLoading && !errorMessage">
         <div class="card-Header-bm">
             <div class="row-bm">
                 <div class="cols-bm">
@@ -8,31 +10,31 @@
                 <div class="cols-bm">
                     Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
                         style="background: darkgreen; color: #fff; margin-right: 5px; "></button>
-                    <button kendoButton icon="pdf" style="background: #F23428; color: #fff;"></button>
+                    
                 </div>
             </div>
         </div>
-        <form>
+        <form [formGroup]="weeklycaseform" (ngSubmit)="formSearch()">
             <div class="flex-container-bm">
                 <div class="flex-item-bm">
                     <form [formGroup]="weeklycaseform" (ngSubmit)="formSearch()">
                     <div class="row-bm">
                      
                             <div class="cols-bm">
-                                <kendo-datepicker class='kendo-input controls-bm' [format]="'MM-dd-yyyy'" formControlName="FromDate" placeholder="From" tabindex="1">
+                                <kendo-datepicker class='kendo-input controls-bm' [format]="'MM-dd-yyyy'" formControlName="FromDate" placeholder="From" tabindex="1"  (valueChange)="FromDateChange($event)">
                                 </kendo-datepicker>
                             </div>
                             <div class="cols-bm">
                                 <kendo-datepicker class='kendo-input controls-bm' [format]="'MM-dd-yyyy'"
-                                    formControlName="ToDate" placeholder="To" tabindex="2">
+                                    formControlName="ToDate" placeholder="To" tabindex="2"  (valueChange)="ToDateChange($event)">
                                 </kendo-datepicker>
                             </div>
                             <div class="cols-bm">
                                 <kendo-buttongroup>
                                     <button kendoButton icon="zoom" style="color: #fff; background: #F23428;"
-                                        type="submit" title="Find" tabindex="3"></button>
+                                        type="submit" title="Find" tabindex="3" [disabled]="!allowSearch"></button>
                                     <button kendoButton icon="refresh" style="background: #7F7F7F; color: white; "
-                                        type="reset" title="Reset" tabindex="4"></button>
+                                        type="reset" title="Reset" tabindex="4" (click)="resetForm()"></button>
                                 </kendo-buttongroup>
                             </div>
                      
@@ -54,6 +56,10 @@
                 </div>
             </div>
         </div>
-        <!--Chart-->
+        <!--Chart--></div>
+        <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
+            <h6>Error Code: {{errorCode}}</h6>
+            <p>{{errorMessage}}</p>
+        </div>
     </kendo-card-body>
 </kendo-card>

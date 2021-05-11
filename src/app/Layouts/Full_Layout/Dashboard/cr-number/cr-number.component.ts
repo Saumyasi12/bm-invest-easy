@@ -2,8 +2,8 @@ import { formatDate } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DialogService } from '@progress/kendo-angular-dialog';
-import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
-import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
+import { DataStateChangeEvent, GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { orderBy, SortDescriptor, State,process } from '@progress/kendo-data-query';
 import { headerStyle } from 'src/app/common/common.functions';
 import { crDataModel } from 'src/app/Models/crNumber-data.model';
 import { CrNumberService } from 'src/app/Services/cr-number.service';
@@ -32,7 +32,10 @@ export class CrNumberComponent implements OnInit {
   crNumber = null;
   caseStatus = null;
   /// Form Reset
-
+  public state: State = {
+    skip: 0,
+    take: 10 
+    };
   //error-handling
   errorMessage = null;
   errorCode = null;
@@ -47,30 +50,48 @@ export class CrNumberComponent implements OnInit {
   private data!: Object[]; 
   crform: FormGroup;
   public gtservice;
-
+  FilterOBJ={FromDate:'',ToDate:'',Filter:''}
   crData:crDataModel[]= [];
-  public fields: string[] = [];
+  public fields: string[] =['CRNumber','CIFNumber','InvestEasyStatus','InvestEasyRemarks','T24Status','T24Remarks','ExpiryDate'];
   constructor(private fb: FormBuilder, private dialogService: DialogService, private crNumberService: CrNumberService) { }
 
   ngOnInit(): void {
-
+  
     this.windowHeight = window.innerHeight-155;
   this.pageSize  = Math.ceil( this.windowHeight /35);
   this.showLoading= true;
   this.generateForm();
-  this.crNumberService.fetchCrNumberData().subscribe(data=>{
+  this.crNumberService.fetchCrNumberDataByFilter(this.FilterOBJ).subscribe(data=>{
     this.crData= data;
-    this.loadItems();
     this.showLoading= false;
+    this.loadItems();
+    
+   
   }, err=>{
     this.errorMessage=err.error.error;
     this.errorCode = err.status;
     this.showLoading= false;
   })
+ 
   }
+  public dataStateChange(state: DataStateChangeEvent): void {
+    this.state = state;
+    this.gridView = process(this.crData, this.state);
+    }
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.loadItems();
+  }
+  ChangeDateFormat(dt: string): string {
+    let res: string = '-'
+    try {
+      if (dt) {
+        res = formatDate(dt, 'MM-dd-yyyy', 'en_US')
+      }
+    } catch {
+      res = dt
+    }
+    return res;
   }
   private loadItems(): void {
     
@@ -154,13 +175,16 @@ this.allowSearch=false;
 
 // form-validation ///
 formSearch() {  
-  const searchObj= {...this.crform.value, 
-    fromDate: formatDate(this.crform.value.fromDate, 'yyyy-mm-dd', 'en-US'),
-    toDate: formatDate(this.crform.value.toDate, 'yyyy-mm-dd', 'en-US')}
+  this.FilterOBJ= {
+    FromDate: this.crform.value.fromDate,
+    ToDate: this.crform.value.toDate,
+    Filter:this.crform.value.crNumber
+  }
     this.showLoading = true;
-    this.crNumberService.fetchCrNumberDataByFilter(searchObj).subscribe(data=>{
+    this.crNumberService.fetchCrNumberDataByFilter(this.FilterOBJ).subscribe(data=>{
       this.crData= data;
       this.loadItems();
+      
       this.showLoading= false;
     },err=>{
       this.errorMessage=err.error.error;

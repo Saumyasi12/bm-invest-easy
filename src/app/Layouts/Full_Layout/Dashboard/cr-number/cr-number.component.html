@@ -3,7 +3,7 @@
         <div class="card-Header-bm">
             <div class="row-bm">
                 <div class="cols-bm">
-                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;"></p>
+                    <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">CR Details</p>
                 </div>
                 <div class="cols-bm" *ngIf="!showLoading && !errorMessage">
                     Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
@@ -11,7 +11,13 @@
                 </div>
             </div>
         </div>
-
+        <!-- Excel Export -->
+        <kendo-excelexport [data]="crData" fileName="CRDetails.xlsx" #excelexport>
+            <kendo-excelexport-column *ngFor="let field of fields" [field]="field" [locked]="field === 'FeedbackId'"
+                [width]="100">
+            </kendo-excelexport-column>
+        </kendo-excelexport>
+        <!-- Excel Export -->
         <form [formGroup]="crform" (ngSubmit)="formSearch()">
             <div class="flex-container-bm">
                 <div class="flex-item-bm">
@@ -31,8 +37,11 @@
                                 <kendo-textbox formControlName="feedbackId" class="controls-bm" placeholder="CR Number" (valueChange)="crNumberChange($event)"></kendo-textbox>
                         </div> -->
                         <div class="cols-bm">
-                            <kendo-combobox [data]="['426583','426583']" class="controls-bm" formControlName="crNumber"
-                                placeholder="CR Number" (valueChange)="crNumberChange($event)"> </kendo-combobox>
+                            <!-- <kendo-combobox [data]="['426583','426583']" class="controls-bm" formControlName="crNumber"
+                                placeholder="CR Number" (valueChange)="crNumberChange($event)"> </kendo-combobox> -->
+
+                            <kendo-textbox placeholder="CR Number" class="controls-bm"
+                                (valueChange)="crNumberChange($event)" formControlName="crNumber"></kendo-textbox>
                         </div>
                         <div class="cols-bm">
                             <kendo-buttongroup>
@@ -51,24 +60,38 @@
         <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
 
         <div *ngIf="!showLoading && !errorMessage">
-            <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
-                (pageChange)="pageChange($event)" [height]="windowHeight">
+            <!-- <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
+                (pageChange)="pageChange($event)" [height]="windowHeight"> -->
+
+            <kendo-grid [data]="gridView" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort"
+                [filter]="state.filter" [sortable]="true" [pageable]="true" filterable="menu"
+                (dataStateChange)="dataStateChange($event)" [rowClass]="rowCallback">
+
+                <kendo-grid-column title="Id" width="6%" [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                        {{rowIndex+1}}
+                    </ng-template>
+                </kendo-grid-column>
+
                 <kendo-grid-column field="CRNumber" title="CR Number" width="6%" [headerStyle]="headerStyle">
                 </kendo-grid-column>
-                <kendo-grid-column field="CIF" title="CIF" width="6%" [headerStyle]="headerStyle">
+                <kendo-grid-column field="CIFNumber" title="CIF" width="6%" [headerStyle]="headerStyle">
                 </kendo-grid-column>
-                <kendo-grid-column field="InvestEasyExpiryDate" title="Invest Easy Expiry Date" width="12%"
+                <kendo-grid-column field="ExpiryDate"  title="Invest Easy Expiry Date" width="12%"
+                    [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        {{ChangeDateFormat(dataItem.ExpiryDate)}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="InvestEasyStatus" title="InvestEasy Status" width="7%"
                     [headerStyle]="headerStyle">
                 </kendo-grid-column>
-                <kendo-grid-column field="CRScraped" title="CR Scraped" width="7%" [headerStyle]="headerStyle">
-                </kendo-grid-column>
-                <kendo-grid-column field="CRScrapedRemarks" title="CR Scraped Remarks" width="15%"
+                <kendo-grid-column field="InvestEasyRemarks" title="InvestEasy Remarks" width="15%"
                     [headerStyle]="headerStyle">
                 </kendo-grid-column>
-                <kendo-grid-column field="CRUpdated" title="CR Updated" width="7%" [headerStyle]="headerStyle">
+                <kendo-grid-column field="T24Status" title="T24 Status" width="7%" [headerStyle]="headerStyle">
                 </kendo-grid-column>
-                <kendo-grid-column field="CRUpdatedRemarks" title="CR Updated Remarks" width="10%"
-                    [headerStyle]="headerStyle">
+                <kendo-grid-column field="T24Remarks" title="T24 Remarks" width="10%" [headerStyle]="headerStyle">
                 </kendo-grid-column>
 
             </kendo-grid>

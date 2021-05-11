@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../src/environments/environment'
 import { Observable } from 'rxjs';
@@ -9,21 +9,23 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CrTrendsService {
-
+  getToken(): string {
+    return (JSON.parse(localStorage.getItem('token'))).TokenValue;
+  }
   constructor(private http: HttpClient) { }
 
   fetchCrTrendsWeeklyGraphData(fobj:any): Observable<any>{
-    return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/weekly-data.json', fobj).pipe(map(ev=>{    
+    return this.http.post(`${environment.API_URL}Crtrends/GetTrendsWeekly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
       return this.getFinalDataForDaily(ev);   
     }))
   }
   fetchCrTrendsMonthlyGraphData(fobj:any): Observable<any>{
-    return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/monthly-data.json', fobj).pipe(map(ev=>{    
+    return this.http.post(`${environment.API_URL}Crtrends/GetTrendsMonthly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
       return this.getFinalDataForMonthly(ev);   
     }))
   }
   fetchCrTrendsYearlyGraphData(fobj:any):  Observable<any>{
-    return this.http.get('https://bm-atm-cdm-default-rtdb.firebaseio.com/yearly-data.json', fobj).pipe(map(ev=>{    
+    return this.http.post(`${environment.API_URL}Crtrends/GetTrendsYearly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
       return this.getFinalDataForYaerly(ev);   
     }))
   }

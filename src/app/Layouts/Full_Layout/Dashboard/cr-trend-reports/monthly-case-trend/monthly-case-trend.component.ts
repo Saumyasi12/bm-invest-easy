@@ -14,9 +14,16 @@ export class MonthlyCaseTrendComponent implements OnInit {
   pageTitle = "Monthly CR Trend";
   monthlyDataSource: any;
   monthlyCrChartConfig: any;
-  issuelist: string[];
+  issuelist= ['CR RECEIVED', 'CR PROCESSED'];
   Monthlycaseform: FormGroup;
   fobj = { FromDate: "", ToDate: "", Status: "", Issue: "" }
+  FromDate: Date;
+  ToDate: Date;
+  allowSearch: boolean;
+  showLoading= true;
+  errorMessage: any;
+  errorCode: any;
+  Issue: any;
 
   constructor(private crService: CrTrendsService, private fb: FormBuilder) { }
 
@@ -33,12 +40,20 @@ export class MonthlyCaseTrendComponent implements OnInit {
 
   renderChart(formObj: any) {
     this.crService.fetchCrTrendsMonthlyGraphData(formObj).subscribe(ev => {
+      this.showLoading = true;
       console.log(ev);
       this.monthlyDataSource = {
         "chart": chartConfigUI.crWeeklyChart,
         "categories": ev.categories,
         "dataset": ev.dataset,
       }
+      this.showLoading = false;
+      this.errorMessage = null;
+      this.errorCode = null;
+    }, err=>{
+      this.showLoading = false;
+      this.errorMessage = 'Something went wrong';
+      this.errorCode = err.status;
     });
     this.monthlyCrChartConfig = {
       width: '100%',
@@ -51,5 +66,51 @@ export class MonthlyCaseTrendComponent implements OnInit {
     this.fobj = { FromDate: formatDate(this.Monthlycaseform.controls['FromDate'].value, 'yyyy-MM-dd', 'en-US'), ToDate: formatDate(this.Monthlycaseform.controls['ToDate'].value, 'yyyy-MM-dd', 'en-US'), Status: "", Issue: this.Monthlycaseform.controls['Issue'].value }
     this.renderChart(this.fobj)
   }
+
+
+     /// form-validation //
+     FromDateChange(value: Date) : void{
+      if(value){
+        this.FromDate = value;
+        this.checkFormValidation();
+        }
+      }
+      ToDateChange(value: Date) : void{
+      if(value){
+        this.ToDate = value;
+        this.checkFormValidation();
+        }
+
+      }
+      issueChange(value: Date) : void{
+        if(value){
+          this.Issue = value;
+          this.checkFormValidation();
+          }
+        }
+      
+      checkFormValidation() :void{
+      if (!this.Issue && (!this.FromDate && !this.ToDate) ){
+        this.allowSearch = true;
+      }
+      else if(this.FromDate && !this.ToDate){
+        this.allowSearch= false
+      } else if(!this.FromDate && this.ToDate){
+        this.allowSearch = false;
+      } else if(this.FromDate > this.ToDate){
+        this.allowSearch= false;
+      }else{
+        this.allowSearch=true;
+      }
+      
+      
+    }
+    
+    resetForm(){
+      this.Monthlycaseform.reset();
+      this.allowSearch = false;
+    }
+
+
 }
 

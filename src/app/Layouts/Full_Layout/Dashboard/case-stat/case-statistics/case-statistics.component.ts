@@ -22,6 +22,7 @@ export class CaseStatisticsComponent {
   public isViewfrom: boolean;
   public viewfromclass = 'boxShadow';
   chart: any;
+  FilterObj={Fromdate:"",Todate:"",Filter:""}
   casetatform: FormGroup;
   public gridView!: GridDataResult;
   public pageSize = 5;
@@ -39,6 +40,15 @@ export class CaseStatisticsComponent {
   windowHeight: number;
   caseStatistics: CaseStatistics[] = [];
 
+  //----Page Loader--//
+  showLoading =true;
+  fields:string[]=['CRNumber','CIFNumber','InvestEasyStatus','InvestEasyRemarks','T24Status','T24Remarks','ExpiryDate'];
+  //error-handling
+  errorMessage = null;
+  errorCode = null;
+  //error-handling
+
+
 
   @HostListener('window:resize', ['$event']) onResize(event) {
 
@@ -51,15 +61,12 @@ export class CaseStatisticsComponent {
   }
 
   ngOnInit() {
-
     //Window resize
     this.windowHeight = window.innerHeight - 330;
     this.pageSize = Math.ceil(this.windowHeight / 35);
-    //Window resize
-    console.log(this.pageSize)
-
-
-    this.chartService.fetchCaseStatusData().subscribe(ev => {
+    //Window resize    
+    this.showLoading = true;
+    this.chartService.fetchCaseStatusData(this.FilterObj).subscribe(ev => {
       // console.log(ev.chartData);
       this.actualdata = ev[1];
       this.datasourceCasestatisstics = {
@@ -73,17 +80,24 @@ export class CaseStatisticsComponent {
             ]
           }
         ],
-        "dataset": ev[0]
+        "dataset": ev[0]      
       }
+        this.showLoading = false;
+    }, err=>{
+      this.showLoading = false;
+      this.errorMessage = 'Something went wrong';
+      this.errorCode = err.status;
     });
+
     this.caseStatsChartConfig = {
       width: '100%',
       height: '145',
       type: 'stackedbar2d',
       dataFormat: 'json'
     };
-    this.chartService.fetchCaseStatisticsData().subscribe(ev => {
+    this.chartService.fetchCRStatusGridData(this.FilterObj).subscribe(ev => {
       this.caseStatistics = ev;
+      
       this.loadItems();
     })
 
@@ -133,14 +147,13 @@ FromDateChange(value: Date) : void{
   
 }
   formSearch() {
-    var data = {
+    this.FilterObj = {
       Fromdate: formatDate(this.casetatform.controls['Fromdate'].value, 'yyyy-MM-dd', 'en-US'), Todate: formatDate(this.casetatform.controls['Todate'].value, 'yyyy-MM-dd', 'en-US'),
       Filter: this.casetatform.controls['Filter'].value
     }
 
-    this.chartService.fetchCaseDataOnFilter(data).subscribe(ev => {
-      debugger
-      console.log(ev)
+    this.chartService.fetchCaseStatusData(this.FilterObj).subscribe(ev => {
+      this.showLoading= true;  
       this.actualdata = ev[1];
       this.datasourceCasestatisstics = {
         "chart": { ...chartConfigUI.caseStats, showValues: "0" },
@@ -155,11 +168,29 @@ FromDateChange(value: Date) : void{
         ],
         "dataset": ev[0]
       };
+      this.showLoading = false;
+    }, err=>{
+      this.showLoading = false;
+      this.errorMessage = 'Something went wrong';
+      this.errorCode = err.status;
+    });
+
+    this.chartService.fetchCRStatusGridData(this.FilterObj).subscribe(ev => {
+      this.caseStatistics = ev;
+      this.loadItems();
     })
-
-    
   }
-
+  ChangeDateFormat(dt: string): string {
+    let res: string = '-'
+    try {
+      if (dt) {
+        res = formatDate(dt, 'MM-dd-yyyy', 'en_US')
+      }
+    } catch {
+      res = dt
+    }
+    return res;
+  }
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.loadItems();
@@ -177,9 +208,7 @@ FromDateChange(value: Date) : void{
 
   }
 
-  //Excel button work
-  public excelData: any[] = CaseStatVar;
-  public fields: string[] = Object.keys(this.excelData[0]);
+
 }
 
 

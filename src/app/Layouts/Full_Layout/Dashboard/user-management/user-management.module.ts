@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {UserManagementComponent} from './user-management.component'
+
 import { GridModule, PDFModule, ExcelModule } from '@progress/kendo-angular-grid';
 import { IconsModule } from '@progress/kendo-angular-icons';
 import { InputsModule } from '@progress/kendo-angular-inputs';
+import {ListViewModule} from '@progress/kendo-angular-listview'
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { IntlModule } from '@progress/kendo-angular-intl';
@@ -13,30 +16,22 @@ import { NavigationModule } from '@progress/kendo-angular-navigation';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router'
+import {FormsModule,ReactiveFormsModule} from '@angular/forms'
+import { NotificationModule } from '@progress/kendo-angular-notification';
+import { RouterModule, Routes } from '@angular/router';
 
-
-import { HttpClientModule } from '@angular/common/http';
-import { LegalTypeComponent } from './legal-type.component';
-import { LegalTypeService } from 'src/app/Services/legal-type.service';
-import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
-import { LegalTypeAddEditComponent } from './legal-type-add-edit/legal-type-add-edit.component';
 const route: Routes = [{
-  path: '', component:LegalTypeComponent 
-  /* , children: [
+  path: '', component: UserManagementComponent, children: [
     {
-      path: '', component:ReactiveCaseComponent 
+      path: '', component: UserManagementComponent
     },
-  ] */
+  ]
 }]
-
 @NgModule({
-  declarations: [LegalTypeComponent, LegalTypeAddEditComponent],
+  declarations: [UserManagementComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(route),
-    HttpClientModule,
     GridModule,    
     InputsModule,
     IconsModule,
@@ -52,12 +47,10 @@ const route: Routes = [{
     TooltipModule,
     DialogsModule,
     DropDownsModule,
-    ReactiveFormsModule,
     FormsModule,
-    SpinLoaderModule
-  ],
-  providers:[
-    LegalTypeService
+    ReactiveFormsModule,
+    ListViewModule,
+    NotificationModule
   ]
 })
-export class LegalTypeModule { }
+export class UserManagementModule { }

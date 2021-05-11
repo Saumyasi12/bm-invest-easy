@@ -17,10 +17,10 @@ export class UserManagementService {
 
 
   getUserList() {
-    return this.http.get<Tbl_User_Detail[]>(`${environment.API_URL}Reports/GetListOfUsers`, { headers: this.headers });
+    return this.http.get<Tbl_User_Detail[]>(`${environment.API_URL}UserManagement/GetListOfUsers`, { headers: this.headers });
   }
   SavePages(filetr: Tbl_User_Detail) {
-    return this.http.post<any>(`${environment.API_URL}Reports/SaveUserPageData`, filetr, { headers: this.headers });
+    return this.http.post<any>(`${environment.API_URL}UserManagement/SaveUserPageData`, filetr, { headers: this.headers });
   }
 
   CheckUserpages(pagename: string) {

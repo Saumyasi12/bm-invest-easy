@@ -20,10 +20,10 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 export class LoginPageComponent {
     public userdata: loginparams = { username: "", password: "" }
     public userobj: Tbl_User_Detail;
-    @ViewChild('password')
-    public TokenData={TokenValue:"",CreatedTS:new Date()}
+    @ViewChild('password',{static:true})   
     public textbox!: TextBoxComponent;
     public dataitem: any;
+    public TokenData={TokenValue:"",CreatedTS:new Date()}
     public ngAfterViewInit(): void {
         this.textbox.input.nativeElement.type = 'password';
     }
@@ -59,13 +59,12 @@ export class LoginPageComponent {
                     Usergroup: result.Usergroup,
                     Password: '',
                     GroupPages: result.GroupPages,
-                    Name: result.Name,
-                    Visa130ColHeaders:result.Visa130ColHeaders
+                    Name: result.Name                    
                 }
                 this.TokenData={TokenValue:result.Password,CreatedTS:new Date()}
                 localStorage.setItem("token",JSON.stringify(this.TokenData))              
                 sessionStorage.setItem("UserInfo", JSON.stringify(this.userobj))
-                this.router.navigate(["/casestat" ])
+                this.router.navigate(["/"+this.CheckPages(this.userobj.GroupPages,this.userobj.Usergroup) ])
             } else {
                 this.showError("Invalild Credential.")
             }
@@ -102,42 +101,31 @@ export class LoginPageComponent {
             pagename = 'usermanagement'
         }
         else {
-            if  (listofpages.includes('v_130')) {
-                pagename = 'v_130'
+            if  (listofpages.includes('casestat')) {
+                pagename = 'casestat'
+            }          
+            else if (listofpages.includes('crtrendsreport')) {
+                pagename = 'crtrendsreport'
             }
-           /*  else if (listofpages.includes('wcstat')) {
-                pagename = 'wcstat';
-            } */
-           /*  else if (listofpages.includes('casetrend')) {
-                pagename = 'wccasetrend'
-            } */
-           /*  else if (listofpages.includes('staffpreformance')) {
-                pagename = 'staffperformance'
-            } */
-           /*  else if (listofpages.includes('slastat')) {
-                pagename = 'slastat'
-            } */
-          /*   else if(listofpages.includes('casestat')) {
-                pagename = 'casestat';
-            } */
-            else if (listofpages.includes('v_summary')) {
-                pagename = 'v_summary'
+            else if (listofpages.includes('crnumber')) {
+                pagename = 'crnumber'
             }
-            else if (listofpages.includes('reconciliation')) {
-                pagename = 'reconciliation'
+            else if (listofpages.includes('expnumber')) {
+                pagename = 'expnumber'
             }
-            else if (listofpages.includes('closurereport')) {
-                pagename = 'closurereport'
+            else if (listofpages.includes('exception')) {
+                pagename = 'exception'
             }
-            else if (listofpages.includes('casehistory')) {
-                pagename = 'casehistory'
+            else if (listofpages.includes('countrycode')) {
+                pagename = 'countrycode'
             }
-            else if (listofpages.includes('macthedtran')) {
-                pagename = 'macthedtran'
+            else if (listofpages.includes('configcode')) {
+                pagename = 'configcode'
             }
-            else if (listofpages.includes('unmacthedtran')) {
-                pagename = 'unmacthedtran'
+            else if (listofpages.includes('legaltype')) {
+                pagename = 'legaltype'
             }
+            
         }
 
         return pagename;

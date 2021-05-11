@@ -15,7 +15,7 @@ export class FullLayoutComponent implements OnInit {
   public expanded = false;
   public dateval = new Date();
   public items: Array<any> = [];
-  public userinfo: Tbl_User_Detail = { ID: 0, UserName: "", Usergroup: "", GroupPages: "", Name: "", Password: "",Visa130ColHeaders:""  };;
+  public userinfo: Tbl_User_Detail = { ID: 0, UserName: "", Usergroup: "", GroupPages: "", Name: "", Password: "" };;
 
   constructor(public router: Router) {
    
@@ -49,6 +49,6 @@ export class FullLayoutComponent implements OnInit {
     drawer.toggle(event);
 
   }
-
+ 
 
 }

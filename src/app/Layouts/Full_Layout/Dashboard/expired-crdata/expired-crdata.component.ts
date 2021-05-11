@@ -34,7 +34,7 @@ export class ExpiredCrdataComponent implements OnInit {
   errorMessage = null;
   errorCode = null;
   //error-handling
-
+FilterOBJ={FromDate:'',ToDate:'',Filter:''}
 
   pageSizeCount: number;
   public gridView!: GridDataResult;
@@ -46,7 +46,7 @@ export class ExpiredCrdataComponent implements OnInit {
   public gtservice;
 
   expiredData:expiredDataModel[]= [];
-  public fields: string[] = [];
+  public fields: string[] = ['CRNumber','CIFNumber','ExpiryDate'];
   constructor(private fb: FormBuilder, private dialogService: DialogService, private expiredCrdataService: ExpiredCrdataService) { }
 
   ngOnInit(): void {
@@ -55,10 +55,11 @@ export class ExpiredCrdataComponent implements OnInit {
   this.pageSize  = Math.ceil( this.windowHeight /35);
   this.showLoading= true;
   this.generateForm();
-  this.expiredCrdataService.fetchExpiredData().subscribe(data=>{
+  this.expiredCrdataService.fetchExpiredData(this.FilterOBJ).subscribe(data=>{
     this.expiredData= data;
-    this.loadItems();
     this.showLoading= false;
+    
+    this.loadItems();    
   }, err=>{
     this.errorMessage=err.error.error;
     this.errorCode = err.status;
@@ -94,7 +95,17 @@ export class ExpiredCrdataComponent implements OnInit {
     this.sort = sort;
     this.loadSortedItems();
 }
-
+ChangeDateFormat(dt: string): string {
+  let res: string = '-'
+  try {
+    if (dt) {
+      res = formatDate(dt, 'MM-dd-yyyy', 'en_US')
+    }
+  } catch {
+    res = dt
+  }
+  return res;
+}
 generateForm(){
   this.crform = this.fb.group({
     fromDate: new FormControl(),
@@ -151,14 +162,17 @@ this.allowSearch=false;
 
 // form-validation ///
 formSearch() {  
-  const searchObj= {...this.crform.value, 
-    fromDate: formatDate(this.crform.value.fromDate, 'yyyy-mm-dd', 'en-US'),
-    toDate: formatDate(this.crform.value.toDate, 'yyyy-mm-dd', 'en-US')}
+  this.FilterOBJ= {
+    FromDate: this.crform.value.fromDate,
+    ToDate: this.crform.value.toDate,
+  Filter:this.crform.value.crNumber
+  }
     this.showLoading = true;
-    this.expiredCrdataService.fetchExpiredDataByFilter(searchObj).subscribe(data=>{
+    this.expiredCrdataService.fetchExpiredData(this.FilterOBJ).subscribe(data=>{
       this.expiredData= data;
-      this.loadItems();
       this.showLoading= false;
+      this.loadItems();
+    
     },err=>{
       this.errorMessage=err.error.error;
       this.errorCode = err.status;

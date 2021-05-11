@@ -1,12 +1,14 @@
 <div *ngIf="!windowOpened">
-    <kendo-card [width]="'100%'">
+
+    <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+    <kendo-card [width]="'100%'" *ngIf="!showLoading && !errorMessage">
         <kendo-card-body>
             <div class="card-Header-bm">
                 <div class="row-bm">
-                    <!--div class="cols-bm">
+                    <div class="cols-bm">
                         <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
-                    </div---->
-               
+                    </div>
+
 
                 </div>
             </div>
@@ -18,7 +20,7 @@
                         </div>
                         <div class="controls-heading">
                             <kendo-buttongroup>
-                                <button kendoButton icon="clock">Today</button>
+                                <button kendoButton icon="clock" [diabled]="true">Today</button>
                                 <button kendoButton icon="calendar" (click)="open('window',1)">View
                                     From</button>
                             </kendo-buttongroup>
@@ -31,18 +33,18 @@
                         </div>
                     </div>
                 </div>
-               
+
             </div>
             <div class="bm-dashboard-container">
                 <div class="bm-dashboard-item rouded-corner">
                     <div class="header">
                         <div class="heading">
-                          CR Statistics
+                            CR Statistics
                         </div>
                         <div class="controls-heading">
                             <kendo-buttongroup>
-                                <button kendoButton icon="clock">Current Week</button>
-                                <button kendoButton icon ="calendar" (click)="open('window',2)"> View Form</button>
+                                <button kendoButton icon="clock" [diabled]="true">Current Week</button>
+                                <button kendoButton icon="calendar" (click)="open('window',2)"> View From</button>
                             </kendo-buttongroup>
                         </div>
                     </div>
@@ -53,33 +55,53 @@
                         </div>
                     </div>
                 </div>
-                <div class="bm-dashboard-item rouded-corner">
+                <div class="bm-dashboard-item rouded-corner" style="justify-content: space-between;">
                     <div class="header">
                         <div class="heading">Expired CR's</div>
-                       </div>
+                    </div>
                     <div class="card-body">
                         <div class="content">
-                            <div><button kendoButton [look]="'flat'" class="big-int" >
-                                    {{ mystar[0].count }}
-                                </button></div>
+                            <div>
+                                <div class="big-int">
+                                    {{ mystar[0]}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
                         <div class="chip-bm">
-                            <div class="legend" *ngFor="let item of mystar">{{item.ExcptionType}}
-                                <span>{{item.count}}</span></div>
+                            <div class="legend">Today
+                                <span>{{mystar[0]}}</span>
+                            </div>
+                            <div class="legend">1 Month
+                                <span>{{mystar[1]}}</span>
+                            </div>
+                            <div class="legend">3 Months
+                                <span>{{mystar[2]}}</span>
+                            </div>
+                            <div class="legend">YTD
+                                <span>{{mystar[3]}}</span>
+                            </div>
                         </div>
+
                     </div>
                 </div>
-                
+            </div>
+
+
+
+            <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
+                <h6>Error Code: {{errorCode}}</h6>
+                <p>{{errorMessage}}</p>
             </div>
         </kendo-card-body>
+
     </kendo-card>
 </div>
 <div *ngIf="windowOpened">
     <app-case-statistics *ngIf="viewflag===1" (onClose)="close('window')"></app-case-statistics>
     <app-routing-portal-statistics *ngIf="viewflag===2" (onClose)="close('window')"></app-routing-portal-statistics>
-    <app-case-ready-for-action *ngIf="viewflag===3" (onClose)="close('window')"></app-case-ready-for-action>
+
 </div>
 
 <!-- <kendo-window *ngIf="windowOpened" style="position: fixed;border: solid;border-color:#F23428 ;" (close)="close('window')" [minWidth]="250" [width]="1200" [height]="700">

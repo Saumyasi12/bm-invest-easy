@@ -9,41 +9,53 @@ import { ConfigCodeService } from 'src/app/Services/config-code.service';
   styleUrls: ['./config-add-edit.component.css']
 })
 export class ConfigAddEditComponent implements OnInit {
-  @Input() configId=null;
-
+  @Input() configId:number;
+Message='';
+ErrorMessage='';
   configForm: FormGroup;
-  selectedconfig: configDataModel = { Id: "0", Name: "", Value: "", Description: "" };
 
+  selectedconfig: configDataModel = { ID: "0", Name: "", Value: "", Description: "" };
+  editName:boolean=true;
   constructor(private fb: FormBuilder, private configService : ConfigCodeService) { }
 
   ngOnInit(): void {
-    if (this.configId === null) {
+    if (this.configId === 0) {
       this.generateForm();
+      this.editName=true;
     }
-    else {
-      this.selectedconfig = { Id: this.configId, Name: "", Value: "", Description: "" };
-      this.configService.fetchConfigDataByID(this.selectedconfig).subscribe(config => {
+    else {     
+      this.selectedconfig = { ID: this.configId.toString(), Name: "", Value: "", Description: "" };
+      this.configService.fetchConfigDataByID(this.selectedconfig).subscribe(config => {      
         this.selectedconfig = config;
         this.generateForm();
+        this.editName=false;
       })
     }
   }
-
-  generateForm() {    
-    this.configForm = this.fb.group({
-      configId: new FormControl(this.selectedconfig.Id),
+  generateForm() {      
+    this.configForm = this.fb.group({  
+      configId: new FormControl(this.selectedconfig.ID),
       configName: new FormControl(this.selectedconfig.Name, [Validators.required]),
       configValue: new FormControl(this.selectedconfig.Value, [Validators.required]),
-      configDescription: new FormControl(this.selectedconfig.Description, [Validators.required])
+      configDescription: new FormControl(this.selectedconfig.Description)
     });
   }
-
-  resetForm() : void {
+  SubmitForm(){  
+    this.selectedconfig = {
+      ID: this.configForm.controls['configId'].value, Name: this.configForm.controls['configName'].value,
+      Value: this.configForm.controls['configValue'].value, Description: this.configForm.controls['configDescription'].value
+    }
+    this.configService.SaveConfig(this.selectedconfig).subscribe(flag => {
+      if (flag == 1) {
+        this.Message='Data saved successfully.'       
+      } else {
+        this.ErrorMessage='Somthing went wrong.'
+      }   
+    })
     this.configForm.reset();
-
-    }
-    SubmitForm(){
-      console.log("Form Value")
-      this.configForm.reset();
-    }
+  }
+ 
+  resetForm(){
+    this.configForm.reset();
+  }
 }

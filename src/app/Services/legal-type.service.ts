@@ -1,19 +1,27 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { legalDataModel } from '../Models/legalData.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LegalTypeService {
-
+  getToken(): string {
+    return (JSON.parse(localStorage.getItem('token'))).TokenValue;
+  }
   constructor(private http: HttpClient) { }
-  fetchConfigData(): Observable<any>{
-    return this.http.get<legalDataModel[]>('https://atm-cdm-dashboard-default-rtdb.firebaseio.com/legal-data.json')
+  fetchLegalData(): Observable<any>{
+    return this.http.post<legalDataModel[]>(`${environment.API_URL}Legaltype/GetLegalTypeList`,{},{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
 }
-fetchConfigDataByFilter(searchObj): Observable<any>{
-  console.log(searchObj);
-  return this.http.get<legalDataModel[]>('https://atm-cdm-dashboard-default-rtdb.firebaseio.com/legal-data.json')
+
+fetchLegalDataByID(id):Observable<any>{
+  return this.http.post<legalDataModel[]>(`${environment.API_URL}Legaltype/GetLegalType`,id,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
 }
+SaveConfig(obj): Observable<any>{
+  console.log(obj);
+  return this.http.post<legalDataModel[]>(`${environment.API_URL}Legaltype/SaveLegal`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
+ 
+ }
 }

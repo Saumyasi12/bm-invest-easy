@@ -1,48 +1,61 @@
 <kendo-card [style]="'width:100%'">
-    <kendo-card-body> 
+    <kendo-card-body>
         <div class="card-Header-bm">
             <div class="row-bm">
                 <div class="cols-bm">
                     <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">Config</p>
-                </div>                
-            </div>
-        </div>  
-        
-    <kendo-dialog title="Edit Config" *ngIf="opened" (close)="closedialog('cancel')" [minWidth]="250" [width]="600">
-    <app-config-add-edit [configId]="configId" ></app-config-add-edit>
-    </kendo-dialog>
-      
-    <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>  
-       <div *ngIf="!showLoading && !errorMessage">
-        <kendo-grid [data]="gridView"  [pageSize]="pageSize" [skip]="skip" [pageable]="true"
-        (pageChange)="pageChange($event)" [height]="windowHeight"  >    
-        <kendo-grid-column  field="Name" title="Name" width= "10%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="Value" title="Value"  width= "10%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        <kendo-grid-column  field="Description" title="Description" width="12%" [headerStyle]="headerStyle">
-        </kendo-grid-column>
-        
-        <kendo-grid-column  title="Action" width="4%" [headerStyle]="headerStyle">
-            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                <div kendoTooltip>
-                    <button kendoButton *ngIf="!opened" [look]="'default'"
-                    style="background: #92D050; color: white " (click)="opendialog(dataItem.id)" title="Edit"> 
-                    <kendo-icon class="k-i-track-changes k-icon-48" [themeColor]="'#292b2d'" ></kendo-icon></button>
-            
                 </div>
-                 
-             </ng-template>
-        </kendo-grid-column>
-    </kendo-grid>
-     
-       </div>
+                <div class="cols-bm">
+                    <kendo-buttongroup>
+                        <button kendoButton *ngIf="!opened" icon="table-row-insert-below" style="color: #189514;  "
+                            (click)="opendialog(0)">Add New Row</button>
+                    </kendo-buttongroup>
+                </div>
+            </div>
+        </div>
+
+        <kendo-dialog title="Edit Config" *ngIf="opened" (close)="closedialog('cancel')" [minWidth]="250" [width]="600">
+            <app-config-add-edit [configId]="configId"></app-config-add-edit>
+        </kendo-dialog>
+
+        <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+        <div *ngIf="!showLoading && !errorMessage">
+            <kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
+                (pageChange)="pageChange($event)" [height]="windowHeight">
+                
+                <kendo-grid-column title="Id" width="6%" [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                        {{rowIndex+1}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="Name" title="Name" width="10%" [headerStyle]="headerStyle">
+                </kendo-grid-column>
+                <kendo-grid-column field="Value" title="Value" width="10%" [headerStyle]="headerStyle">
+                </kendo-grid-column>
+                <kendo-grid-column field="Description" title="Description" width="12%" [headerStyle]="headerStyle">
+                </kendo-grid-column>
+
+                <kendo-grid-column title="Action" width="4%" [headerStyle]="headerStyle">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <div kendoTooltip>
+                            <button kendoButton *ngIf="!opened" [look]="'default'"
+                                style="background: #92D050; color: white " (click)="opendialog(dataItem.ID)"
+                                title="Edit">
+                                <kendo-icon class="k-i-track-changes k-icon-48" [themeColor]="'#292b2d'"></kendo-icon>
+                            </button>
+
+                        </div>
+
+                    </ng-template>
+                </kendo-grid-column>
+            </kendo-grid>
+
+        </div>
         <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
-           <h6>Error Code: {{errorCode}}</h6>
-           <p>{{errorMessage}}</p>
-           
-        
-     </div> 
+            <h6>Error Code: {{errorCode}}</h6>
+            <p>{{errorMessage}}</p>
+
+
+        </div>
     </kendo-card-body>
 </kendo-card>
-

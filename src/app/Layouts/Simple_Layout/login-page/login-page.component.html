@@ -6,7 +6,7 @@
       <kendo-card [width]="'400px'">
         <div style="padding: 20px;">
 
-          <form class="k-form" [formGroup]="form" >
+          <form class="k-form" [formGroup]="form">
             <fieldset class="k-form-fieldset">
               <div class="row">
                 <div class="logo-row">
@@ -18,12 +18,13 @@
               </div>
 
               <div class="label2">
-               Invest Easy TEAM
+                Invest Easy TEAM
               </div>
 
               <kendo-formfield>
                 <kendo-label [for]="username" text="Username">&nbsp;&nbsp;&nbsp;
-                  <kendo-textbox formControlName="username" [clearButton]="true" #username required autocomplete="off"></kendo-textbox>
+                  <kendo-textbox formControlName="username" [clearButton]="true" tabindex="1" #username required
+                    autocomplete="off"></kendo-textbox>
                 </kendo-label>
 
                 <kendo-formerror>Username is required</kendo-formerror>
@@ -31,23 +32,32 @@
 
               <kendo-formfield>
                 <kendo-label [for]="password" text="Password"> &nbsp;&nbsp;&nbsp;
-                  <kendo-textbox formControlName="password" #password required [clearButton]="true" autocomplete="off">
-                    <ng-template kendoTextBoxSuffixTemplate>
-                      <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
-                    </ng-template>
+                  <kendo-textbox formControlName="password" tabindex="2" #password required [clearButton]="true"
+                    autocomplete="off">
                   </kendo-textbox>
+
                 </kendo-label>
                 <kendo-formerror>Password is required</kendo-formerror>
               </kendo-formfield>
+              <div>
+                <div class="show-pwd">
+                  <input type="checkbox" id="terms" kendoCheckBox (click)="toggleVisibility()" />
+                  <label class="k-checkbox-label" for="terms"> Show password.</label>
+                </div>
+
+
+              </div>
 
 
               <div class="k-form-buttons ">
-                <button kendoButton (click)="login()" icon="login" style="color: #fff; background: #F23428; "  [disabled]="!form.valid">Login</button>
-                <button kendoButton (click)="clearForm()" icon="refresh" style="color: #fff; background: #808080;">Reset</button>
+                <button kendoButton (click)="login()" icon="login" style="color: #fff; background: #F23428; "
+                  [disabled]="!form.valid">Login</button>
+                <button kendoButton (click)="clearForm()" icon="refresh"
+                  style="color: #fff; background: #808080;">Reset</button>
 
                 <!-- <button kendoButton  icon="login" class="login-button-login"  (click)="login()" [disabled]="!form.valid" look="flat" >Login</button>
                 <button class=" login-button-login" (click)="login()" [disabled]="!form.valid">Login</button> -->
-                
+
               </div>
 
 

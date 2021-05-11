@@ -1,6 +1,10 @@
+
+
 export interface legalDataModel{
     LegalType: string
-    Status: string
+    Status: boolean
+    Description: string
+    ID : string
     
     
 }
