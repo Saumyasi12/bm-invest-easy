@@ -32,7 +32,7 @@
             </kendo-datepicker>
           </div>
           <div class="cols-bm">
-            <kendo-combobox [data]="['Processed','Application Exception','Business Rule Exception']"  formControlName="Filter" class='kendo-input controls-bm'>
+            <kendo-combobox [data]="['Processed','Application Exception','Business Rule Exception','Unprocessed']"  formControlName="Filter" class='kendo-input controls-bm'>
             </kendo-combobox>
           </div>
           <div class="cols-bm margin-extra">
@@ -60,17 +60,21 @@
     <div class="bm-dashboard-item rouded-corner">
       <div class="card-body">
         <div class="content status">
-          <div class="status-items k-text-success">
+          <div class="status-items Processed">
             Processed
             <div class="status-big-text">{{actualdata[0]}}</div>
           </div>
-          <div class="status-items  k-text-base">
+          <div class="status-items Business-Rule-Exception">
             Business Rule Exception
             <div class="status-big-text">{{actualdata[1]}}</div>
           </div>
-          <div class="status-items  k-text-tertiary">
+          <div class="status-items  Application-Exception">
             Application Exception
             <div class="status-big-text">{{actualdata[2]}}</div>
+          </div>
+          <div class="status-items  Unprocessed">
+            Unprocessed
+            <div class="status-big-text">{{actualdata[3]}}</div>
           </div>
         </div>
       </div>

@@ -53,7 +53,18 @@ export class ChartService {
                         }
                     ]
                 },
-               
+                {
+                    seriesname: "Unprocessed",
+                    color: "#fdce3e",
+                    patternangle: "60",
+                    patternbgcolor: "#FFFFFF",
+                    showValues: "1",
+                    "data": [
+                        {
+                            "value": ev[3]
+                        }
+                    ]
+                }
                 
             ]
         return ([data, ev]);

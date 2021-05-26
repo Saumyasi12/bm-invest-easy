@@ -43,18 +43,22 @@ export class CountryCodeComponent implements OnInit {
   ngOnInit(): void {
     this.windowHeight = window.innerHeight-155;
   this.pageSize  = Math.ceil( this.windowHeight /35);
-  this.showLoading= true;
   // this.generateForm();
-  this.countryCodeService.fetchCountryData().subscribe(data=>{
-    this.countryData= data;
-    this.loadItems();
-    this.showLoading= false;
-  }, err=>{
-    this.errorMessage=err.error.error;
-    this.errorCode = err.status;
-    this.showLoading= false;
-  })
+  this.rederdata();  
+  }
 
+  rederdata(){
+    this.showLoading= true;
+    this.countryCodeService.fetchCountryData().subscribe(data=>{
+      this.countryData= data;
+      this.loadItems();
+      this.showLoading= false;
+    }, err=>{
+      this.errorMessage=err.error.error;
+      this.errorCode = err.status;
+      this.showLoading= false;
+    })
+  
   }
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
@@ -94,6 +98,7 @@ export class CountryCodeComponent implements OnInit {
 
 
    public close(component) {
+    this.rederdata();  
     this[component + 'Opened'] = false;
     this.viewflag = 0;
   }

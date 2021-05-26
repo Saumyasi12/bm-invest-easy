@@ -196,7 +196,9 @@ FromDateChange(value: Date) : void{
           "legendNumColumns": "1"
         },
         data: ev[0]
+       
       }
+      this.showLoading = false;
     },err=>{
       this.showLoading = false;
       this.errorMessage = 'Something went wrong';
@@ -206,12 +208,13 @@ FromDateChange(value: Date) : void{
       this.routingPortalGridData = ev;
       this.loadItems();
       // console.log(ev)
+      this.showLoading = false;
     },  err=>{
       this.showLoading = false;
       this.errorMessage = 'Something went wrong';
       this.errorCode = err.status;
     })
-    
+    this.showLoading = false;
   }
 
 

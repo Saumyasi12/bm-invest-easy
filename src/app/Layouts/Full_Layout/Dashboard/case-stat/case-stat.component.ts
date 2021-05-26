@@ -67,9 +67,11 @@ FilterObj={Fromdate:"",Todate:"",Filter:""}
       this.errorMessage = null;
       this.errorCode = null;
     }, err=>{
-    this.errorMessage=err.error.error;
+      console.log(err.message);
+      this.showLoading= false;
+    this.errorMessage=err.message;
     this.errorCode = err.status;
-    this.showLoading= false;
+
   } );
     this.chartService.fetchRoutingPortalData(this.FilterObj).subscribe(ev => {
       this.datasourceRoutingPortal = {
@@ -77,17 +79,21 @@ FilterObj={Fromdate:"",Todate:"",Filter:""}
         data: ev[0]
       }
     }, err=>{
-      this.errorMessage=err.error.error;
-      this.errorCode = err.status;
+      console.log(err.message);
       this.showLoading= false;
+      this.errorMessage=err.message;
+      this.errorCode = err.status;
+      //this.showLoading= false;
     } );
     this.chartService.fetchReadyToAction(this.FilterObj).subscribe(ev => {
       this.mystar = ev;
       this.totalCount = this.mystar.map(value => value.count).reduce((a, b) => a + b);
     }, err=>{
-      this.errorMessage=err.error.error;
-      this.errorCode = err.status;
+      console.log(err);
       this.showLoading= false;
+      this.errorMessage=err.message;
+      this.errorCode = err.status;
+     // this.showLoading= false;
     } );
 
   

@@ -1,8 +1,9 @@
-<div *ngIf="!windowOpened">
 
-    <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
-    <kendo-card [width]="'100%'" *ngIf="!showLoading && !errorMessage">
+<div *ngIf="!windowOpened">
+    <kendo-card [width]="'100%'" >
         <kendo-card-body>
+            <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
+            <div *ngIf="!showLoading && !errorMessage">
             <div class="card-Header-bm">
                 <div class="row-bm">
                     <div class="cols-bm">
@@ -88,15 +89,17 @@
                 </div>
             </div>
 
-
+        </div>
 
             <div class="k-fab-error alert-error" *ngIf="errorMessage && !showLoading">
                 <h6>Error Code: {{errorCode}}</h6>
                 <p>{{errorMessage}}</p>
             </div>
+          
         </kendo-card-body>
 
     </kendo-card>
+
 </div>
 <div *ngIf="windowOpened">
     <app-case-statistics *ngIf="viewflag===1" (onClose)="close('window')"></app-case-statistics>

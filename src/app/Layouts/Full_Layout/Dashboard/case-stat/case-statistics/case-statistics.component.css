@@ -70,3 +70,22 @@ kendo-card-header {
  .k-grid td{
   padding: 3px 0px 3px 0px;
   }
+
+  .Processed
+  {
+    color:#92D050;
+  }
+  .Business-Rule-Exception
+  {
+    color:#0D274D;
+  }
+
+  .Application-Exception
+  {
+    color:#C00000;
+  }
+
+  .Unprocessed
+  {
+    color:#fdce3e;
+  }
