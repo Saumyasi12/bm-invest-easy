@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { Tbl_User_Detail } from '../../Models/ReportsModel'
+import { AppConfig } from '../app-config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,17 @@ import { Tbl_User_Detail } from '../../Models/ReportsModel'
 export class UserManagementService {
   token: string
   flag: boolean = false;
-  constructor(private http: HttpClient, private router: Router) { }
-
+  API_URL:string='';
+  constructor(private http: HttpClient, private router: Router,public config:AppConfig) { 
+    this.API_URL = config.apiUrl;
+  }
   headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
-
   getUserList() {
-    return this.http.get<Tbl_User_Detail[]>(`${environment.API_URL}UserManagement/GetListOfUsers`, { headers: this.headers });
+    return this.http.get<Tbl_User_Detail[]>(`${this.API_URL}UserManagement/GetListOfUsers`, { headers: this.headers });
   }
   SavePages(filetr: Tbl_User_Detail) {
-    return this.http.post<any>(`${environment.API_URL}UserManagement/SaveUserPageData`, filetr, { headers: this.headers });
+    return this.http.post<any>(`${this.API_URL}UserManagement/SaveUserPageData`, filetr, { headers: this.headers });
   }
 
   CheckUserpages(pagename: string) {

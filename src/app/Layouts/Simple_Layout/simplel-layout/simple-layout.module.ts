@@ -15,6 +15,7 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 
 import { ReactiveFormsModule } from '@angular/forms'
+import { SpinLoaderModule } from '../../spin-loader/spin-loader.module';
 
 
 const routes: Routes = [{
@@ -39,8 +40,8 @@ const routes: Routes = [{
     ButtonsModule,
     ExcelExportModule,  
     LayoutModule,
-    NotificationModule
-  
+    NotificationModule,
+    SpinLoaderModule
   ]
 })
 export class SimpleLayoutModule { }

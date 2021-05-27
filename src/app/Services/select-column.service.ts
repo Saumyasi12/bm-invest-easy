@@ -5,18 +5,22 @@ import {ReconciliationRemoveRow, AuthCodeImage,FeedbackIdFilter,TestObj, matched
 import {tbl_AuthCode, tbl_UserNameMapping,Matched_FinancialTransaction,tbl_IssuingOutgoingVISA,tbl_VisaAcquiringIncoming,tbl_VisaAcquiringOutgoing,Unmatched_FinancialTransaction,tbl_IssuingIncomingVISA,NonCustom_GLReconciliationTable, tbl_UnassignedTickets, Tbl_User_Detail} from '../Models/ReportsModel'
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { AppConfig } from './app-config.service';
 @Injectable({
   providedIn: 'root'
 })
 export class SelectColumnService {
-  constructor(private http:HttpClient) { }
+  API_URL: string = ''
+  constructor(private http: HttpClient, public config: AppConfig) {
+    this.API_URL = config.apiUrl;
+  }
 
-  headers = new HttpHeaders().set('Authorization', "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjYmM0MDY2Zi02NzI0LTQ5ZWEtODVhMC04MzU2ZjQ0ODY2OWEiLCJ2YWxpZCI6IjEiLCJ1c2VyaWQiOiIxIiwibmFtZSI6IlN1c2hpbCIsImV4cCI6MTYxMjI1MjcyMiwiaXNzIjoiaHR0cDovL3Rlc3RhZC5jb20iLCJhdWQiOiJodHRwOi8vdGVzdGFkLmNvbSJ9.1yMfrOYdMUl5swVIm9TGVKjfL9VlCC6KZgjgHvSFMBk");
-
+  getToken(): string {
+    return (JSON.parse(localStorage.getItem('token'))).TokenValue;
+  }
   updateVisa130ColumnHeaders(obj:Tbl_User_Detail)
-  {
-      console.log(`${environment.API_URL}SelectColumn/UpdateVisa130Columns`);
-    return this.http.post<number>(`${environment.API_URL}SelectColumn/UpdateVisa130Columns`,obj,{ headers: this.headers});
+  {     
+    return this.http.post<number>(`${this.API_URL}SelectColumn/UpdateVisa130Columns`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) });
   }
 
 }

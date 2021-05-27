@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../src/environments/environment'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AppConfig } from '../app-config.service';
 
 
 @Injectable({
@@ -12,20 +12,23 @@ export class CrTrendsService {
   getToken(): string {
     return (JSON.parse(localStorage.getItem('token'))).TokenValue;
   }
-  constructor(private http: HttpClient) { }
+  API_URL:string='';
+  constructor(private http:HttpClient,public config:AppConfig) {
+    this.API_URL = config.apiUrl;
+   } 
 
   fetchCrTrendsWeeklyGraphData(fobj:any): Observable<any>{
-    return this.http.post(`${environment.API_URL}Crtrends/GetTrendsWeekly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
+    return this.http.post(`${this.API_URL}Crtrends/GetTrendsWeekly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
       return this.getFinalDataForDaily(ev);   
     }))
   }
   fetchCrTrendsMonthlyGraphData(fobj:any): Observable<any>{
-    return this.http.post(`${environment.API_URL}Crtrends/GetTrendsMonthly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
+    return this.http.post(`${this.API_URL}Crtrends/GetTrendsMonthly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
       return this.getFinalDataForMonthly(ev);   
     }))
   }
   fetchCrTrendsYearlyGraphData(fobj:any):  Observable<any>{
-    return this.http.post(`${environment.API_URL}Crtrends/GetTrendsYearly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
+    return this.http.post(`${this.API_URL}Crtrends/GetTrendsYearly`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(map(ev=>{    
       return this.getFinalDataForYaerly(ev);   
     }))
   }

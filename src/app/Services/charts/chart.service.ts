@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../src/environments/environment'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { caseReadyForAction, CaseStatistics, caseReadyForClosure } from 'src/app/Models/caseStats.Model';
+import { AppConfig } from '../app-config.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -11,9 +11,12 @@ export class ChartService {
     getToken(): string {
         return (JSON.parse(localStorage.getItem('token'))).TokenValue;
       }
-    constructor(private http: HttpClient){}
+      API_URL:string='';
+      constructor(private http:HttpClient,public config:AppConfig) {
+        this.API_URL = config.apiUrl;
+       } 
     fetchCaseStatusData(obj):  Observable<any>{
-       return this.http.post(`${environment.API_URL}Overview/GetCRCount`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(
+       return this.http.post(`${this.API_URL}Overview/GetCRCount`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(
            map((ev)=>{
             console.log(ev);
                 const data=  [
@@ -76,7 +79,7 @@ export class ChartService {
    }
   
    fetchRoutingPortalData(obj):  Observable<any>{
-    return this.http.post(`${environment.API_URL}Overview/GetCrStatisticsGraph`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(
+    return this.http.post(`${this.API_URL}Overview/GetCrStatisticsGraph`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) }).pipe(
         map((ev)=>{
              const data= [
                 {                      
@@ -103,15 +106,15 @@ export class ChartService {
 
 
 fetchReadyToAction(obj):  Observable<any>{
-   return this.http.post<any>(`${environment.API_URL}Overview/GetCRExpired`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
+   return this.http.post<any>(`${this.API_URL}Overview/GetCRExpired`,obj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
 
 }
 fetchCRStatusGridData(fobj): Observable<any>{
-    return this.http.post<any>(`${environment.API_URL}Overview/GetCRTable`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
+    return this.http.post<any>(`${this.API_URL}Overview/GetCRTable`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
 }
 
 fetchRoutingPortalGridData(fobj): Observable<any>{
-    return this.http.post<any>(`${environment.API_URL}Overview/GetCrStatisticsTable`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
+    return this.http.post<any>(`${this.API_URL}Overview/GetCrStatisticsTable`,fobj,{ headers: new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`) })
 }
 
 

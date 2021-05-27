@@ -1,7 +1,7 @@
 
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms'
 import {HttpClientModule} from '@angular/common/http'
 //import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,12 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UploadModule } from '@progress/kendo-angular-upload';
+import { AppConfig } from './Services/app-config.service';
+
+
+function initConfig(config: AppConfig){
+  return () => config.ensureInit();
+}
 
 const routes: Routes = [
   {
@@ -40,7 +46,8 @@ const routes: Routes = [
     UploadModule,
   ],
   providers: [
-  
+    AppConfig,
+    { provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfig], multi: true }, 
   ],
   bootstrap: [AppComponent]
 })

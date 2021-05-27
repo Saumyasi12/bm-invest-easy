@@ -23,9 +23,14 @@ export class LoginPageComponent {
     @ViewChild('password',{static:true})   
     public textbox!: TextBoxComponent;
     public dataitem: any;
+    public showLoading:boolean=false;
+    key: string = '';
     public TokenData={TokenValue:"",CreatedTS:new Date()}
     public ngAfterViewInit(): void {
         this.textbox.input.nativeElement.type = 'password';
+        this.loginobj.GetKey().subscribe(result => {
+            this.key = result;           
+        })
     }
     constructor(private loginobj: LoginService, private router: Router, private notificationService: NotificationService, private encservice: EncryptdataService) {
         localStorage.removeItem("token");
@@ -44,33 +49,40 @@ export class LoginPageComponent {
     });
 
     public login(): void {
+        this.showLoading = true
         this.form.markAllAsTouched();
 
         this.userdata = {
             username: this.form.controls['username'].value,
-            password: this.encservice.encryptData(this.form.controls['password'].value)
+            password: this.encservice.encryptPassword(this.form.controls['password'].value,this.key)
         }
         this.loginobj.invokelogin(this.userdata).subscribe(result => {
-            if (result !== null) {
+            debugger
+            if (result.ErrorMessage === "") {
                 this.showSuccess("Login Successful.")
+                this.showLoading = false
                 this.userobj = {
                     ID: result.ID,
-                    UserName: result.UserName,
-                    Usergroup: result.Usergroup,
+                    UserName: result.UserDetail.UserName,
+                    Usergroup: result.UserDetail.Usergroup,
                     Password: '',
-                    GroupPages: result.GroupPages,
-                    Name: result.Name                    
+                    GroupPages: result.UserDetail.GroupPages,
+                    Name: result.UserDetail.Name
                 }
-                this.TokenData={TokenValue:result.Password,CreatedTS:new Date()}
-                localStorage.setItem("token",JSON.stringify(this.TokenData))              
+                console.log(JSON.stringify(this.userobj))
+                this.TokenData = { TokenValue: result.UserDetail.Password, CreatedTS: new Date() }
+                localStorage.setItem("token", JSON.stringify(this.TokenData))
                 sessionStorage.setItem("UserInfo", JSON.stringify(this.userobj))
-                this.router.navigate(["/"+this.CheckPages(this.userobj.GroupPages,this.userobj.Usergroup) ])
+                this.router.navigate(["/" + this.CheckPages(result.UserDetail.GroupPages, result.UserDetail.Usergroup)])
             } else {
-                this.showError("Invalild Credential.")
+                this.showLoading = false
+                this.showError(result.ErrorMessage)
             }
         }, error => {
             console.log(error);
+            this.showLoading = false
         });
+       
     }
 
     public clearForm(): void {

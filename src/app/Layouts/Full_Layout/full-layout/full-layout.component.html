@@ -6,27 +6,38 @@
 		<ng-template kendoDrawerTemplate *ngIf="expanded">
 			<div class="panelbar-wrapper">
 				<kendo-panelbar style="background-color: #F2F2F2;">
+
 					<kendo-panelbar-item style="font-weight: bold; padding: 2px;" [title]="'Dashboard'">
 					</kendo-panelbar-item>
 					<kendo-panelbar-item [title]="'Overview'" icon="group-section" *ngIf="checkPrevilege('casestat')"
 						(click)="NavigateUrl('/casestat',drawer)"></kendo-panelbar-item>
-					<kendo-panelbar-item [title]="'CR Trends'" icon="detail-section" *ngIf="checkPrevilege('crtrendsreport')"
-						(click)="NavigateUrl('/crtrendsreport',drawer)"></kendo-panelbar-item>
+					<kendo-panelbar-item [title]="'CR Trends'" icon="detail-section"
+						*ngIf="checkPrevilege('crtrendsreport')" (click)="NavigateUrl('/crtrendsreport',drawer)">
+					</kendo-panelbar-item>
 
 					<kendo-panelbar-item style="font-weight: bold; padding: 2px;" [title]="'Reports'">
 					</kendo-panelbar-item>
 					<kendo-panelbar-item [title]="'CR Details'" icon="group-section"
-						(click)="NavigateUrl('/crnumber',drawer)" *ngIf="checkPrevilege('crnumber')"></kendo-panelbar-item>
+						(click)="NavigateUrl('/crnumber',drawer)" *ngIf="checkPrevilege('crnumber')">
+					</kendo-panelbar-item>
 					<kendo-panelbar-item [title]="'Expired Details'" icon="detail-section"
-						(click)="NavigateUrl('/expnumber',drawer)" *ngIf="checkPrevilege('expnumber')"></kendo-panelbar-item>
+						(click)="NavigateUrl('/expnumber',drawer)" *ngIf="checkPrevilege('expnumber')">
+					</kendo-panelbar-item>
 					<kendo-panelbar-item [title]="'Exceptions'" icon="detail-section"
-						(click)="NavigateUrl('/exception',drawer)" *ngIf="checkPrevilege('exception')"></kendo-panelbar-item>
+						(click)="NavigateUrl('/exception',drawer)" *ngIf="checkPrevilege('exception')">
+					</kendo-panelbar-item>
 					<kendo-panelbar-item [title]="'Country Code'" icon="detail-section"
-						(click)="NavigateUrl('/countrycode',drawer)" *ngIf="checkPrevilege('countrycode')"></kendo-panelbar-item>
+						(click)="NavigateUrl('/countrycode',drawer)" *ngIf="checkPrevilege('countrycode')">
+					</kendo-panelbar-item>
 					<kendo-panelbar-item [title]="'Config'" icon="detail-section"
-						(click)="NavigateUrl('/configcode',drawer)" *ngIf="checkPrevilege('configcode')"></kendo-panelbar-item>
-						<kendo-panelbar-item [title]="'Legal Type'" icon="detail-section"
-						(click)="NavigateUrl('/legaltype',drawer)" *ngIf="checkPrevilege('legaltype')"></kendo-panelbar-item>
+						(click)="NavigateUrl('/configcode',drawer)" *ngIf="checkPrevilege('configcode')">
+					</kendo-panelbar-item>
+					<kendo-panelbar-item [title]="'Legal Type'" icon="detail-section"
+						(click)="NavigateUrl('/legaltype',drawer)" *ngIf="checkPrevilege('legaltype')">
+					</kendo-panelbar-item>
+					<kendo-panelbar-item [title]="'User Management'" icon="k-i-accessibility"
+						(click)="NavigateUrl('/usermanagement',drawer)" *ngIf="checkPrevilege('usermanagement')">
+					</kendo-panelbar-item>
 				</kendo-panelbar>
 			</div>
 		</ng-template>

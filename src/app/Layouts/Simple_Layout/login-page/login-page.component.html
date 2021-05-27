@@ -1,11 +1,11 @@
 <div class="bgImage">
 
   <div class="container">
-
+    <app-spin-loader *ngIf="showLoading"></app-spin-loader>
     <div class="login__container">
       <kendo-card [width]="'400px'">
         <div style="padding: 20px;">
-
+          
           <form class="k-form" [formGroup]="form">
             <fieldset class="k-form-fieldset">
               <div class="row">

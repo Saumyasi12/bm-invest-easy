@@ -58,7 +58,7 @@ export class MonthlyCaseTrendComponent implements OnInit {
     this.monthlyCrChartConfig = {
       width: '100%',
       height: '400',
-      type: 'stackedarea2d',
+      type: 'stackedcolumn2d',
       dataFormat: 'json'
     };
   }

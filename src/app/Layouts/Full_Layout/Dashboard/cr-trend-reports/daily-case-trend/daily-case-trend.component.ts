@@ -59,7 +59,7 @@ constructor(private crService: CrTrendsService, private fb: FormBuilder) {
    this.weeklyCrChartConfig={
        width: '100%',
        height: '400',
-       type: 'stackedarea2d',
+       type: 'stackedcolumn2d',
        dataFormat: 'json'
    };
   }

@@ -82,13 +82,13 @@ export class CrTrendsComponent implements OnInit {
   this.weeklyCrChartConfig={
     width: '100%',
     height: '160',
-    type: 'stackedarea2d',
+    type: 'stackedcolumn2d',
     dataFormat: 'json'
 };
 this.monthlyCrChartConfig={
   width: '100%',
   height: '160',
-  type: 'stackedarea2d',
+  type: 'stackedcolumn2d',
   dataFormat: 'json'
 };
 this.yearlyCrChartConfig={
