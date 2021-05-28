@@ -23,6 +23,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SpinLoaderModule } from 'src/app/Layouts/spin-loader/spin-loader.module';
 //import {WecareTrendComponent} from './wecare-casetrend/wecare-casetrend.component' 
 
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+import { FusionChartsModule } from 'angular-fusioncharts';
+import * as FusionCharts from "../../../../../../fusioncharts/js/fusioncharts";
+import * as charts from "../../../../../../fusioncharts/js/fusioncharts.charts";
+import {ChartService} from '../../../../Services/charts/chart.service'
+
+FusionCharts.options.license({ key: 'fdF6tkgD3B1D8B1B2D1A1B2F2C2C11A5etE-11F3F3swB-22kB-13B2E2oyjG1C3C8D4E3D2B2C3I2D1B10B2D1F4D5D3B-8I-8G-7B6A6E3tB2C1C1ihC-21B1E6B1ycrA33A18B14isqB4A2H4C1J4A2A11C1A3C1E3vxxC5B7CE2C-11xoH1F2C2fuC7d1D4G4ccC-22C6D4B5D1D1D1D1G1B11D9C1B5D5B2j==', creditLabel: false }); 
+FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 const newRoute: Routes=[
 
     {
@@ -63,7 +71,11 @@ const newRoute: Routes=[
     DialogsModule,
     DropDownsModule,
     ReactiveFormsModule,
+    FusionChartsModule,
     SpinLoaderModule
+  ],
+  providers:[
+    ChartService
   ]
 })
 

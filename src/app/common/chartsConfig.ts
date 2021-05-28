@@ -1,6 +1,7 @@
 export const chartConfigUI ={
 caseStats:
     {
+        exportenabled: "1",
         theme: "fusion",
         showValues: "1",
         valueFontColor: "#ffffff",
@@ -65,6 +66,7 @@ caseStats:
      valuePosition:"Inside",
      minAngleForLabel:"360",
      interactiveLegend:"1",
+     exportenabled: "1",
      pieRadius:"70%",
      legendMarkerType: "square",
      legendItemFontSize: "12px",
@@ -75,7 +77,7 @@ caseStats:
         paletteColors:"#EF3226,#0D274D",
         showLabels:"1",
         showPlotBorder:"1",
-        
+        exportenabled: "1",
         showHoverEffect:"1",
         isTrendZone:"1",
         valueFontSize:"10",
@@ -91,7 +93,7 @@ caseStats:
         paletteColors:"#EF3226,#0D274D",
         showLabels:"1",
         showPlotBorder:"1",
-        
+        exportenabled: "1",
         showHoverEffect:"1",
         isTrendZone:"1",
         valueFontSize:"10",
@@ -104,7 +106,7 @@ caseStats:
         theme: "fusion"
     },
     issueTypeChart:{
-        
+        exportenabled: "1",
             paletteColors:"#F23228",
             showLabels:"1",
             showPlotBorder:"0",

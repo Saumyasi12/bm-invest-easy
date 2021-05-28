@@ -8,8 +8,8 @@
                     <p kendoCardTitle style="padding-top: 4px; margin-bottom: 4px;">{{pageTitle}}</p>
                 </div>
                 <div class="cols-bm">
-                    Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
-                        style="background: darkgreen; color: #fff; margin-right: 5px; "></button>
+                    <!-- Export &nbsp;&nbsp;<button kendoButton icon="excel" [name]="'file-excel'"
+                        style="background: darkgreen; color: #fff; margin-right: 5px; "></button> -->
                     
                 </div>
             </div>
@@ -30,12 +30,7 @@
                                     <kendo-datepicker class='kendo-input controls-bm' [format]="'MM-dd-yyyy'"
                                         formControlName="ToDate" placeholder="To" tabindex="2" (valueChange)="ToDateChange($event)">
                                     </kendo-datepicker>
-                                </div>
-                                <div class="cols-bm">
-                                    <kendo-combobox [data]="issuelist" placeholder="Issue Type"
-                                    formControlName="Issue" class='kendo-input controls-bm' (valueChange)="issueChange($event)">
-                                 </kendo-combobox>
-                                </div>
+                                </div>                               
                                 <div class="cols-bm">
                                     <kendo-buttongroup>
                                         <button kendoButton icon="zoom" style="color: #fff; background: #F23428;"

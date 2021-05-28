@@ -39,7 +39,7 @@ export class LegalTypeAddEditComponent implements OnInit {
       legalId: new FormControl(this.legalId),
       legalType: new FormControl(this.selectedlegal.LegalType, [Validators.required]),
       status: new FormControl(this.selectedlegal.Status.toString(),[Validators.required]),
-      description: new FormControl(this.selectedlegal.Description, [Validators.required])
+      description: new FormControl(this.selectedlegal.Description)
     });
   }
 
