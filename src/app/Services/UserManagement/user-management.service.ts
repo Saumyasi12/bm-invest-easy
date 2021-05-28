@@ -15,7 +15,7 @@ export class UserManagementService {
   constructor(private http: HttpClient, private router: Router,public config:AppConfig) { 
     this.API_URL = config.apiUrl;
   }
-  headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+  headers = new HttpHeaders().set('Authorization', `Bearer ${(JSON.parse(localStorage.getItem('token'))).TokenValue}`);
 
   getUserList() {
     return this.http.get<Tbl_User_Detail[]>(`${this.API_URL}UserManagement/GetListOfUsers`, { headers: this.headers });

@@ -32,7 +32,7 @@
                             <label for="description">Description :</label>
                         </div>
                         <div class="cols-bm">
-                            <kendo-textarea class="controls-bm width50" formControlName="description" [rows]="'5'"></kendo-textarea>
+                            <kendo-textarea class="controls-bm width50" formControlName="description" ></kendo-textarea>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                 <div class="row-bm">
                     <div class="cols-bm">
                         <button kendoButton [look]="'default'" style="background: #F23428;color: white;margin: 3px" type="submit" [disabled]="!legalForm.valid">Submit</button>
-                        <button kendoButton [look]="'default'"  style="background: #7F7F7F;color: white;margin: 3px" type="reset" (click)="resetForm()">Reset</button></div>
+                        <button kendoButton [look]="'default'"  style="background: #7F7F7F;color: white;margin: 3px" type="reset" [disabled]="DisableReset" (click)="resetForm()">Reset</button></div>
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ import { CountryCodeService } from 'src/app/Services/country-code.service';
 export class CountryCodeAddEditComponent implements OnInit {
   @Input() countryId=null;
   Message= "";
+  disableReset=true;
   ErrorMessage= "";
   countryForm: FormGroup;
   selectedcountry: countryDataModel = { ID: "0",  CountryCode: "", CountryName: "", CountryShortName: "" };
@@ -21,12 +22,14 @@ export class CountryCodeAddEditComponent implements OnInit {
 
     if (this.countryId === '0') {
       this.generateForm();
+      this.disableReset=false;
     }
     else {
       this.selectedcountry = { ID: this.countryId, CountryCode: "", CountryName: "", CountryShortName: "" };
       this.countryService.fetchCountryDataByID(this.selectedcountry).subscribe(country => {
         this.selectedcountry = country;
         this.generateForm();
+        this.disableReset=true;
       })
     }
   }

@@ -12,6 +12,7 @@ export class ConfigAddEditComponent implements OnInit {
   @Input() configId:number;
 Message='';
 ErrorMessage='';
+disableReset=false;
   configForm: FormGroup;
 
   selectedconfig: configDataModel = { ID: "0", Name: "", Value: "", Description: "" };
@@ -22,6 +23,7 @@ ErrorMessage='';
     if (this.configId === 0) {
       this.generateForm();
       this.editName=true;
+      this.disableReset=false;
     }
     else {     
       this.selectedconfig = { ID: this.configId.toString(), Name: "", Value: "", Description: "" };
@@ -29,6 +31,7 @@ ErrorMessage='';
         this.selectedconfig = config;
         this.generateForm();
         this.editName=false;
+        this.disableReset=true;
       })
     }
   }

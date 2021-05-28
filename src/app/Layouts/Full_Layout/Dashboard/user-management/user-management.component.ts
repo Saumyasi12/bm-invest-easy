@@ -28,7 +28,7 @@ export class UserManagementComponent implements OnInit {
   public gridView: GridDataResult;
   public pageSize = 10;
   public skip = 0;
-  public headerstyle = { 'background-color': '#E23328', 'color': '#fff', 'line-height': '1em', 'font-size': '14px', 'font-family': 'arial', 'overflow': 'visible', 'white-space': 'normal' };
+  public headerstyle = { 'background-color': '#E23328', 'color': '#fff', 'line-height': '2em', 'font-size': '14px', 'font-family': 'arial', 'overflow': 'visible', 'white-space': 'normal' };
   public pagelist: any;
 
 

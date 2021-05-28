@@ -46,11 +46,11 @@
                 <td></td>
                 <td>
                     <table style="float: right; margin-right: 9%;">
-                        <tr>
+                        <tr class="permission-Heder">
                             Permissions
                         </tr>
 
-                        <tr *ngFor="let item of pagelist">
+                        <tr *ngFor="let item of pagelist" style="color:#e23328;">
                             <td>
                                 <div class="wrap">
                                     <input type="checkbox" id="terms" (change)="changepagelist($event,item.Link)" [checked]="item.Checked" kendoCheckBox />

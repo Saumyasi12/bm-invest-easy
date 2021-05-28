@@ -45,7 +45,7 @@
                 <div class="row-bm">
                     <div class="cols-bm">
                         <button kendoButton [look]="'default'" style="background: #F23428;color: white;margin: 3px" type="submit" [disabled]="!countryForm.valid">Submit</button>
-                        <button kendoButton [look]="'default'"  style="background: #7F7F7F;color: white;margin: 3px" type="reset" (click)="resetForm()">Reset</button></div>
+                        <button kendoButton [look]="'default'"  style="background: #7F7F7F;color: white;margin: 3px" type="reset" [disabled]="disableReset" (click)="resetForm()">Reset</button></div>
                 </div>
             </div>
         </div>

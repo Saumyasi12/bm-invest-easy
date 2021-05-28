@@ -13,6 +13,7 @@ export class LegalTypeAddEditComponent implements OnInit {
   @Input() legalId='';
 
   Message= "";
+  DisableReset=false;
   ErrorMessage ="";
   legalForm: FormGroup;
   selectedlegal: legalDataModel = { ID: "0",  LegalType: "", Status: false, Description: "" };
@@ -22,12 +23,14 @@ export class LegalTypeAddEditComponent implements OnInit {
   ngOnInit(): void {
   
     if (this.legalId === '0') {
+      this.DisableReset=false;
       this.generateForm();
     }
     else {
       this.selectedlegal = { ID: this.legalId, LegalType: "", Status: false, Description: "" };
       this.legalService.fetchLegalDataByID(this.selectedlegal).subscribe(legal => {
         this.selectedlegal = legal;
+        this.DisableReset=true;
         this.generateForm();
       })
     }
@@ -46,7 +49,7 @@ export class LegalTypeAddEditComponent implements OnInit {
 
   resetForm() : void {
     this.legalForm.reset();
-
+    this.legalForm.controls['description'].setValue('');
     }
     SubmitForm(){
      
