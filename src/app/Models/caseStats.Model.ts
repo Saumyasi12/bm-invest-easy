@@ -8,20 +8,26 @@ export interface caseReadyForClosure {
 }
 
 export interface CaseStatistics {
-  FeedbackId: string;
-  IssueType: string;
+  CRNumber: string;
+  CIFNumber: string;
   Status: string;
-  Reason: string;
-  MessageType: string;
+  ExpiryDate: string;
+  InvestEasyStatus: string;
+  InvestEasyRemarks: string;
+  T24Status: string;
+  T24Remarks: string;
+  
+
 };
 
 export interface RoutingPortalGridData {
-  FeedbackId: string;
-  AuthCode: string;
-  Amount: string;
-  RoutingPortal: string;
-  CardNo: string;
-  Status: string;
+  CRNumber: string;
+  CIFNumber: string;
+  ExpiryDate: string;
+  InvestEasyStatus: string;
+  InvestEasyRemarks: string;
+  T24Status: string;
+  T24Remarks: string;
 };
 
 export interface CaseReadyAction {

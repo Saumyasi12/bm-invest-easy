@@ -37,7 +37,6 @@ export class LegalTypeAddEditComponent implements OnInit {
   }
 
   generateForm() {  
-    debugger  
     this.legalForm = this.fb.group({
       legalId: new FormControl(this.legalId),
       legalType: new FormControl(this.selectedlegal.LegalType, [Validators.required]),
@@ -49,13 +48,13 @@ export class LegalTypeAddEditComponent implements OnInit {
 
   resetForm() : void {
     this.legalForm.reset();
-    this.legalForm.controls['description'].setValue('');
     }
     SubmitForm(){
      
       this.selectedlegal = {
         ID: this.legalForm.controls['legalId'].value, LegalType: this.legalForm.controls['legalType'].value,
-        Status: this.legalForm.controls['status'].value, Description: this.legalForm.controls['description'].value
+        Status: this.legalForm.controls['status'].value, 
+        Description: this.legalForm.controls['description'].value
       }
       // this.selectedBot = { Id: this.botId, Name: "", Value: "", Description: "" };
       this.legalService.SaveConfig(this.selectedlegal).subscribe(flag => {

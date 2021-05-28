@@ -2,3 +2,12 @@
     width: 200px;
     margin-bottom: 5px;
 }
+
+.description{
+    outline: 0;
+    border: 1px solid #999;
+    min-height: 80px;
+    padding: 0px 8px;
+    font: inherit;
+    color: inherit;
+}

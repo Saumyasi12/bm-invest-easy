@@ -39,6 +39,10 @@ export class CaseStatisticsComponent {
   pageSizeCount: number;
   windowHeight: number;
   caseStatistics: CaseStatistics[] = [];
+  dataitem: CaseStatistics = {
+    CRNumber: "", CIFNumber: "", InvestEasyStatus: "", InvestEasyRemarks: "", T24Status: "",
+    T24Remarks: "",ExpiryDate:"",Status:""
+  }
 
   //----Page Loader--//
   showLoading =true;
@@ -95,9 +99,23 @@ export class CaseStatisticsComponent {
       type: 'stackedbar2d',
       dataFormat: 'json'
     };
-    this.chartService.fetchCRStatusGridData(this.FilterObj).subscribe(ev => {
-      this.caseStatistics = ev;
-      
+    this.chartService.fetchCRStatusGridData(this.FilterObj).subscribe(data => {
+      if (data != null) {
+        data.map(item => {
+          this.dataitem = {
+            CRNumber: item.CRNumber,
+            CIFNumber: item.CIFNumber,
+            InvestEasyStatus: item.InvestEasyStatus,
+            InvestEasyRemarks: item.InvestEasyRemarks,
+            ExpiryDate: this.ChangeDateFormat(item.ExpiryDate),
+            T24Status: item.T24Status,
+            T24Remarks: item.T24Remarks,
+            Status:item.Status
+  
+          }
+          this.caseStatistics.push(this.dataitem);
+        })
+      }      
       this.loadItems();
     })
 
@@ -175,8 +193,23 @@ FromDateChange(value: Date) : void{
       this.errorCode = err.status;
     });
 
-    this.chartService.fetchCRStatusGridData(this.FilterObj).subscribe(ev => {
-      this.caseStatistics = ev;
+    this.chartService.fetchCRStatusGridData(this.FilterObj).subscribe(data => {
+      if (data != null) {
+        data.map(item => {
+          this.dataitem = {
+            CRNumber: item.CRNumber,
+            CIFNumber: item.CIFNumber,
+            InvestEasyStatus: item.InvestEasyStatus,
+            InvestEasyRemarks: item.InvestEasyRemarks,
+            ExpiryDate: this.ChangeDateFormat(item.ExpiryDate),
+            T24Status: item.T24Status,
+            T24Remarks: item.T24Remarks,
+            Status:item.Status
+  
+          }
+          this.caseStatistics.push(this.dataitem);
+        })
+      } 
       this.loadItems();
     })
   }

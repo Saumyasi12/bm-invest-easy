@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DialogService } from '@progress/kendo-angular-dialog';
 import { DataStateChangeEvent, GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor, State,process } from '@progress/kendo-data-query';
+import { items } from 'fusioncharts';
 import { headerStyle } from 'src/app/common/common.functions';
 import { crDataModel } from 'src/app/Models/crNumber-data.model';
 import { CrNumberService } from 'src/app/Services/cr-number.service';
@@ -52,6 +53,10 @@ export class CrNumberComponent implements OnInit {
   public gtservice;
   FilterOBJ={FromDate:'',ToDate:'',Filter:''}
   crData:crDataModel[]= [];
+  dataitem: crDataModel = {
+    CRNumber: "", CIFNumber: "", InvestEasyStatus: "", InvestEasyRemarks: "", T24Status: "",
+    T24Remarks: "",ExpiryDate:""
+  }
   public fields: string[] =['CRNumber','CIFNumber','InvestEasyStatus','InvestEasyRemarks','T24Status','T24Remarks','ExpiryDate'];
   constructor(private fb: FormBuilder, private dialogService: DialogService, private crNumberService: CrNumberService) { }
 
@@ -62,7 +67,22 @@ export class CrNumberComponent implements OnInit {
   this.showLoading= true;
   this.generateForm();
   this.crNumberService.fetchCrNumberDataByFilter(this.FilterOBJ).subscribe(data=>{
-    this.crData= data;
+    if (data != null) {
+      data.map(item => {
+        this.dataitem = {
+          CRNumber: item.CRNumber,
+          CIFNumber: item.CIFNumber,
+          InvestEasyStatus: item.InvestEasyStatus,
+          InvestEasyRemarks: item.InvestEasyRemarks,
+          ExpiryDate: this.ChangeDateFormat(item.ExpiryDate),
+          T24Status: item.T24Status,
+          T24Remarks: item.T24Remarks,
+
+        }
+        this.crData.push(this.dataitem);
+    //this.crData= data;
+      })
+    }
     this.showLoading= false;
     this.loadItems();
     
@@ -182,7 +202,22 @@ formSearch() {
   }
     this.showLoading = true;
     this.crNumberService.fetchCrNumberDataByFilter(this.FilterOBJ).subscribe(data=>{
-      this.crData= data;
+      if (data != null) {
+        data.map(item => {
+          this.dataitem = {
+            CRNumber: item.CRNumber,
+            CIFNumber: item.CIFNumber,
+            InvestEasyStatus: item.InvestEasyStatus,
+            InvestEasyRemarks: item.InvestEasyRemarks,
+            ExpiryDate: this.ChangeDateFormat(item.ExpiryDate),
+            T24Status: item.T24Status,
+            T24Remarks: item.T24Remarks,
+  
+          }
+          this.crData.push(this.dataitem);
+      //this.crData= data;
+        })
+      }
       this.loadItems();
       
       this.showLoading= false;

@@ -41,7 +41,10 @@ export class RoutingPortalStatisticsComponent implements OnInit {
   Filter = null;
 
   routingPortalGridData: RoutingPortalGridData[] = [];
-
+  dataitem: RoutingPortalGridData = {
+    CRNumber: "", CIFNumber: "", InvestEasyStatus: "", InvestEasyRemarks: "", T24Status: "",
+    T24Remarks: "",ExpiryDate:""
+  }
 
   pageSizeCount: number;
   windowHeight: number;
@@ -93,8 +96,22 @@ export class RoutingPortalStatisticsComponent implements OnInit {
       dataFormat: 'json',
     }
 
-    this.chartService.fetchRoutingPortalGridData(this.FilterObj).subscribe(ev => {
-      this.routingPortalGridData = ev;
+    this.chartService.fetchRoutingPortalGridData(this.FilterObj).subscribe(data => {
+      if (data != null) {
+        data.map(item => {
+          this.dataitem = {
+            CRNumber: item.CRNumber,
+            CIFNumber: item.CIFNumber,
+            InvestEasyStatus: item.InvestEasyStatus,
+            InvestEasyRemarks: item.InvestEasyRemarks,
+            ExpiryDate: this.ChangeDateFormat(item.ExpiryDate),
+            T24Status: item.T24Status,
+            T24Remarks: item.T24Remarks
+  
+          }
+          this.routingPortalGridData.push(this.dataitem);   
+        })
+      }
       this.loadItems();
         
     },  err=>{
@@ -204,8 +221,22 @@ FromDateChange(value: Date) : void{
       this.errorMessage = 'Something went wrong';
       this.errorCode = err.status;
     } )
-    this.chartService.fetchRoutingPortalGridData(this.FilterObj).subscribe(ev => {
-      this.routingPortalGridData = ev;
+    this.chartService.fetchRoutingPortalGridData(this.FilterObj).subscribe(data => {
+      if (data != null) {
+        data.map(item => {
+          this.dataitem = {
+            CRNumber: item.CRNumber,
+            CIFNumber: item.CIFNumber,
+            InvestEasyStatus: item.InvestEasyStatus,
+            InvestEasyRemarks: item.InvestEasyRemarks,
+            ExpiryDate: this.ChangeDateFormat(item.ExpiryDate),
+            T24Status: item.T24Status,
+            T24Remarks: item.T24Remarks
+  
+          }
+          this.routingPortalGridData.push(this.dataitem);   
+        })
+      }
       this.loadItems();
       // console.log(ev)
       this.showLoading = false;
