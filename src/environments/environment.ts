@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   API_URL: 'http://localhost:61058/api/',
   APPLICATION_URL: 'http://localhost:4200/#/',
+  CHART_API_URL:'http://localhost:4579/',
   ISLIVE: false
 };
 /*

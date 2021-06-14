@@ -6,8 +6,12 @@ import { UserManagementService } from '../../../../Services/UserManagement/user-
 
 import { ChartService } from 'src/app/Services/charts/chart.service';
 import { chartConfigUI } from '../../../../common/chartsConfig';
-import { caseReadyForAction ,caseReadyForClosure } from '../../../../Models/caseStats.Model'
+import { caseReadyForAction, caseReadyForClosure } from '../../../../Models/caseStats.Model'
 import { FilterClass } from 'src/app/Models/ViewModel';
+import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
+import { AppConfig } from 'src/app/Services/app-config.service';
+
 
 @Component({
   selector: 'app-case-stat',
@@ -18,9 +22,9 @@ export class CaseStatComponent implements OnInit {
 
   pageTitle = "CR Overview";
 
-   //----Page Loader--//
-   showLoading =true;
-FilterObj={Fromdate:"",Todate:"",Filter:""}
+  //----Page Loader--//
+  showLoading = true;
+  FilterObj = { Fromdate: "", Todate: "", Filter: "" }
   //error-handling
   errorMessage = null;
   errorCode = null;
@@ -41,14 +45,40 @@ FilterObj={Fromdate:"",Todate:"",Filter:""}
   totalCount: number;
   totalCountClosure: number;
 
-  constructor(private userservice: UserManagementService, private chartService: ChartService) {
+  constructor(private userservice: UserManagementService, private chartService: ChartService,public config:AppConfig) {
 
   }
 
   ngOnInit(): void {
-   this.showLoading = true
+    this.showLoading = true
+    this.getChartDataForCaseStatus();
+  this.getChartDataForCaseStatistics();
+  this.getChartDataForExpiredCR();
+    const connection = new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Information)
+      .withUrl(this.config.ChartApiUrl + 'notify')
+      .build();
+
+    connection.start().then(function () {
+      console.log('SignalR Connected');
+    }).catch(function (err) {
+      return console.error(err.toString());
+    });
+
+
+    connection.on("refreshCRStatus", () => {
+      this.getChartDataForCaseStatus();
+    });
+    connection.on("refreshCRStatistics", () => {
+      this.getChartDataForCaseStatistics();
+    });
+    connection.on("refreshExpiredCR", () => {
+      this.getChartDataForExpiredCR();
+    });
+  }
+  getChartDataForCaseStatus() {
     // console.log(chartConfigUI);
-    this.chartService.fetchCaseStatusData(this.FilterObj).subscribe(ev => {
+    this.chartService.fetchCaseStatusData_Realtime(this.FilterObj).subscribe(ev => {
       this.casestatus = ev;
       this.datasourceCasestatisstics = {
         "chart": chartConfigUI.caseStats,
@@ -66,53 +96,55 @@ FilterObj={Fromdate:"",Todate:"",Filter:""}
       this.showLoading = false;
       this.errorMessage = null;
       this.errorCode = null;
-    }, err=>{
+    }, err => {
       console.log(err.message);
-      this.showLoading= false;
-    this.errorMessage=err.message;
-    this.errorCode = err.status;
-
-  } );
-    this.chartService.fetchRoutingPortalData(this.FilterObj).subscribe(ev => {
-      this.datasourceRoutingPortal = {
-        chart: chartConfigUI.routerChart,
-        data: ev[0]
-      }
-    }, err=>{
-      console.log(err.message);
-      this.showLoading= false;
-      this.errorMessage=err.message;
+      this.showLoading = false;
+      this.errorMessage = err.message;
       this.errorCode = err.status;
-      //this.showLoading= false;
-    } );
-    this.chartService.fetchReadyToAction(this.FilterObj).subscribe(ev => {
-      this.mystar = ev;
-      this.totalCount = this.mystar.map(value => value.count).reduce((a, b) => a + b);
-    }, err=>{
-      console.log(err);
-      this.showLoading= false;
-      this.errorMessage=err.message;
-      this.errorCode = err.status;
-     // this.showLoading= false;
-    } );
 
-  
-
+    });
     this.caseStatsChartConfig = {
       width: '100%',
       height: '155',
       type: 'stackedbar2d',
       dataFormat: 'json'
     };
+
+    
+  }
+  getChartDataForExpiredCR(){
+    this.chartService.fetchReadyToActionRealtime(this.FilterObj).subscribe(ev => {
+      this.mystar = ev;
+      this.totalCount = this.mystar.map(value => value.count).reduce((a, b) => a + b);
+    }, err => {
+      console.log(err);
+      this.showLoading = false;
+      this.errorMessage = err.message;
+      this.errorCode = err.status;
+      // this.showLoading= false;
+    });   
+  }
+  getChartDataForCaseStatistics() {
+    this.chartService.fetchRoutingPortalDataRealtime().subscribe(ev => {
+      this.datasourceRoutingPortal = {
+        chart: chartConfigUI.routerChart,
+        data: ev[0]
+      }
+    }, err => {
+      console.log(err.message);
+      this.showLoading = false;
+      this.errorMessage = err.message;
+      this.errorCode = err.status;
+      //this.showLoading= false;
+    });
     this.routingPortalChartConfig = {
       width: '100%',
       height: '210',
       type: 'doughnut2d',
       dataFormat: 'json'
     }
+
   }
-
-
   public close(component) {
     this[component + 'Opened'] = false;
     this.viewflag = 0;

@@ -1,3 +1,4 @@
 {
-    "apiUrl": "http://localhost:61058/api/" 
+    "apiUrl": "http://localhost:61058/api/" ,
+    "ChartApiUrl":"http://localhost:4579/"
 } 

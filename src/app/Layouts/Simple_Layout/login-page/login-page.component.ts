@@ -66,7 +66,7 @@ export class LoginPageComponent {
                     UserName: result.UserDetail.UserName,
                     Usergroup: result.UserDetail.Usergroup,
                     Password: '',
-                    GroupPages: result.UserDetail.GroupPages,
+                    GroupPages:result.UserDetail.Usergroup==='Application User Management Team'?'usermanagement':result.UserDetail.GroupPages,
                     Name: result.UserDetail.Name
                 }
                 console.log(JSON.stringify(this.userobj))

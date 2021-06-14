@@ -14,7 +14,7 @@ export class AppConfig {
     }
   
     apiUrl: string ='';
-  
+    ChartApiUrl:string='';
     ensureInit(): Promise<any> {
       return new Promise((r, e) => {
         //mock because can't xhr local file here

@@ -2,8 +2,8 @@
 <div *ngIf="!windowOpened">
     <kendo-card [width]="'100%'" >
         <kendo-card-body>
-            <app-spin-loader *ngIf="showLoading && !errorMessage"></app-spin-loader>
-            <div *ngIf="!showLoading && !errorMessage">
+            <app-spin-loader *ngIf="(showLoading||showLoading1||showLoading2) && !errorMessage"></app-spin-loader>
+            <div *ngIf="!(showLoading||showLoading1||showLoading2) && !errorMessage">
             <div class="card-Header-bm">
                 <div class="row-bm">
                     <div class="cols-bm">
