@@ -221,6 +221,7 @@ FromDateChange(value: Date) : void{
       this.errorMessage = 'Something went wrong';
       this.errorCode = err.status;
     } )
+    this.routingPortalGridData=[]
     this.chartService.fetchRoutingPortalGridData(this.FilterObj).subscribe(data => {
       if (data != null) {
         data.map(item => {

@@ -192,7 +192,7 @@ FromDateChange(value: Date) : void{
       this.errorMessage = 'Something went wrong';
       this.errorCode = err.status;
     });
-
+    this.caseStatistics=[]
     this.chartService.fetchCRStatusGridData(this.FilterObj).subscribe(data => {
       if (data != null) {
         data.map(item => {
